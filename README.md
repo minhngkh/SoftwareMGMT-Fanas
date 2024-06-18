@@ -1,5 +1,5 @@
-Software Management Project - Group 2
-Project: FANAS - an audio book app
+# Software Management Project - Group 2
+Project: *FANAS - an audio book app*
 
 Team members:
 
