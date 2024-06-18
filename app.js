@@ -25,6 +25,4 @@ app.get('/get-audio-url', async (req, res) => {
 
 const PORT = 8080;
 
-app.listen(PORT, ip.address(), () => {
-    console.log(`Server is listening on port http://${ip.address()}:${PORT}`);
-});
+module.exports = app;
