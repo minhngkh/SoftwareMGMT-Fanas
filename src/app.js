@@ -2,30 +2,41 @@ const express = require('express');
 const path = require('path');
 const ip = require("ip");
 const handleBars = require('express-handlebars');
-const { storage, getDownloadURL } = require('./firebase.js');
+require("dotenv").config();
+
+const { storage, getDownloadURL } = require('./config/firebase.js');
+const firebaseAuthController = require('./controllers/firebaseAuthContoller.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname, 'resource', 'views')));
+
+app.use(
+    express.urlencoded({
+      extended: true,
+    })
+);
+app.use(express.json());
 
 //Setup view engine with handlebars
 app.engine('hbs', handleBars.engine({
     extname: '.hbs',
     helpers: {
       sum: (a, b) => a + b,
-      json: (content) => JSON.stringify(content),
-      prodClassFromName: (prodName) => prodName.replaceAll(' ', '-'),
+      json: (content) => JSON.stringify(content)
     }
   }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource', 'views'));
 
+app.post('/register', firebaseAuthController.registerUser);
+app.post('/login', firebaseAuthController.loginUser);
+app.post('/logout', firebaseAuthController.logoutUser);
+
 app.get('/', (req, res) => {
-    //res.render('login');
-    res.render('index', {layout: 'main'});
-
-  })
-
+  //res.render('homepage', {layout: 'main'});
+  //res.render('signup', {layout: 'main'});
+  res.render('index', {layout: 'main'});
+});
 
 app.get('/get-audio-url', async (req, res) => {
     console.log(req.query);
