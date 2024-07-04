@@ -5,7 +5,7 @@ const handleBars = require('express-handlebars');
 require("dotenv").config();
 
 const { storage, getDownloadURL } = require('./config/firebase.js');
-const firebaseAuthController = require('./controllers/firebaseAuthContoller.js');
+const firebaseAuthController = require('./controllers/firebaseAuthController.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));

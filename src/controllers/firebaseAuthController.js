@@ -1,5 +1,6 @@
 const { 
     getAuth, 
+    admin,
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
     signOut,
@@ -8,7 +9,7 @@ const {
     dbFirestore
    } = require('../config/firebase');
 const Authentication = require("../config/Authentication");
-const Firestore = require('../config/Firestore');
+const User = require('../config/models/userModel');
 const auth = getAuth();
 
 class FirebaseAuthController {
@@ -41,17 +42,14 @@ class FirebaseAuthController {
         //     res.status(500).json({ error: errorMessage });
         // });
         const {message, status, userCredential} = await Authentication.registerUser(req.body, () => {});
-        if(!!userCredential) {
+        if(userCredential) {
             const userInfo = {
                 "userID": userCredential.user?.uid,
                 "avatarPath": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
                 "email": req.body.email,
-                "favoriteGenres": [],
-                "fullname": req.body.email,
-                "password": req.body.password,
                 "role": "customer"
             }
-            await Firestore.createNewUser(userInfo ,() => {});
+            await User.createNewUser(userInfo ,() => {});
         }
         res.status(status).json({message});
     } 
@@ -82,11 +80,11 @@ class FirebaseAuthController {
         //     const errorMessage = error.message || "An error occurred while logging in";
         //     res.status(500).json({ error: errorMessage });
         // });
-        const {message, status, uid} = await Authentication.loginUser(req.body, () => {});
-        if(!!uid) {
-            res.cookie("uid", uid, { expires: new Date(Date.now() + 900000), httpOnly: true });
+        const {message, status, userCredential} = await Authentication.loginUser(req.body, () => {});
+        if(userCredential) {
+            res.cookie("uid", userCredential.user.uid, { expires: new Date(Date.now() + 900000), httpOnly: true });
         }
-        res.status(status).json({message});
+        res.status(status).json({message,userCredential});
         console.log({message, status});
     }
 

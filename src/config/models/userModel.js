@@ -1,25 +1,26 @@
 const { dbFirestore } = require("../firebase")
 
-const usersRef = dbFirestore.collection("Users");
+const userCollection = dbFirestore.collection("Users");
 
-class Firestore {
+class User {
     async createNewUser(userInfo, next) {
         console.log(userInfo);
-        const {userID, avatarPath, fullname, favoriteGenres, role} = userInfo;
+        const {userID, avatarPath, email, role} = userInfo;
         // if(!userID) {
         //     return { message: "Missing userID", status: 422 };
         // }
         const fullUserInfo = {
             userID,
             avatarPath,
-            fullname,
-            favoriteGenres,
+            email,
+            favoriteGenres:[],
             favoriteList: [],
             historyList: [],
             role
         }
         try {
-            await usersRef.doc(userID).set(fullUserInfo);
+            const userRef= userCollection.doc(userID)
+            await userRef.set(fullUserInfo);
         }catch {
             next();
         }
@@ -28,7 +29,7 @@ class Firestore {
     async isAdmin(userID, next) {
         console.log("Checking role of ", userID);
         try {
-            const userSnapshot = await usersRef.doc(userID).get();
+            const userSnapshot = await userCollection.doc(userID).get();
             if(userSnapshot.exists) {
                 const role = userSnapshot.data().role;
                 if(role === "admin") {
@@ -43,4 +44,4 @@ class Firestore {
     }
 }
 
-module.exports = new Firestore;
+module.exports = new User;
