@@ -5,7 +5,7 @@ const {
     signInWithEmailAndPassword,
     signOut
 } = require("../firebase");
-const User = require("../models/userModel");
+const User = require("../../models/userModel");
 const sendEmail = require("../../utils/sendEmail")
 
 const authentication = getAuth();

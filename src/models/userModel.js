@@ -1,4 +1,4 @@
-const { dbFirestore } = require("../firebase")
+const { dbFirestore } = require("../config/firebase")
 
 const userCollection = dbFirestore.collection("Users");
 
