@@ -104,6 +104,7 @@ html {
     border-radius: 20px;
     height: 710px;
     text-align: center;
+    overflow: auto;
 }
 .category h4 {
     font-size: 16px;
@@ -114,6 +115,7 @@ html {
 }
 .list_ctg {
     list-style: none;
+
 }
 .item_ctg {
     padding: 12px;
@@ -174,11 +176,11 @@ html {
     display: block;
 }
 .bx {
+    
     width: 55px;
     padding: 4px;
     border-radius: 23px;
     background: #BDBDBD;
- 
     margin: 0 auto 11px;
 }
 .box_sort h4{

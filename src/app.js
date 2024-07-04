@@ -58,6 +58,14 @@ app.get('/example', (req, res) => {
   res.render("example", { layout: "example", exampleText});
 });
 
+app.get('/detail', (req, res) => {
+  res.render("detail");
+});
+
+app.get('/search', (req, res) => {
+  res.render("search");
+});
+
 const PORT = 8080;
 
 module.exports = app;
