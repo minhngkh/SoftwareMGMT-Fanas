@@ -10,7 +10,7 @@ const firebaseConfig = {
     appId: process.env.FIREBASE_APP_ID
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 const admin = require('firebase-admin');
 const serviceAccountKey = require('./firebaseServiceAccountKey.json');
@@ -22,6 +22,8 @@ admin.initializeApp({
 });
 
 const{getStorage,getDownloadURL}=require("firebase-admin/storage");
+const dbFirestore = admin.firestore();
+//Authentication methods
 const {
     getAuth, 
     createUserWithEmailAndPassword, 
@@ -38,5 +40,6 @@ module.exports = {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut,
-    admin
+    admin,
+    dbFirestore
 };

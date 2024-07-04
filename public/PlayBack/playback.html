@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./playback.css">
+    <link rel="stylesheet" href="./assets/fontawesome-free-6.5.2-web/css/all.min.css">
+<body>
+    <div class="box box--playbackpage">
+        <div class="topscreen--icon">
+            <i class="icon fa-solid fa-arrow-left"></i>
+            <i class="icon fa-solid fa-share-nodes"></i>
+        </div>
+        <div class="pb-image">
+            <img class ="book-image" src="./assets/img/Book-Image1.jpg" alt="">
+            <div class="font book-name">Cô gái đến từ hôm qua</div>
+        </div>
+        <div class="progress-container">
+            <div class="font chapter-number">Chương 1</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+                <div class="progress-handle"></div>
+            </div>
+            <div class="time-container">
+                <div class="font time-current">
+                    0:5:20
+                </div>
+                <div class="font time-remain">
+                    -0:55:40
+                </div>
+            </div>
+        </div>
+        <div class="functionbutton-container">
+            <div class="forward-step">
+                <i class="icon fa-solid fa-forward-step"></i>
+            </div>
+            <div class="backward-button">
+                <i class="icon fa-solid fa-arrow-rotate-left"></i>
+            </div>
+            <div class="button-play">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path>
+                </svg>
+            </div>
+            <div class="forward-button">
+                <i class="icon fa-solid fa-arrow-rotate-right"></i>
+            </div>
+            <div class="backward-step">
+                <i class="icon fa-solid fa-backward-step"></i>
+            </div>
+        </div>
+        <div class="optionbutton--container">
+            <div class="btn btn--Timer">
+                <i class="icon fa-regular fa-clock"></i>
+                <div class="btn--content">
+                    Hẹn giờ
+                </div>
+            </div>
+            <div class="btn btn--Chapter">
+                <i class="icon fa-solid fa-list"></i>
+                <div class="btn--content">
+                    Chương
+                </div>
+            </div>
+            <div class="btn btn--Speed">
+                <div class="icon speed-amount">1.0x</div>
+                <div class="btn--content">
+                    Tốc độ
+                </div>
+            </div>
+            <div class="btn btn--Voice">
+                <div class="icon voice-name">MAI</div>
+                <div class="btn--content">
+                    Đổi giọng
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Màn hình chương -->
+
+    <div class="box box--chapterlist">
+        <div class="container_list">
+            <div class="interact-bar"></div>
+            <h3 style="font-size: 20px;">CHƯƠNG</h3>
+            <p> Chương và thời gian dự tính </p>
+            <div class="row_list">
+                <div class="col_chap">
+                    <p> Chương 1 </p>
+                    <p class = "chapter-time" > 60 phút</p>
+                </div>
+                <label>
+                   <input class="radio-design" type="radio" />
+                </label> 
+             </div>
+            <div class="row_list">
+                <div class="col_chap">
+                    <p> Chương 2 </p>
+                    <p class = "chapter-time" > 60 phút</p>
+                </div>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+                <div class="col_chap">
+                    <p> Chương 3 </p>
+                    <p class = "chapter-time" > 60 phút</p>
+                </div>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+                <div class="col_chap">
+                    <p> Chương 4 </p>
+                    <p class = "chapter-time" > 60 phút</p>
+                </div>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+                <div class="col_chap">
+                    <p> Chương 5 </p>
+                    <p class = "chapter-time" > 60 phút</p>
+                </div>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+                <div class="col_chap">
+                    <p> Chương 6 </p>
+                    <p class = "chapter-time" > 60 phút</p>
+                </div>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+        </div>
+        <div class="user-confirm">
+            <button class="confirm-button">Xác nhận</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Màn hình thời gian -->
+
+    <div class="box box--timer">
+        <div class="container_list">
+            <div class="interact-bar"></div>
+            <h3 style="font-size: 20px;">HẸN GIỜ</h3>
+            <p>Ngừng phát khi hết giờ</p>
+            <div class="row_list">
+                <p> Không hẹn giờ </p>
+                <label>
+                   <input class="radio-design" type="radio" />
+                </label> 
+             </div>
+            <div class="row_list">
+               <p> 5 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+               <p> 10 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+               <p> 15 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+               <p> 20 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+               <p> 30 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+            <div class="row_list">
+               <p> 40 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+
+            <div class="row_list">
+               <p> 50 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+
+            <div class="row_list">
+               <p> 60 phút </p>
+               <label>
+                  <input class="radio-design" type="radio" />
+               </label> 
+            </div>
+        </div>
+        <div class="user-confirm">
+            <button class="confirm-button">Xác nhận</button>
+        </div>
+    </div>
+
+    <!-- Màn hình hiển thị tốc độ đọc -->
+
+    <div class="box box--speed">
+        <div class="container-list-speed">
+            <div class="interact-bar"></div>
+            <h3 style="font-size: 20px;">Tốc độ phát</h3>
+            <div class="speed-bar">
+                <div class="current-speed"></div>
+                <div class="speed-bar-handle"></div>
+            </div>
+            <div class="speed-column">
+                <div class="speedindex-bar">
+                    <div class="speed-index">0.25</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">0.5</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">0.75</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">1</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">1.25</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">1.5</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">1.75</div>
+                </div>
+                <div class="speedindex-bar">
+                    <div class="speed-index">2</div>
+                </div>
+            </div>
+        </div>
+        <div class="user-confirm">
+            <button class="confirm-button">Xác nhận</button>
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Màn hình nếu chưa mua thành viên  -->
+
+     <div class="box box--preplaybackpage">
+        <div class="topscreen--icon">
+            <i class="icon fa-solid fa-arrow-left"></i>
+            <i class="icon fa-solid fa-share-nodes"></i>
+        </div>
+        <div class="bookinfo-container">
+            <div class="ppb-image">
+                <img class ="ppb-image__book-image" src="./assets/img/Book-Image1.jpg" alt="">
+            </div>
+            <div class="ppb-bookinfo-container__bookName">Cô gái đến từ hôm qua</div>
+            <div class="ppb-bookinfo-container__authorName">Nguyễn Nhật Ánh
+                <i class="icon fa-solid fa-greater-than" style="font-size: 15px"></i>
+            </div>
+            <div class="ppb-bookinfo-container__reviewNum">
+                <i class="icon fa-regular fa-star" style="font-size: 15px;"></i>
+                Chưa có đánh giá
+            </div>
+        </div>
+        <div class="sell-optionBar">
+            <div class="soB-freeContainer">
+                <i class="icon fa-regular fa-heart" style="font-size: 30px;"></i>
+                <div class="btn soB-freeContainer__freeBar">
+                    <div class="soB-freeContainer__freeBarWord">
+                        Nghe chương đầu miễn phí
+                    </div>
+                </div>
+            </div>
+
+            <div class="soB-sellContainer">
+                <div class="soB-sellContainer__sellinfo">
+                    <div class="soB-sellContainer__sellinfoWord">Giá bán lẻ</div>
+                    <div class="soB-sellContainer__sellinfoPrice">99,000đ
+                        <i class="fa-solid fa-square-check"></i>
+                    </div>
+                </div>
+
+                <div class="soB-sellContainer__sellBar">
+                    <div class="btn soB-sellContainer__sellBarButton">
+                        <div class="soB-sellContainer__sellBarWord">
+                            Mua với giá bán lẻ - 99,000đ
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="introduce-scpritBox">
+                <div class="isB__content">
+                    <h3 style="font-family: var(--font-fam);">Giới thiệu nội dung</h3>
+                    <p style="font-family: var(--font-fam);">
+                        Cô gái đến từ hôm qua của tác giả Nguyễn Nhật Ánh là một tác phẩm hài hước và dỉ dỏm kể về câu chuyện cua gái của chàng trai Anh Thư hồi bé và cả lúc bây giờ - khi anh đã trở thành một cậu sinh viện, Ngay từ những trang sách đầu tiên, tác giả đã trao cho Anh Thư ngòi bút kể lại câu chuyện của mình
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <i class="icon fa-solid fa-house home">
+                <div class="footerfont footer-home">Trang chủ</div>
+            </i>
+            <i class="icon fa-solid fa-magnifying-glass">
+                <div class="footerfont footer-sreach">Tìm kiếm</div>
+            </i>
+            <i class="icon fa-solid fa-bell">
+                <div class="footerfont footer-notification">Thông báo</div>
+            </i>
+        </footer>
+    </div>
+    <div class="box box--homePage">
+        <div class="HP-bookContainer">
+            <img class ="book-image img1" src="./assets/img/Book-Image1.jpg" alt="">
+            <img class ="book-image img2" src="./assets/img/Book-Image3.jpg" alt="">
+        </div>
+        <h3 class="font continue" style="font-size: 30px;">Tiếp tục</h3>
+        <div class="HP-continueContainer">
+            <div class="HP-continueContainer__continueBox">
+                <div class="cC-continueBox__bookImage">
+                    <img src="./assets/img/Book-Image2.jpg" alt="">
+                </div>
+                <div class="cC-continueBox__bookInfo">
+                    <div class="cB-bookInfo__bookType">
+                        Sách nói
+                    </div>
+                    <div class="cB-bookInfo__bookName">
+                        Bong bóng lên trời
+                    </div>
+                </div>
+                <i class="icon fa-solid fa-play"></i>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <i class="icon fa-solid fa-house home">
+                <div class="footerfont footer-home">Trang chủ</div>
+            </i>
+            <i class="icon fa-solid fa-magnifying-glass">
+                <div class="footerfont footer-sreach">Tìm kiếm</div>
+            </i>
+            <i class="icon fa-solid fa-bell">
+                <div class="footerfont footer-notification">Thông báo</div>
+            </i>
+        </footer>
+    </div>
+
+</body>
+</html>
