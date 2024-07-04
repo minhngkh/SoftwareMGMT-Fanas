@@ -8,7 +8,8 @@ const { storage, getDownloadURL } = require('./config/firebase.js');
 const firebaseAuthController = require('./controllers/firebaseAuthController.js');
 
 const app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
+console.log(path.join(__dirname, '../public'));
 
 app.use(
     express.urlencoded({
@@ -50,6 +51,11 @@ app.get('/get-audio-url', async (req, res) => {
         console.error("Error fetching the download URL: ", error);
         res.status(500).send("Error fetching the download URL");
     }
+});
+
+app.get('/example', (req, res) => {
+  const exampleText = "muahahahaha";
+  res.render("example", { layout: "example", exampleText});
 });
 
 const PORT = 8080;
