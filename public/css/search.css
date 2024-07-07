@@ -10,7 +10,7 @@ html {
     box-sizing: border-box;
     background-color: #ccc;
 }
-.app_body{
+.app_body1{
     max-width: 430px;
     width: 100%;
     height: 932px;
@@ -251,7 +251,7 @@ html {
 .info .rate .fa-solid {
     color: #FF6B00;
 }
-.detail_footer {
+.detail_footer1 {
     position: relative;
     bottom: -63px;
 }
