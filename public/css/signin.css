@@ -1,19 +1,9 @@
-body,
-html {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Inter;
-  background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
-}
-
 .wrapper {
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  margin: 1rem;
+  font-family: Inter;
+  max-width: 430px;
+  width: 100%;
+  height: 932px;
+  background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
 }
 
 .container {
@@ -23,41 +13,115 @@ html {
   text-align: center;
 }
 
-h1 {
-  display: flex;
-  margin-left: 1rem;
-  align-items: center;
-  justify-content: start;
+.wrapper h1 {
+  padding: 194px 25px 20px;
   color: #ffffff;
   font-weight: 700;
   font-size: 25px;
+  font-family: Inter;
 }
 
 .phone-input {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  margin: 0 25px 45px 25px;
+  position: relative;
 }
 
 .phone-input input {
-  width: 200px;
+  width: 218px;
   border: 1px solid #ffffff;
-  border-radius: 53px;
-  padding: 5px;
-  margin: 1rem 1rem;
-  font-size: 18px;
-  font-weight: 900;
+  border-radius: 22px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Inter;
+  padding: 9px 13px;
 }
 
+.input-text {
+  margin-left: 14px;
+}
+
+.phone-input .listPhone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 148px;
+  height: 42px;
+  border-radius: 22px;
+}
+
+.box-D {
+  width: 148px;
+  height: 42px;
+  border-radius: 22px;
+  background: #ffffff;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.domain-list {
+  position: relative;
+}
+
+.domain-item {
+  background-color: #ffffff;
+  width: 148px;
+  display: none;
+  position: absolute;
+  top: 42px;
+}
+.list-D {
+  padding-left: 0;
+  list-style: none;
+}
+.item-D {
+  display: flex;
+  align-items: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  text-align: center;
+  padding: 3px 10px;
+  border-bottom: 1px solid #ddd;
+}
+.item-D1 {
+  display: flex;
+  align-items: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  text-align: center;
+  padding: 3px 10px;
+}
+.item-D1 img {
+  display: inline-block;
+  margin-right: 5px;
+}
+.item-D img {
+  display: inline-block;
+  margin-right: 5px;
+}
+.item-D:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
 input:focus {
   outline: none;
 }
 
 .confirm-button {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
+  width: 380px;
+  height: 57px;
+  padding: 14px 124.9px 14px 125.96px;
+  margin: 0 25px 119px 25px;
   background: linear-gradient(to right, #ff8a8a, #ff8413);
   color: black;
   font-weight: 700;
