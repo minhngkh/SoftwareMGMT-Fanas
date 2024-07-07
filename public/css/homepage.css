@@ -1,118 +1,136 @@
-* {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 62.5%;
-  line-height: 1.6rem;
-  box-sizing: border-box;
-  background-color: #ccc;
-  font-family: Inter;
-}
-
-.wrapper {
+.homepage {
   max-width: 430px;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
+  height: 932px;
+  background: linear-gradient(360deg, #e4f2ff 0%, #cbb7da 50%, #32587a 100%);
   font-size: 1.7rem;
+  position: relative;
+  font-family: intern;
+  overflow-x: hidden;
+}
+.homepage_body {
+  width: 100%;
+  height: 932px;
   overflow: auto;
-  scroll-snap-type: y mandatory;
 }
-
-.container {
-  width: 100%;
-  font-size: 30px;
-  max-width: 430px;
-  text-align: center;
-  padding-top: 118px;
+.list-header {
+  margin: 118px 0px 19px 40px;
+}
+.list1 {
+  list-style: none;
+  padding-left: 0;
+  overflow-x: auto;
   display: flex;
-  flex-direction: column;
-  font-weight: 700;
+  flex-wrap: nowrap;
 }
-
-.list-label {
-  display: flex;
-  margin-top: 4rem;
+.list1-item img {
+  border-radius: 14px;
+  margin-right: 26px;
 }
-
-.item {
-  width: 80%;
-  height: 13vh;
-  display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
-}
-
-.item img {
-  width: 30%;
-}
-
-.text {
-  width: 70%;
-  background: rgb(116, 186, 210);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.item h4 {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  color: rgb(58, 58, 58);
-}
-
-.item p {
-  height: 80%;
-  width: 190px;
-  font-weight: 700;
-  font-size: medium;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  margin-left: 1rem;
-}
-
-.content {
-  height: 80%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
-.content span {
-  width: 30%;
-  position: relative;
+.list_header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  position: relative;
+  width: 410px;
 }
-
-.tool {
+.list_header i {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: #f1f1f1;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 10px 0;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 50px 50px 0 0;
-}
-
-.tool span {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  right: 15px;
+  top: 10px;
   font-size: 14px;
-  cursor: pointer;
+}
+.list_header h4 {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29.05px;
+  text-align: left;
+  padding-left: 10px;
+  margin-bottom: 31px;
+}
+.list-continue {
+  margin-bottom: 19px;
+}
+.list2 {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.list2-item {
+  margin-right: 26px;
+}
+.box-list2-item {
+  margin-bottom: 8px;
+  display: flex;
+  width: 351px;
+  background: #b7d8f8;
+  align-items: center;
 }
 
-.tool i {
-  margin-bottom: 5px;
-  font-size: 20px;
+.list2_book-info {
+  padding: 9px 23px;
+  width: 200px;
+}
+.list2_name {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.05px;
+  text-align: left;
+  font-family: intern;
+}
+.sn {
+  display: block;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.94px;
+  text-align: left;
+  font-family: intern;
+  margin-bottom: 10px;
+}
+.list2-item i {
+  position: relative;
+  right: -15px;
+  font-size: 28px;
+}
+.list3 {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 20px;
+  display: flex;
+  overflow-x: auto;
+}
+.list3-item {
+  position: relative;
+  padding: 20px;
+  margin-right: 11px;
+}
+.list3-item span {
+  z-index: 100;
+  position: absolute;
+  top: -24px;
+  left: 8px;
+  font-size: 60px;
+  font-weight: 700;
+}
+.homepage_footer {
+  position: relative;
+  bottom: 0;
+}
+.list4 {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  overflow-x: auto;
+  margin-left: 10px;
+}
+.list4-item {
+  margin-right: 22px;
+}
+.list4-item img {
+  display: flex;
+  margin-bottom: 27px;
 }
