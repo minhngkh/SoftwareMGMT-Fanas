@@ -18,7 +18,7 @@ html {
   height: 100vh;
   background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
   font-size: 1.7rem;
-  overflow-y: scroll;
+  overflow: auto;
   scroll-snap-type: y mandatory;
 }
 

@@ -1,28 +1,41 @@
-const User = require('../models/userModel');
+const User = require("../models/userModel");
 
 const { storage, getDownloadURL } = require("../config/firebase.js");
-const {firebaseAuthController} = require("./firebaseAuthController.js");
+const { firebaseAuthController } = require("./firebaseAuthController.js");
 
 class siteController {
   //[GET] /
   index(req, res) {
-    res.render('index', {layout: 'main'});
+    res.render("index", { layout: "main" });
+  }
+
+  //[GET] /homepage
+  homepage(req, res) {
+    res.render("homepage", { layout: "main" });
+  }
+
+  signin(req, res) {
+    res.render("signin", { layout: "main" });
+  }
+
+  signup(req, res) {
+    res.render("signup", { layout: "main" });
   }
 
   //[GET] /search
   search(req, res) {
-    res.render("search", {layout: 'main'});
+    res.render("search", { layout: "main" });
   }
 
   //[GET] /detail
   detail(req, res) {
-    res.render("detail", {layout: 'main'});
+    res.render("detail", { layout: "main" });
   }
 
   //[GET] /example
   example(req, res) {
     const exampleText = "muahahahaha";
-    res.render("example", { layout: "example", exampleText});
+    res.render("example", { layout: "example", exampleText });
   }
 
   //[GET] /get-audio-url
@@ -30,28 +43,24 @@ class siteController {
     console.log(req.query);
 
     try {
-        const filename = "sw" + req.query.chapters + ".mp3";
-        const fileRef = storage.bucket().file('SnowWhite/' + filename);
-        const url = await getDownloadURL(fileRef);
-        res.json({ url });
+      const filename = "sw" + req.query.chapters + ".mp3";
+      const fileRef = storage.bucket().file("SnowWhite/" + filename);
+      const url = await getDownloadURL(fileRef);
+      res.json({ url });
     } catch (error) {
-        console.error("Error fetching the download URL: ", error);
-        res.status(500).send("Error fetching the download URL");
+      console.error("Error fetching the download URL: ", error);
+      res.status(500).send("Error fetching the download URL");
     }
   }
-  
 
-  
   //[GET] /signup
   signup(req, res) {
-    res.render('signup', {layout: 'main'});
-
+    res.render("signup", { layout: "main" });
   }
 
   //[GET] /login
   login(req, res, next) {
-    res.render('login', {layout: 'main'});
-    
+    res.render("login", { layout: "main" });
   }
 
   //[GET] /logout
@@ -61,10 +70,9 @@ class siteController {
       if (err) {
         return next(err);
       }
-      res.redirect('./login');
+      res.redirect("./login");
     });
   }
 }
 
-
-module.exports = new siteController;
+module.exports = new siteController();
