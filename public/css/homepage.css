@@ -126,6 +126,7 @@
   display: flex;
   overflow-x: auto;
   margin-left: 10px;
+  margin-bottom: 50px;
 }
 .list4-item {
   margin-right: 22px;
