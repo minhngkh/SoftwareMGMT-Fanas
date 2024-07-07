@@ -6,7 +6,7 @@
   background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
 }
 
-.container {
+.container1 {
   width: 100%;
   font-size: 30px;
   max-width: 430px;
@@ -25,7 +25,6 @@
   display: flex;
   justify-content: space-between;
   margin: 0 25px 45px 25px;
-  position: relative;
 }
 
 .phone-input input {
@@ -40,15 +39,6 @@
 
 .input-text {
   margin-left: 14px;
-}
-
-.phone-input .listPhone {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 148px;
-  height: 42px;
-  border-radius: 22px;
 }
 
 .box-D {
@@ -153,6 +143,12 @@ input:focus {
 }
 
 .social-buttons a {
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 22px;
+  width: 61px;
+  height: 42px;
+  padding: 7px 13px 4px;
   font-size: 24px;
   margin: 0 15px;
   cursor: pointer;
