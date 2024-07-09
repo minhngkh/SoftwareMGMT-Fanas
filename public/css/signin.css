@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-.wrapper h1 {
+.signin_header {
   padding: 194px 25px 20px;
   color: #ffffff;
   font-weight: 700;
@@ -37,9 +37,6 @@
   font-weight: 700;
   font-family: Inter;
   padding: 9px 13px;
-}
-
-.input-text {
 }
 
 .box-D {
