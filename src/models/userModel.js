@@ -42,6 +42,21 @@ class User {
             next();
         }
     }
+
+    async getUser(userID, next) {
+        try {
+            const userSnapshot = await userCollection.doc(userID).get();
+            if(userSnapshot.exists) {
+                const userData = userSnapshot.data();
+                return userData;
+            }else {
+                return {};
+            }
+        }catch {
+            next();
+            return {};
+        }
+    }
 }
 
 module.exports = new User;

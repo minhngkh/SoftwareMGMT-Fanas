@@ -10,7 +10,6 @@ const {
    } = require('../config/firebase');
 const Authentication = require("../config/Authentication");
 const User = require('../models/userModel');
-const auth = getAuth();
 
 class FirebaseAuthController {
     async registerUser(req, res) {

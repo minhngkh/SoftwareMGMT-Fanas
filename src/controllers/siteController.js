@@ -1,4 +1,5 @@
-const User = require("../models/userModel");
+const Authentication = require("../config/Authentication");
+const User = require("../models/userModel")
 
 const { storage, getDownloadURL } = require("../config/firebase.js");
 const { firebaseAuthController } = require("./firebaseAuthController.js");
@@ -14,12 +15,56 @@ class siteController {
     res.render("homepage", { layout: "main" });
   }
 
+  //[GET] /signin
   signin(req, res) {
-    res.render("signin", { layout: "main" });
+    console.log("getLogin");
+    let messFailed = "";
+    if (req.query.status === 'failed') {
+      messFailed = 'Wrong username or password.';
+    }
+    res.render("signin", { layout: "main", messFailed });
   }
 
+  //[POST] /signin
+  async postSignin(req, res) {
+    console.log("postLogin");
+    const {message, status, userCredential} = await Authentication.loginUser(req.body, () => {});
+    if(userCredential) {
+        res.cookie("uid", userCredential.user.uid, { expires: new Date(Date.now() + 900000), httpOnly: true });
+    }
+    
+    if(status === 500) {
+      res.redirect("/signin?status=failed")
+    }else {
+      res.redirect("/homepage");
+    }
+  }
+
+  //[GET] /signup
   signup(req, res) {
     res.render("signup", { layout: "main" });
+  }
+
+  //[POST] /signup
+  async postSignup(req, res) {
+    console.log("postSignup");
+    const formData = req.body;
+    const newUser = {
+      email: formData.email,
+      password: formData.password
+    }
+
+    const {message, status, userCredential} = await Authentication.registerUser(newUser, () => {});
+      if(userCredential) {
+        const userInfo = {
+            "userID": userCredential.user?.uid,
+            "avatarPath": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+            "email": req.body.email,
+            "role": "customer"
+        }
+      await User.createNewUser(userInfo ,() => {});
+    }
+    res.redirect("/homepage");
   }
 
   //[GET] /search
@@ -64,14 +109,11 @@ class siteController {
   }
 
   //[GET] /logout
-  logout(req, res, next) {
-    console.log("Loging out");
-    req.logout(function (err) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("./login");
-    });
+  async logout(req, res, next) {
+    console.log("getLogout");
+    await Authentication.logoutUser(() => {});
+    res.clearCookie("uid");
+    res.redirect("/homepage");
   }
 }
 
