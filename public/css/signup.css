@@ -1,29 +1,33 @@
-/* .container {
-  width: 100%;
+.signup_header {
+  padding: 188px 51px 56px 51px;
+  color: #ffffff;
+  font-weight: 700;
   font-size: 30px;
-  max-width: 430px;
-  text-align: center;
+  font-family: Inter;
 }
 
 .button {
-  width: 100%;
-  padding: 5px;
-  margin: 1.5rem 0;
+  width: 328px;
+  height: 42px;
+  margin: 31px 51 31 51;
   display: flex;
   align-items: center;
   justify-content: start;
   border: 1px solid #ccc;
-  border-radius: 100px;
+  border-radius: 22px;
   color: black;
   font-weight: 700;
   font-size: 20px;
   background-color: #ffffff;
+  line-height: 24.2px;
   cursor: pointer;
   transition: 0.3s;
+  font-family: Inter;
 }
 
 .button i {
-  margin-right: 10px;
+  font-size: 35px;
+  margin: 3px 16px 4px 13px;
 }
 
 .button:hover {
@@ -48,7 +52,8 @@ p {
   display: flex;
   font-weight: 700;
   font-size: 20px;
-  margin-top: 10rem;
   justify-content: center;
   align-items: center;
-} */
+  font-family: Inter;
+  margin: 218px 76px 0 75px;
+}
