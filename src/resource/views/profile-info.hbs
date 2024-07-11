@@ -1,0 +1,35 @@
+{{#> profile }}
+  {{#*inline "content" }}
+    <ul class="info-button-list">
+      <li>
+        <button class="info-button-wrapper">
+          <i class="info-button-icon fa-regular fa-user fa-fw"></i>
+          <div class="info-button-text">Thông tin tài khoản</div>
+        </button>
+      </li>
+
+      <li>
+        <a class="info-button-wrapper" href="/profile/favorite">
+          <i class="info-button-icon fa-regular fa-heart fa-fw"></i>
+          <div class="info-button-text">Sách yêu thích</div>
+        </a>
+      </li>
+
+      <li>
+        <a class="info-button-wrapper" href="/profile/history">
+          <i
+            class="info-button-icon fa-solid fa-clock-rotate-left fa-fw"
+          ></i>
+          <div class="info-button-text">Sách đã xem</div>
+        </a>
+      </li>
+
+      <li>
+        <button class="info-button-wrapper">
+          <i class="info-button-icon fa-solid fa-list fa-fw"></i>
+          <div class="info-button-text">Thể loại yêu thích</div>
+        </button>
+      </li>
+    </ul>
+  {{/inline}}
+{{/ profile }}

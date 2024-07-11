@@ -1,0 +1,66 @@
+{{#> layouts/base }}
+  {{#*inline "head-imports" }}
+    <link rel="stylesheet" href="/css/bottom-nav.css" />
+
+    {{#> head-imports }}
+    {{/ head-imports }}
+  {{/inline}}
+
+  {{#*inline "content" }}
+    {{> content }}
+
+    <nav class="bottom-nav">
+      <ul class="nav-button-group">
+        <li>
+          {{#if (eq currentNav "home")}}
+            <a class="nav-button active" aria-current="page" href="/">
+              <div class="nav-button-icon">
+                <i class="fa fa-house"></i>
+              </div>
+              <div class="nav-button-text">Trang chủ</div>
+            </a>
+          {{else}}
+            <a class="nav-button" href="/">
+              <div class="nav-button-icon">
+                <i class="fa fa-house"></i>
+              </div>
+              <div class="nav-button-text">Trang chủ</div>
+            </a>
+          {{/if}}
+        </li>
+
+        <li>
+          {{#if (eq currentNav "search")}}
+            <a class="nav-button active" aria-current="page" href="/search">
+              <div class="nav-button-icon">
+                <i class="fa fa-magnifying-glass"></i>
+              </div>
+              <div class="nav-button-text">Tìm kiếm</div>
+            </a>
+          {{else}}
+            <a class="nav-button" href="/search">
+              <div class="nav-button-icon">
+                <i class="fa fa-magnifying-glass"></i>
+              </div>
+              <div class="nav-button-text">Tìm kiếm</div>
+            </a>
+          {{/if}}
+        </li>
+
+        <li>
+          {{#if (eq currentNav "profile")}}
+            <a class="nav-button active" aria-current="page" href="/profile">
+              <img class="nav-button-icon" src="{{ avatarUrl }}" />
+              <div class="nav-button-text">Tài khoản</div>
+            </a>
+          {{else}}
+            <a class="nav-button" href="/profile">
+              <img class="nav-button-icon" src="{{ avatarUrl }}" />
+              <div class="nav-button-text">Tài khoản</div>
+            </a>
+          {{/if}}
+        </li>
+      </ul>
+    </nav>
+  {{/inline}}
+{{/ layouts/base }}

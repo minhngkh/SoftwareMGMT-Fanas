@@ -1,0 +1,19 @@
+{{#> layouts/base-with-nav }}
+  {{#*inline "head-imports" }}
+    <link rel="stylesheet" href="/css/profile.css" />
+
+    {{#> head-imports }}
+    {{/ head-imports }}
+  {{/inline}}
+
+  {{#*inline "content" }}
+    <div class="avatar-group">
+        <img class="avatar-img" src="{{ avatarUrl }}" />
+        <div class="avatar-name">{{ fullName }}</div>
+      </div>
+
+      <main class="content">
+        {{> content }}
+      </main>
+  {{/inline}}
+{{/ layouts/base-with-nav }}

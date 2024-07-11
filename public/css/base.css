@@ -1,0 +1,33 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: Inter;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
+  background-attachment: fixed;
+}
+
+.phone-wrapper {
+  height: 100lvh;
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  flex-direction: column;
+}
