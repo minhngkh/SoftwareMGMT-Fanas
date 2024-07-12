@@ -1,3 +1,65 @@
+{{#content "css" mode="append"}}
+  <link rel="stylesheet" href="/css/signin.css">
+  <link rel="stylesheet" href="/css/signup.css">
+{{/content}}
+
+{{#content "js" mode="append"}}
+  <script>
+    const passwordField = document.getElementById("password");
+    const togglePassword = document.querySelector(".password-toggle-icon i");
+
+    togglePassword.addEventListener("click", function () {
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      togglePassword.classList.remove("fa-eye-slash");
+        togglePassword.classList.add("fa-eye");
+      } else {
+        passwordField.type = "password";
+        togglePassword.classList.remove("fa-eye");
+        togglePassword.classList.add("fa-eye-slash");
+      }
+    });
+
+    const passwordFieldCheck = document.getElementById("password-check");
+    const togglePasswordCheck = document.querySelector(".password-check-toggle-icon i");
+
+    togglePasswordCheck.addEventListener("click", function () {
+      if (passwordFieldCheck.type === "password") {
+        passwordFieldCheck.type = "text";
+      togglePasswordCheck.classList.remove("fa-eye-slash");
+        togglePasswordCheck.classList.add("fa-eye");
+      } else {
+        passwordFieldCheck.type = "password";
+        togglePasswordCheck.classList.remove("fa-eye");
+        togglePasswordCheck.classList.add("fa-eye-slash");
+      }
+    });
+
+    function checkPassword(password, reEnterPassword) {
+      var passwordInput =  document.getElementById(password);
+      var reEnterPasswordInput = document.getElementById(reEnterPassword)
+      if((passwordInput.value !== "" || reEnterPasswordInput.value !== "")
+      && (passwordInput.value.length <= 6 || reEnterPasswordInput.value.length <= 6)) {
+        document.getElementById('error-noti').style.display = "block";
+        document.getElementById('error-noti').innerText = "Password must contain at least 6 characters."
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').style = "opacity: 0.7";
+      }
+      else if(passwordInput.value !== reEnterPasswordInput.value
+      && (passwordInput.value !== "" || reEnterPasswordInput.value !== "")) {
+        document.getElementById('error-noti').style.display = "block";
+        document.getElementById('error-noti').innerText = "Passwords are not matched."
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').style = "opacity: 0.7";
+      }else {
+        document.getElementById('error-noti').style.display = "none";
+        document.getElementById('submit-btn').disabled = false;
+        document.getElementById('submit-btn').style = "opacity: 1";
+      }
+    }
+  </script>
+{{/content}}
+
 {{!-- <div class="wrapper">
   <h1>Tạo tài khoản miễn phí</h1>
   <div class="container1">
@@ -91,7 +153,7 @@
         <button class="confirm-button" id="submit-btn" type="submit" style="opacity: 0.7;">Xác nhận</button>
       </form>
     </div>
-    
+
       {{!-- <div class="divider">
         <div
           style="border: 1px solid black; width: 75px; margin-right: 10px"
@@ -114,58 +176,3 @@
     <p>Đã có tài khoản? <a href="/signin" id="signup">Đăng nhập</a></p>
   </div>
 </div>
-
-<script>
-  const passwordField = document.getElementById("password");
-  const togglePassword = document.querySelector(".password-toggle-icon i");
-
-  togglePassword.addEventListener("click", function () {
-    if (passwordField.type === "password") {
-      passwordField.type = "text";
-     togglePassword.classList.remove("fa-eye-slash");
-      togglePassword.classList.add("fa-eye");
-    } else {
-      passwordField.type = "password";
-      togglePassword.classList.remove("fa-eye");
-      togglePassword.classList.add("fa-eye-slash");
-    }
-  });
-
-  const passwordFieldCheck = document.getElementById("password-check");
-  const togglePasswordCheck = document.querySelector(".password-check-toggle-icon i");
-
-  togglePasswordCheck.addEventListener("click", function () {
-    if (passwordFieldCheck.type === "password") {
-      passwordFieldCheck.type = "text";
-     togglePasswordCheck.classList.remove("fa-eye-slash");
-      togglePasswordCheck.classList.add("fa-eye");
-    } else {
-      passwordFieldCheck.type = "password";
-      togglePasswordCheck.classList.remove("fa-eye");
-      togglePasswordCheck.classList.add("fa-eye-slash");
-    }
-  });
-
-  function checkPassword(password, reEnterPassword) {
-    var passwordInput =  document.getElementById(password);
-    var reEnterPasswordInput = document.getElementById(reEnterPassword)
-    if((passwordInput.value !== "" || reEnterPasswordInput.value !== "") 
-    && (passwordInput.value.length <= 6 || reEnterPasswordInput.value.length <= 6)) {
-      document.getElementById('error-noti').style.display = "block";
-      document.getElementById('error-noti').innerText = "Password must contain at least 6 characters."
-      document.getElementById('submit-btn').disabled = true;
-      document.getElementById('submit-btn').style = "opacity: 0.7";
-    }
-    else if(passwordInput.value !== reEnterPasswordInput.value 
-    && (passwordInput.value !== "" || reEnterPasswordInput.value !== "")) {
-      document.getElementById('error-noti').style.display = "block";
-      document.getElementById('error-noti').innerText = "Passwords are not matched."
-      document.getElementById('submit-btn').disabled = true;
-      document.getElementById('submit-btn').style = "opacity: 0.7";
-    }else {
-      document.getElementById('error-noti').style.display = "none";
-      document.getElementById('submit-btn').disabled = false;
-      document.getElementById('submit-btn').style = "opacity: 1";
-    }
-  }
-</script>

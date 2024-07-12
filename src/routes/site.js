@@ -27,6 +27,4 @@ router.post("/signup", siteController.postSignup);
 
 router.get("/", siteController.index);
 
-router.get("/homepage-example", siteController.homepageExample);
-
 module.exports = router;

@@ -12,7 +12,7 @@ class siteController {
 
   //[GET] /homepage
   homepage(req, res) {
-    res.render("homepage", { layout: "main" });
+    res.render("homepage", { layout: "base-with-nav" });
   }
 
   //[GET] /signin
@@ -22,7 +22,7 @@ class siteController {
     if (req.query.status === "failed") {
       messFailed = "Wrong username or password.";
     }
-    res.render("signin", { layout: "main", messFailed });
+    res.render("signin", { layout: "base", messFailed });
   }
 
   //[POST] /signin
@@ -48,7 +48,7 @@ class siteController {
 
   //[GET] /signup
   signup(req, res) {
-    res.render("signup", { layout: "main" });
+    res.render("signup", { layout: "base" });
   }
 
   //[POST] /signup
@@ -77,12 +77,12 @@ class siteController {
 
   //[GET] /search
   search(req, res) {
-    res.render("search", { layout: "main" });
+    res.render("search", { layout: "base-with-nav" });
   }
 
   //[GET] /detail
   detail(req, res) {
-    res.render("detail", { layout: "main" });
+    res.render("detail", { layout: "base-with-nav" });
   }
 
   //[GET] /example
@@ -106,11 +106,6 @@ class siteController {
     }
   }
 
-  //[GET] /signup
-  signup(req, res) {
-    res.render("signup", { layout: "main" });
-  }
-
   //[GET] /login
   login(req, res, next) {
     res.render("login", { layout: "main" });
@@ -122,10 +117,6 @@ class siteController {
     await Authentication.logoutUser(() => {});
     res.clearCookie("uid");
     res.redirect("/homepage");
-  }
-
-  homepageExample(req, res) {
-    res.render("homepage-example", { layout: "base-with-nav" });
   }
 }
 
