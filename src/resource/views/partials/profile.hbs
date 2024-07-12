@@ -1,19 +1,12 @@
-{{#> layouts/base-with-nav }}
-  {{#*inline "head-imports" }}
-    <link rel="stylesheet" href="/css/profile.css" />
+{{#content "css" mode="prepend"}}
+  <link rel="stylesheet" href="/css/profile.css" />
+{{/content}}
 
-    {{#> head-imports }}
-    {{/ head-imports }}
-  {{/inline}}
+<div class="avatar-group">
+  <img class="avatar-img" src="{{ avatarUrl }}" />
+  <div class="avatar-name">{{ fullName }}</div>
+</div>
 
-  {{#*inline "content" }}
-    <div class="avatar-group">
-        <img class="avatar-img" src="{{ avatarUrl }}" />
-        <div class="avatar-name">{{ fullName }}</div>
-      </div>
-
-      <main class="content">
-        {{> content }}
-      </main>
-  {{/inline}}
-{{/ layouts/base-with-nav }}
+<main class="content">
+  {{> @partial-block}}
+</main>

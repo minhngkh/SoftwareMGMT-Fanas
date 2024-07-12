@@ -1,5 +1,5 @@
 const Authentication = require("../config/Authentication");
-const User = require("../models/userModel")
+const User = require("../models/userModel");
 
 const { storage, getDownloadURL } = require("../config/firebase.js");
 const { firebaseAuthController } = require("./firebaseAuthController.js");
@@ -19,8 +19,8 @@ class siteController {
   signin(req, res) {
     console.log("getLogin");
     let messFailed = "";
-    if (req.query.status === 'failed') {
-      messFailed = 'Wrong username or password.';
+    if (req.query.status === "failed") {
+      messFailed = "Wrong username or password.";
     }
     res.render("signin", { layout: "main", messFailed });
   }
@@ -28,14 +28,20 @@ class siteController {
   //[POST] /signin
   async postSignin(req, res) {
     console.log("postLogin");
-    const {message, status, userCredential} = await Authentication.loginUser(req.body, () => {});
-    if(userCredential) {
-        res.cookie("uid", userCredential.user.uid, { expires: new Date(Date.now() + 900000), httpOnly: true });
+    const { message, status, userCredential } = await Authentication.loginUser(
+      req.body,
+      () => {},
+    );
+    if (userCredential) {
+      res.cookie("uid", userCredential.user.uid, {
+        expires: new Date(Date.now() + 900000),
+        httpOnly: true,
+      });
     }
-    
-    if(status === 500) {
-      res.redirect("/signin?status=failed")
-    }else {
+
+    if (status === 500) {
+      res.redirect("/signin?status=failed");
+    } else {
       res.redirect("/homepage");
     }
   }
@@ -51,18 +57,20 @@ class siteController {
     const formData = req.body;
     const newUser = {
       email: formData.email,
-      password: formData.password
-    }
+      password: formData.password,
+    };
 
-    const {message, status, userCredential} = await Authentication.registerUser(newUser, () => {});
-      if(userCredential) {
-        const userInfo = {
-            "userID": userCredential.user?.uid,
-            "avatarPath": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
-            "email": req.body.email,
-            "role": "customer"
-        }
-      await User.createNewUser(userInfo ,() => {});
+    const { message, status, userCredential } =
+      await Authentication.registerUser(newUser, () => {});
+    if (userCredential) {
+      const userInfo = {
+        userID: userCredential.user?.uid,
+        avatarPath:
+          "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+        email: req.body.email,
+        role: "customer",
+      };
+      await User.createNewUser(userInfo, () => {});
     }
     res.redirect("/homepage");
   }
@@ -114,6 +122,10 @@ class siteController {
     await Authentication.logoutUser(() => {});
     res.clearCookie("uid");
     res.redirect("/homepage");
+  }
+
+  homepageExample(req, res) {
+    res.render("homepage-example", { layout: "base-with-nav" });
   }
 }
 
