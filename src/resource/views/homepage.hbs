@@ -2,7 +2,16 @@
   <div class="homepage_body">
     <div class="list-header">
       <ul class="list1">
+        {{#each sliders}}
         <li class="list1-item">
+          {{!-- {{sliders}} --}}
+          <a href="./detail">
+            <img src="{{coverPath}}" alt="" height="534" width="315">
+          </a>
+          {{!-- <img src="assets/img/cgdthq.jpg" alt="" height="534" width="315" /> --}}
+        </li>
+        {{/each}}
+        {{!-- <li class="list1-item">
           <img src="assets/img/cgdthq.jpg" alt="" height="534" width="315" />
         </li>
         <li class="list1-item">
@@ -13,10 +22,7 @@
         </li>
         <li class="list1-item">
           <img src="assets/img/cgdthq.jpg" alt="" height="534" width="315" />
-        </li>
-        <li class="list1-item">
-          <img src="assets/img/cgdthq.jpg" alt="" height="534" width="315" />
-        </li>
+        </li> --}}
       </ul>
     </div>
     <div class="list-continue">

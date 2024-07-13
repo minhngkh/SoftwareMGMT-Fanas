@@ -1,7 +1,7 @@
 const Authentication = require("../config/Authentication");
 const User = require("../models/userModel")
 
-const { storage, getDownloadURL } = require("../config/firebase.js");
+const { storage, getDownloadURL, dbFirestore } = require("../config/firebase.js");
 const { firebaseAuthController } = require("./firebaseAuthController.js");
 
 class siteController {
@@ -11,8 +11,21 @@ class siteController {
   }
 
   //[GET] /homepage
-  homepage(req, res) {
-    res.render("homepage", { layout: "main" });
+  async homepage(req, res) {
+    var sliders = [];
+
+    await dbFirestore.collection("Books").get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        // console.log(doc);
+        let item = doc.data();
+        // console.log(item.bookname);
+        // console.log(item.coverPath);
+
+        sliders.push(item);
+      });
+    });
+
+    res.render("homepage", { layout: "main", sliders: sliders });
   }
 
   //[GET] /signin
