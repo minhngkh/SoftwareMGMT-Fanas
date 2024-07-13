@@ -1,8 +1,16 @@
 .wrapper {
   overflow-x: hidden;
+  padding-top: 100px;
   /* max-width: 430px; */
   width: 100%;
   text-align: center;
+}
+
+.wrapper h1 {
+  margin-bottom: 5rem;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 30px;
 }
 
 .container1 {
