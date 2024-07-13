@@ -16,9 +16,9 @@ class siteController {
 
     await dbFirestore.collection("Books").get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
-        // console.log(doc);
         let item = doc.data();
-        // console.log(item.bookname);
+        item.id = doc.id;
+        // console.log(item);
         // console.log(item.coverPath);
 
         sliders.push(item);
@@ -86,8 +86,18 @@ class siteController {
   }
 
   //[GET] /detail
-  detail(req, res) {
-    res.render("detail", { layout: "main" });
+  async detail(req, res) {
+    console.log(req.query);
+    let bookId = req.query.id;
+    var detail;
+
+    await dbFirestore.collection("Books").get().then((snapshot) => {
+      let book = snapshot.docs.find(o=> o.id === bookId);
+      detail = book.data();
+      console.log(detail);
+    });
+
+    res.render("detail", { layout: "main", detail: detail });
   }
 
   //[GET] /example
