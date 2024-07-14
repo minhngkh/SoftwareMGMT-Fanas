@@ -1,0 +1,26 @@
+{{#> profile}}
+  <div class="list-header">
+    <div class="list-header-text">{{ listName }}</div>
+    <div class="list-header-filter">
+      <i class="fa-solid fa-arrow-down-wide-short"></i>
+      <div>Sắp xếp</div>
+    </div>
+  </div>
+
+  <ul class="book-button-list">
+    {{#each history}}
+      <li>
+        <button class="book-button-wrapper">
+          <img class="book-cover" src="{{ coverUrl }}" />
+          <div class="book-text-group">
+            <div class="book-type">Sách nói</div>
+            <div class="book-title">{{ title }}</div>
+          </div>
+          <div class="play-button">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </button>
+      </li>
+    {{/each}}
+  </ul>
+{{/profile}}
