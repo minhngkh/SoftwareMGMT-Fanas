@@ -18,9 +18,12 @@
     <div class="detail_body">
         <div class="box-temp3">
             <div class="info_book">
-                <img src="assets/img/nna.jpg" alt="">
-                <h4>Cô gái tới từ hôm qua</h4>
-                <span class="actor">Nguyễn Nhật Ánh</span>
+                {{!-- <img src="assets/img/nna.jpg" alt=""> --}}
+                <img src="{{detail.coverPath}}" alt="">
+                {{!-- <h4>Cô gái tới từ hôm qua</h4> --}}
+                <h4>{{detail.bookName}}</h4>
+                {{!-- <span class="actor">Nguyễn Nhật Ánh</span> --}}
+                <span class="actor">{{detail.author}}</span>
                 <span>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -28,6 +31,7 @@
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                     / 400 lượt đánh giá
+                    {{!-- {{rating}} --}}
                 </span>
             </div>
             <div class="header_like">
@@ -40,6 +44,7 @@
                     <span>Giá bán lẻ</span>
                     <span>
                         99,999đ
+                        {{!-- {{price}} --}}
                         <label class="custom-checkbox">
                             <input type="checkbox">
                             <span class="checkmark"></span>
@@ -48,25 +53,19 @@
                 </div>
                 <div class="header_cost-box">
                     <span>Mua với giá bán lẻ-99,999đ</span>
+                    {{!-- <span>Mua với giá bán lẻ-{{price}}</span> --}}
                 </div>
             </div>
         </div>
         <div class="footer-info" id="footer-info">
             <h3>Giới thiệu nội dung</h3>
-            <p>Cô gái đến từ hôm qua của tác giả Nguyễn Nhật Ánh là một tác phẩm
-              hài hước và dí dỏm kể về câu chuyện cua gái của chàng trai trẻ Anh Thư hồi
-              còn bé và cả lúc bây giờ – khi anh đã trở thành một câu sinh viên. Ngay từ những trang sách đầu tiên,
-              tác giả đã trao cho Anh Thư ngòi bút để kể lại câu chuyện của mình bằng ngôi thứ nhất “tôi”,
-              chính điều này làm cho tác phẩm chân thật và lôi cuốn một cách lạ kì, về những kỉ niêm ấu thơ hồn nhiên,
-              ngây thơ, trong sáng khi còn là một cậu nhóc, cùng với sự xuất hiện của cô bé rất ư là dễ thương – Tiểu Li.
-              Và rồi ta lại được nghe câu chuyện về cô gái hoa khôi của lớp mà anh đã phải lòng từ lâu. Việc lồng ghép,
-              đan xen cả hai câu chuyện về nhau tưởng chừng gượng gạo, lộ liễu nhưng không, Nguyễn Nhật Ánh đã biến sự
-              lồng ghép ấy trở nên nhẹ hẫng bằng việc đưa ra những mắc xích kết nối cả hai phần hiện tại và quá khứ rất tài tình.</p>
+              <p>{{detail.description}}</p>
               <h4>Về tác giả</h4>
               <div class="box-info">
                 <img src="assets/img/nnaimg.jpg" alt="" width="71" height="71">
+                {{!-- <img src="{{authorimg}}" alt="" width="71" height="71"> --}}
                 <div class="name-au">
-                    <h5>Nguyễn Nhật Ánh</h5>
+                    <h5>{{detail.author}}</h5>
                     <span>40 Sách</span>
                 </div>
               </div>
@@ -81,16 +80,16 @@
             <h4>Thông tin xuất bản</h4>
             <p>Nhà xuất bản sách giấy NXB trẻ</p>
             <div class="box-temp1">
-                <span class="ctg">Hài kịch</span>
-                <span class="ctg">Lãng mạn</span>
-                <span class="ctg">Học đường</span>
+                {{#each detail.genres}}
+                  <span class="ctg">{{this}}</span>
+                {{/each}}
             </div>
             <h4>Thông tin cần đọc</h4>
             <p>Cần thêm thông tin</p>
             <span class="underline"></span>
             <div style="width: 100%; padding:20px;">
                 <div class="box-temp2">
-                    <img src="assets/img/nna.jpg" alt="" width="103" height="176" style="border-radius: 14px; margin-right: 11px    ;">
+                    <img src="{{detail.coverPath}}" alt="" width="103" height="176" style="border-radius: 14px; margin-right: 11px ;">
                     <div class="box-info1">
                         <div class="eval">
                             <span>4.0</span>

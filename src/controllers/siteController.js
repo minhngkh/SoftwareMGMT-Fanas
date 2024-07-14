@@ -1,7 +1,11 @@
 const Authentication = require("../config/Authentication");
 const User = require("../models/userModel");
 
-const { storage, getDownloadURL } = require("../config/firebase.js");
+const {
+  storage,
+  getDownloadURL,
+  dbFirestore,
+} = require("../config/firebase.js");
 const { firebaseAuthController } = require("./firebaseAuthController.js");
 
 class siteController {
@@ -11,8 +15,24 @@ class siteController {
   }
 
   //[GET] /homepage
-  homepage(req, res) {
-    res.render("homepage", { layout: "base-with-nav" });
+  async homepage(req, res) {
+    var sliders = [];
+
+    await dbFirestore
+      .collection("Books")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          let item = doc.data();
+          item.id = doc.id;
+          // console.log(item);
+          // console.log(item.coverPath);
+
+          sliders.push(item);
+        });
+      });
+
+    res.render("homepage", { layout: "base-with-nav", sliders: sliders });
   }
 
   //[GET] /signin
@@ -81,8 +101,21 @@ class siteController {
   }
 
   //[GET] /detail
-  detail(req, res) {
-    res.render("detail", { layout: "base-with-nav" });
+  async detail(req, res) {
+    console.log(req.query);
+    let bookId = req.query.id;
+    var detail;
+
+    await dbFirestore
+      .collection("Books")
+      .get()
+      .then((snapshot) => {
+        let book = snapshot.docs.find((o) => o.id === bookId);
+        detail = book.data();
+        console.log(detail);
+      });
+
+    res.render("detail", { layout: "base-with-nav", detail: detail });
   }
 
   //[GET] /example
