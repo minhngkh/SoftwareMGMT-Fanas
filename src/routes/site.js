@@ -18,7 +18,7 @@ router.get("/example", siteController.example);
 router.get("/detail", siteController.detail);
 router.get("/search", siteController.search);
 
-router.get("/homepage", siteController.homepage);
+router.get("/homepage", isLoggedIn, siteController.homepage);
 router.get("/logout", siteController.logout);
 router.get("/signin", siteController.signin);
 router.post("/signin", siteController.postSignin);
@@ -27,4 +27,18 @@ router.post("/signup", siteController.postSignup);
 
 router.get("/", siteController.index);
 
+
+function isLoggedIn(req, res, next){
+    console.log("Authenticate checking");
+    
+    const cookieHeader = req.headers?.cookie;
+    // console.log(cookieHeader);
+
+    if (typeof cookieHeader !== "undefined"){
+        return next();
+    } else {
+        res.redirect("/signin");
+    }
+
+}
 module.exports = router;
