@@ -18,6 +18,12 @@ class siteController {
   async homepage(req, res) {
     var sliders = [];
 
+    const cookieHeader = req.headers?.cookie;
+    const uid = cookieHeader.split('=')[1];
+
+    let userData = await User.getUser(uid);
+    // console.log(userData);
+
     await dbFirestore
       .collection("Books")
       .get()
@@ -32,7 +38,7 @@ class siteController {
         });
       });
 
-    res.render("homepage", { layout: "base-with-nav", sliders: sliders });
+    res.render("homepage", { layout: "base-with-nav", sliders: sliders, avatarPath: userData.avatarPath });
   }
 
   //[GET] /signin
