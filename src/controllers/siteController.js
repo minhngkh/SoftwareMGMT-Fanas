@@ -89,6 +89,7 @@ class siteController {
           "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
         email: req.body.email,
         role: "customer",
+        favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : []
       };
       await User.createNewUser(userInfo, () => {});
     }

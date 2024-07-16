@@ -1,13 +1,13 @@
 .wrapper {
   overflow-x: hidden;
-  padding-top: 100px;
+  padding-top: 80px;
   /* max-width: 430px; */
   width: 100%;
   text-align: center;
 }
 
 .wrapper h1 {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   color: #ffffff;
   font-weight: 700;
   font-size: 30px;
@@ -119,7 +119,7 @@ input:focus {
   width: 90%;
   height: 57px;
   padding: 14px 0;
-  margin: 0 0 119px;
+  margin: 0 0 10px;
   background: linear-gradient(to right, #ff8a8a, #ff8413);
   color: black;
   font-weight: 700;

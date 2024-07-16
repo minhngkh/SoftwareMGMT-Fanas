@@ -4,8 +4,7 @@ const userCollection = dbFirestore.collection("Users");
 
 class User {
     async createNewUser(userInfo, next) {
-        console.log(userInfo);
-        const {userID, avatarPath, email, role} = userInfo;
+        const {userID, avatarPath, email, role, favoriteGenres} = userInfo;
         // if(!userID) {
         //     return { message: "Missing userID", status: 422 };
         // }
@@ -13,7 +12,7 @@ class User {
             userID,
             avatarPath,
             email,
-            favoriteGenres:[],
+            favoriteGenres: favoriteGenres,
             favoriteList: [],
             historyList: [],
             role
