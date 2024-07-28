@@ -56,7 +56,7 @@ class siteController {
     console.log("postLogin");
     const { message, status, userCredential } = await Authentication.loginUser(
       req.body,
-      () => {},
+      () => { },
     );
     if (userCredential) {
       res.cookie("uid", userCredential.user.uid, {
@@ -87,7 +87,7 @@ class siteController {
     };
 
     const { message, status, userCredential } =
-      await Authentication.registerUser(newUser, () => {});
+      await Authentication.registerUser(newUser, () => { });
     if (userCredential) {
       const userInfo = {
         userID: userCredential.user?.uid,
@@ -97,7 +97,7 @@ class siteController {
         role: "customer",
         favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : []
       };
-      await User.createNewUser(userInfo, () => {});
+      await User.createNewUser(userInfo, () => { });
     }
     res.redirect("/homepage");
   }
@@ -105,6 +105,25 @@ class siteController {
   //[GET] /search
   search(req, res) {
     res.render("search", { layout: "base-with-nav" });
+  }
+
+  //[GET] /search-books
+  //For example /search-books?phrase=hoa
+  async searchBooks(req, res) {
+    const phrase = req.query.phrase;
+    let foundBooks = [];
+
+    await dbFirestore.collection("Books").get().then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        let book = doc.data();
+        if (book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())) {
+          book.id = doc.id;
+          foundBooks.push(book);
+        }
+      });
+    });
+
+    res.json(foundBooks);
   }
 
   //[GET] /detail
@@ -154,7 +173,7 @@ class siteController {
   //[GET] /logout
   async logout(req, res, next) {
     console.log("getLogout");
-    await Authentication.logoutUser(() => {});
+    await Authentication.logoutUser(() => { });
     res.clearCookie("uid");
     res.redirect("/homepage");
   }
