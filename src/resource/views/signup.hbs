@@ -1,0 +1,264 @@
+{{#content "css" mode="append"}}
+  <link rel="stylesheet" href="/css/signin.css">
+  <link rel="stylesheet" href="/css/signup.css">
+{{/content}}
+
+{{#content "js" mode="append"}}
+  <script>
+    const passwordField = document.getElementById("password");
+    const togglePassword = document.querySelector(".password-toggle-icon i");
+
+    togglePassword.addEventListener("click", function () {
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      togglePassword.classList.remove("fa-eye-slash");
+        togglePassword.classList.add("fa-eye");
+      } else {
+        passwordField.type = "password";
+        togglePassword.classList.remove("fa-eye");
+        togglePassword.classList.add("fa-eye-slash");
+      }
+    });
+
+    const passwordFieldCheck = document.getElementById("password-check");
+    const togglePasswordCheck = document.querySelector(".password-check-toggle-icon i");
+
+    togglePasswordCheck.addEventListener("click", function () {
+      if (passwordFieldCheck.type === "password") {
+        passwordFieldCheck.type = "text";
+      togglePasswordCheck.classList.remove("fa-eye-slash");
+        togglePasswordCheck.classList.add("fa-eye");
+      } else {
+        passwordFieldCheck.type = "password";
+        togglePasswordCheck.classList.remove("fa-eye");
+        togglePasswordCheck.classList.add("fa-eye-slash");
+      }
+    });
+
+    function checkPassword(password, reEnterPassword) {
+      var passwordInput =  document.getElementById(password);
+      var reEnterPasswordInput = document.getElementById(reEnterPassword)
+      if((passwordInput.value !== "" || reEnterPasswordInput.value !== "")
+      && (passwordInput.value.length <= 6 || reEnterPasswordInput.value.length <= 6)) {
+        document.getElementById('error-noti').style.display = "block";
+        document.getElementById('error-noti').innerText = "Password must contain at least 6 characters."
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').style = "opacity: 0.7";
+      }
+      else if(passwordInput.value !== reEnterPasswordInput.value
+      && (passwordInput.value !== "" || reEnterPasswordInput.value !== "")) {
+        document.getElementById('error-noti').style.display = "block";
+        document.getElementById('error-noti').innerText = "Passwords are not matched."
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').style = "opacity: 0.7";
+      }else {
+        document.getElementById('error-noti').style.display = "none";
+        document.getElementById('submit-btn').disabled = false;
+        document.getElementById('submit-btn').style = "opacity: 1";
+      }
+    }
+  </script>
+{{/content}}
+
+{{!-- <div class="wrapper">
+  <h1>Tạo tài khoản miễn phí</h1>
+  <div class="container1">
+    <div class="button" id="facebook">
+      <i class="fa fa-facebook" style="margin:3px 25px 4px 13px"></i>
+      <div class="btn-text">Tiếp tục với Facebooks</div>
+    </div>
+    <div class="button" id="google">
+      <i class="fa fa-google"></i>
+      Tiếp tục với Google mail
+    </div>
+    <div class="button" id="email">
+      <i class="fa fa-envelope"></i>
+      Tiếp tục với Email
+    </div>
+    <div class="button" id="phone">
+      <i class="fa fa-phone"></i>
+      Tiếp tục với Số điện thoại
+    </div>
+  </div>
+
+  <div class="signin">
+    <p>Đã có tài khoản? <a href="/signin" id="login">Đăng nhập</a></p>
+  </div>
+</div> --}}
+
+<div class="wrapper">
+  <h1>Đăng ký</h1>
+  <div class="container1">
+    <div class="phone-input">
+
+      {{!-- <div class="domain-list">
+        <div class="box-D">
+          <span class="item-D1">Tên miền</span>
+          <i class="fa-solid fa-caret-down"></i>
+        </div>
+        <!-- Search history -->
+        <div class="domain-item">
+          <ul class="list-D">
+            <li class="item-D">
+              <img src="assets/img/vietnam.png" alt="" height="35" width="35" />
+              +84
+            </li>
+            <li class="item-D">
+              <img src="assets/img/vietnam.png" alt="" height="35" width="35" />
+              +97
+            </li>
+            <li class="item-D">
+              <img src="assets/img/vietnam.png" alt="" height="35" width="35" />
+              +85
+            </li>
+          </ul>
+
+        </div>
+      </div> --}}
+
+      <form method="POST" action="/signup">
+        <div class="input-text">
+          <input
+            type="email"
+            placeholder="Nhập email"
+            name="email"
+            id="email"
+            required
+          />
+          <div class="password-wapper">
+            <input
+              type="password"
+              placeholder="Nhập password"
+              name="password"
+              id="password"
+              oninput="checkPassword('password-check', 'password')"
+              required
+            />
+            <span class="password-toggle-icon"><i class="fas fa-eye-slash"></i></span>
+          </div>
+          <div class="password-wapper">
+            <input
+              type="password"
+              placeholder="Nhập lại password"
+              id="password-check"
+              oninput="checkPassword('password-check', 'password')"
+              required
+            />
+            <span class="password-check-toggle-icon"><i class="fas fa-eye-slash"></i></span>
+          </div>
+        </div>
+        <div>
+          <p style="color: #FF7171; font-size:20px; font-weight:700; display: none;" id="error-noti"></p>
+        </div>
+
+        <div class="item-container mb-4">
+          <h1 class="mt-5 mb-3">Thể loại yêu thích</h1>
+          <div class="w-100 d-flex justify-content-between  mb-3">
+            <div class="d-flex flex-column">
+                <div class="col-auto">
+                  <input type="checkbox" class="btn-check" id="btn-check-outlined1" name="favoriteGenres" value="Lãng mạn"
+                    autocomplete="off" />
+                  <label class="btn btn-outline-secondary" for="btn-check-outlined1">Lãng mạn</label><br />
+                </div>
+                <div class="col-auto">
+                  <input type="checkbox" class="btn-check" id="btn-check-outlined2" name="favoriteGenres" value="Tiểu thuyết"
+                    autocomplete="off" />
+                  <label class="btn btn-outline-secondary" for="btn-check-outlined2">Tiểu thuyết</label><br />
+                </div>
+                <div class="col-auto">
+                  <input type="checkbox" class="btn-check" id="btn-check-outlined3" name="favoriteGenres" value="Khoa học"
+                    autocomplete="off" />
+                  <label class="btn btn-outline-secondary" for="btn-check-outlined3">Khoa học</label><br />
+                </div>
+                <div class="col-auto">
+                  <input type="checkbox" class="btn-check" id="btn-check-outlined4" name="favoriteGenres" value="Kinh dị"
+                    autocomplete="off" />
+                  <label class="btn btn-outline-secondary" for="btn-check-outlined4">Kinh dị</label><br />
+                </div>
+                <div class="col-auto">
+                  <input type="checkbox" class="btn-check" id="btn-check-outlined5" name="favoriteGenres" value="Cổ tích"
+                    autocomplete="off" />
+                  <label class="btn btn-outline-secondary" for="btn-check-outlined5">Cổ tích</label><br />
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined6" name="favoriteGenres" value="Lịch sử"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined6">Lịch sử</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined7" name="favoriteGenres" value="Kịch"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined7">Kịch</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined8" name="favoriteGenres" value="Thơ"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined8">Thơ</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined9" name="favoriteGenres" value="Viễn tưởng"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined9">Viễn tưởng</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined10" name="favoriteGenres" value="Trinh thám"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined10">Trinh thám</label><br />
+              </div>
+            </div>
+            <div class="d-flex flex-column">
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined11" name="favoriteGenres" value="Tự truyện"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined11">Tự truyện</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined12" name="favoriteGenres" value="Bí ẩn"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined12">Bí ẩn</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined13" name="favoriteGenres" value="Phiêu lưu"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined13">Phiêu lưu</label><br />
+              </div>
+              <div class="col-auto">
+                <input type="checkbox" class="btn-check" id="btn-check-outlined14" name="favoriteGenres" value="Hài kịch"
+                  autocomplete="off" />
+                <label class="btn btn-outline-secondary" for="btn-check-outlined14">Hài kịch</label><br />
+              </div>
+            </div>
+          </div>
+            
+            
+            
+        </div>
+
+        <button class="confirm-button" id="submit-btn" type="submit" style="opacity: 0.7;">Xác nhận</button>
+      </form>
+    </div>
+
+      {{!-- <div class="divider">
+        <div
+          style="border: 1px solid black; width: 75px; margin-right: 10px"
+        ></div>
+        <div>
+          <span>Hoặc đăng nhập bằng</span>
+        </div>
+        <div
+          style="border: 1px solid black; width: 75px; margin-left: 10px"
+        ></div>
+      </div> --}}
+    {{!-- <div class="social-buttons">
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-google"></i></a>
+      <a href="#"><i class="fa-regular fa-envelope"></i></a>
+    </div> --}}
+  </div>
+
+  <div class="signup">
+    <p>Đã có tài khoản? <a href="/signin" id="signup">Đăng nhập</a></p>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{{#content "css" mode="prepend"}}
+  <link rel="stylesheet" href="/css/profile.css" />
+{{/content}}
+
+<div class="avatar-group">
+  <img class="avatar-img" src="{{ avatarUrl }}" />
+  <div class="avatar-name">{{ fullName }}</div>
+</div>
+
+<main class="content">
+  {{> @partial-block}}
+</main>

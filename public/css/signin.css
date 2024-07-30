@@ -1,0 +1,211 @@
+.wrapper {
+  overflow-x: hidden;
+  padding-top: 80px;
+  /* max-width: 430px; */
+  width: 100%;
+  text-align: center;
+}
+
+.wrapper h1 {
+  margin-bottom: 3rem;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.container1 {
+  width: 100%;
+  font-size: 30px;
+  max-width: 430px;
+  text-align: center;
+}
+
+.signin_header {
+  padding: 194px 25px 20px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 25px;
+  font-family: Inter;
+}
+
+.phone-input {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 0 25px 15px;
+}
+
+.phone-input input {
+  width: 300px;
+  border: 1px solid #ffffff;
+  border-radius: 22px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Inter;
+  padding: 9px 13px;
+}
+
+.input-text input:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.box-D {
+  width: 148px;
+  height: 42px;
+  border-radius: 22px;
+  background: #ffffff;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.domain-list {
+  position: relative;
+}
+
+.domain-item {
+  background-color: #ffffff;
+  width: 148px;
+  display: none;
+  position: absolute;
+  top: 42px;
+}
+.list-D {
+  padding-left: 0;
+  list-style: none;
+}
+.item-D {
+  display: flex;
+  align-items: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  text-align: center;
+  padding: 3px 10px;
+  border-bottom: 1px solid #ddd;
+}
+.item-D1 {
+  display: flex;
+  align-items: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.2px;
+  text-align: center;
+  padding: 3px 10px;
+}
+.item-D1 img {
+  display: inline-block;
+  margin-right: 5px;
+}
+.item-D img {
+  display: inline-block;
+  margin-right: 5px;
+}
+.item-D:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+input:focus {
+  outline: none;
+}
+
+.confirm-button {
+  width: 90%;
+  height: 57px;
+  padding: 14px 0;
+  margin: 0 0 10px;
+  background: linear-gradient(to right, #ff8a8a, #ff8413);
+  color: black;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 25px;
+  border: none;
+  border-radius: 53px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirm-button:hover {
+  opacity: 0.7;
+}
+
+.divider {
+  margin-bottom: 48px;
+  color: black;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 143px;
+}
+
+.social-buttons a {
+  display: inline-block;
+  position: relative;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 22px;
+  width: 61px;
+  height: 42px;
+  font-size: 24px;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: black;
+}
+.social-buttons a i {
+  font-size: 35px;
+  position: absolute;
+  top: 3px;
+  right: 13px;
+}
+.social-buttons i:hover {
+  color: #555;
+}
+
+.signup {
+  display: flex;
+  font-weight: 700;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+#signup {
+  color: #f60;
+  text-decoration: none;
+}
+
+#signup:hover {
+  text-decoration: underline;
+}
+
+.password-wapper {
+  position: relative;
+}
+
+.password-toggle-icon,
+.password-check-toggle-icon {
+  font-size: 25px;
+  position: absolute;
+  right: 50px;
+  top: 14px;
+}
+
+#password,
+#password-check {
+  padding-right: 40px;
+}
