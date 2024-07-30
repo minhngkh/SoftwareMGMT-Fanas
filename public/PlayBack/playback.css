@@ -1,7 +1,7 @@
 :root{
     --text-color: black;
-    --background-color: linear-gradient(#e66465, #9198e5);
-    --font-fam: monospace;
+    --background-color: linear-gradient(360deg, #e4f2ff 0%, #cbb7da 50%, #32587a 100%);
+    --font-fam: intern;
     --font-wei: bold;
     --full-wid: 430px;
     --full-height: 932px;
@@ -13,7 +13,7 @@
 }
 
 .icon{
-    font-size: 25px;
+    font-size: 1.7rem;
     cursor: pointer;
 }
 

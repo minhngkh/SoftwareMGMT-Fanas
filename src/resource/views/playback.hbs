@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./playback.css">
-    <link rel="stylesheet" href="./assets/fontawesome-free-6.5.2-web/css/all.min.css">
-<body>
-    <div class="box box--playbackpage">
+{{#content "css" mode="append"}}
+  <link rel="stylesheet" href="/public/PlayBack/playback.css" />
+{{/content}}
+
+<div class="box box--playbackpage">
         <div class="topscreen--icon">
             <i class="icon fa-solid fa-arrow-left"></i>
             <i class="icon fa-solid fa-share-nodes"></i>
@@ -259,108 +254,3 @@
         </div>
     </div>
 
-    <!-- Màn hình nếu chưa mua thành viên  -->
-
-     <div class="box box--preplaybackpage">
-        <div class="topscreen--icon">
-            <i class="icon fa-solid fa-arrow-left"></i>
-            <i class="icon fa-solid fa-share-nodes"></i>
-        </div>
-        <div class="bookinfo-container">
-            <div class="ppb-image">
-                <img class ="ppb-image__book-image" src="./assets/img/Book-Image1.jpg" alt="">
-            </div>
-            <div class="ppb-bookinfo-container__bookName">Cô gái đến từ hôm qua</div>
-            <div class="ppb-bookinfo-container__authorName">Nguyễn Nhật Ánh
-                <i class="icon fa-solid fa-greater-than" style="font-size: 15px"></i>
-            </div>
-            <div class="ppb-bookinfo-container__reviewNum">
-                <i class="icon fa-regular fa-star" style="font-size: 15px;"></i>
-                Chưa có đánh giá
-            </div>
-        </div>
-        <div class="sell-optionBar">
-            <div class="soB-freeContainer">
-                <i class="icon fa-regular fa-heart" style="font-size: 30px;"></i>
-                <div class="btn soB-freeContainer__freeBar">
-                    <div class="soB-freeContainer__freeBarWord">
-                        Nghe chương đầu miễn phí
-                    </div>
-                </div>
-            </div>
-
-            <div class="soB-sellContainer">
-                <div class="soB-sellContainer__sellinfo">
-                    <div class="soB-sellContainer__sellinfoWord">Giá bán lẻ</div>
-                    <div class="soB-sellContainer__sellinfoPrice">99,000đ
-                        <i class="fa-solid fa-square-check"></i>
-                    </div>
-                </div>
-
-                <div class="soB-sellContainer__sellBar">
-                    <div class="btn soB-sellContainer__sellBarButton">
-                        <div class="soB-sellContainer__sellBarWord">
-                            Mua với giá bán lẻ - 99,000đ
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="introduce-scpritBox">
-                <div class="isB__content">
-                    <h3 style="font-family: var(--font-fam);">Giới thiệu nội dung</h3>
-                    <p style="font-family: var(--font-fam);">
-                        Cô gái đến từ hôm qua của tác giả Nguyễn Nhật Ánh là một tác phẩm hài hước và dỉ dỏm kể về câu chuyện cua gái của chàng trai Anh Thư hồi bé và cả lúc bây giờ - khi anh đã trở thành một cậu sinh viện, Ngay từ những trang sách đầu tiên, tác giả đã trao cho Anh Thư ngòi bút kể lại câu chuyện của mình
-                    </p>
-                </div>
-            </div>
-        </div>
-        <footer class="footer">
-            <i class="icon fa-solid fa-house home">
-                <div class="footerfont footer-home">Trang chủ</div>
-            </i>
-            <i class="icon fa-solid fa-magnifying-glass">
-                <div class="footerfont footer-sreach">Tìm kiếm</div>
-            </i>
-            <i class="icon fa-solid fa-bell">
-                <div class="footerfont footer-notification">Thông báo</div>
-            </i>
-        </footer>
-    </div>
-    <div class="box box--homePage">
-        <div class="HP-bookContainer">
-            <img class ="book-image img1" src="./assets/img/Book-Image1.jpg" alt="">
-            <img class ="book-image img2" src="./assets/img/Book-Image3.jpg" alt="">
-        </div>
-        <h3 class="font continue" style="font-size: 30px;">Tiếp tục</h3>
-        <div class="HP-continueContainer">
-            <div class="HP-continueContainer__continueBox">
-                <div class="cC-continueBox__bookImage">
-                    <img src="./assets/img/Book-Image2.jpg" alt="">
-                </div>
-                <div class="cC-continueBox__bookInfo">
-                    <div class="cB-bookInfo__bookType">
-                        Sách nói
-                    </div>
-                    <div class="cB-bookInfo__bookName">
-                        Bong bóng lên trời
-                    </div>
-                </div>
-                <i class="icon fa-solid fa-play"></i>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <i class="icon fa-solid fa-house home">
-                <div class="footerfont footer-home">Trang chủ</div>
-            </i>
-            <i class="icon fa-solid fa-magnifying-glass">
-                <div class="footerfont footer-sreach">Tìm kiếm</div>
-            </i>
-            <i class="icon fa-solid fa-bell">
-                <div class="footerfont footer-notification">Thông báo</div>
-            </i>
-        </footer>
-    </div>
-
-</body>
-</html>
