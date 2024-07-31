@@ -26,6 +26,7 @@ router.get("/signup", siteController.signup);
 router.post("/signup", siteController.postSignup);
 
 router.get("/search-books", siteController.searchBooks);
+router.get("/playback", siteController.playback);
 
 router.get("/", siteController.index);
 

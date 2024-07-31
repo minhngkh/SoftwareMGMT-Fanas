@@ -177,6 +177,11 @@ class siteController {
     res.clearCookie("uid");
     res.redirect("/homepage");
   }
+
+  playback(req, res, next){
+    res.render("playback" , { layout: "base-with-nav" })
+    
+  }
 }
 
 module.exports = new siteController();
