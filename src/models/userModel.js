@@ -56,6 +56,15 @@ class User {
             return {};
         }
     }
+
+    async updateUser(userID, updateInfo) {
+        try {
+            const userRef = userCollection.doc(userID);
+            await userRef.update(updateInfo);
+        } catch (error) {
+            console.error("Error updating user:", error);
+        }
+    }
 }
 
 module.exports = new User;
