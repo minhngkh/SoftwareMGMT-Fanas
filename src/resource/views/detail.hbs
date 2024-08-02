@@ -23,7 +23,7 @@
                 {{!-- <h4>Cô gái tới từ hôm qua</h4> --}}
                 <h4>{{detail.bookName}}</h4>
                 {{!-- <span class="actor">Nguyễn Nhật Ánh</span> --}}
-                <span class="actor">{{detail.author}}</span>
+                <span class="actor">{{author.name}}</span>
                 <span>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -65,17 +65,18 @@
                 <img src="assets/img/nnaimg.jpg" alt="" width="71" height="71">
                 {{!-- <img src="{{authorimg}}" alt="" width="71" height="71"> --}}
                 <div class="name-au">
-                    <h5>{{detail.author}}</h5>
+                    <h5>{{author.name}}</h5>
                     <span>40 Sách</span>
                 </div>
               </div>
               <p>
-                Nguyễn Nhật Ánh (sinh ngày 7 tháng 5 năm 1955) 
+                {{author.description}}
+                {{!-- Nguyễn Nhật Ánh (sinh ngày 7 tháng 5 năm 1955) 
                 là một nhà văn người Việt Nam. Được xem là một
                 trong những nhà văn hiện đại xuất sắc nhất Việt Nam hiện nay,
                 ông được biết đến qua nhiều tác phẩm văn học về đề tài tuổi trẻ.
                 Nhiều tác phẩm của ông được độc giả và giới chuyên môn đánh giá cao,
-                đa số đều đã được chuyển thể thành phim
+                đa số đều đã được chuyển thể thành phim --}}
             </p>
             <h4>Thông tin xuất bản</h4>
             <p>Nhà xuất bản sách giấy NXB trẻ</p>

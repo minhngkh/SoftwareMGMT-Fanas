@@ -1,5 +1,7 @@
 const Authentication = require("../config/Authentication");
 const User = require("../models/userModel");
+const Book = require("../models/bookModel");
+const Author = require("../models/authorModel");
 
 const {
   storage,
@@ -114,16 +116,20 @@ class siteController {
     let bookId = req.query.id;
     var detail;
 
-    await dbFirestore
-      .collection("Books")
-      .get()
-      .then((snapshot) => {
-        let book = snapshot.docs.find((o) => o.id === bookId);
-        detail = book.data();
-        console.log(detail);
-      });
+    let bookData = await Book.getBookById(bookId);
+    // await dbFirestore
+    //   .collection("Books")
+    //   .get()
+    //   .then((snapshot) => {
+    //     let book = snapshot.docs.find((o) => o.id === bookId);
+    //     detail = book.data();
+    //     // console.log(detail);
+    //   });
 
-    res.render("detail", { layout: "base-with-nav", detail: detail });
+    let authorData = await Author.getAuthorById(bookData.author);
+    // console.log(authorData);
+
+    res.render("detail", { layout: "base-with-nav", detail: bookData, author: authorData });
   }
 
   //[GET] /example
