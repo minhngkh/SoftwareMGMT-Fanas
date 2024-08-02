@@ -109,6 +109,24 @@ class siteController {
     res.render("search", { layout: "base-with-nav" });
   }
 
+  //[GET] /search-books
+  //For example /search-books?phrase=hoa
+  async searchBooks(req, res) {
+    const phrase = req.query.phrase;
+    let foundBooks = [];
+
+    await dbFirestore.collection("Books").get().then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        let book = doc.data();
+        if (book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())) {
+          book.id = doc.id;
+          foundBooks.push(book);
+        }
+      });
+    });
+
+    res.json(foundBooks);
+  }
 
   //[GET] /detail
   async detail(req, res) {
