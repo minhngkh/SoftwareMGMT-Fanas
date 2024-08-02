@@ -9,10 +9,12 @@
 <div class="app_body">
     <div class="detail_header">
         <div class="header_info">
-            <div class="icon">
-                <span><i class="fa-solid fa-arrow-left"></i></span>
-                <span><i class="fa-solid fa-share-nodes"></i></span>
-            </div>
+            <a href="/homepage">
+                <div class="icon">
+                    <span><i class="fa-solid fa-arrow-left"></i></span>
+                    <span><i class="fa-solid fa-share-nodes"></i></span>
+                </div>
+            </a>
         </div>
     </div>
     <div class="detail_body">
@@ -62,8 +64,8 @@
               <p>{{detail.description}}</p>
               <h4>Về tác giả</h4>
               <div class="box-info">
-                <img src="assets/img/nnaimg.jpg" alt="" width="71" height="71">
-                {{!-- <img src="{{authorimg}}" alt="" width="71" height="71"> --}}
+                {{!-- <img src="assets/img/nnaimg.jpg" alt="" width="71" height="71"> --}}
+                <img src="{{author.avatarPath}}" alt="" width="71" height="71">
                 <div class="name-au">
                     <h5>{{author.name}}</h5>
                     <span>40 Sách</span>
