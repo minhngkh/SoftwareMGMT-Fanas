@@ -42,19 +42,19 @@
       && (passwordInput.value.length <= 6 || reEnterPasswordInput.value.length <= 6)) {
         document.getElementById('error-noti').style.display = "block";
         document.getElementById('error-noti').innerText = "Password must contain at least 6 characters."
-        document.getElementById('submit-btn').disabled = true;
-        document.getElementById('submit-btn').style = "opacity: 0.7";
+        //document.getElementById('submit-btn').disabled = true;
+        //document.getElementById('submit-btn').style = "opacity: 0.7";
       }
       else if(passwordInput.value !== reEnterPasswordInput.value
       && (passwordInput.value !== "" || reEnterPasswordInput.value !== "")) {
         document.getElementById('error-noti').style.display = "block";
         document.getElementById('error-noti').innerText = "Passwords are not matched."
-        document.getElementById('submit-btn').disabled = true;
-        document.getElementById('submit-btn').style = "opacity: 0.7";
+        //document.getElementById('submit-btn').disabled = true;
+        //document.getElementById('submit-btn').style = "opacity: 0.7";
       }else {
         document.getElementById('error-noti').style.display = "none";
-        document.getElementById('submit-btn').disabled = false;
-        document.getElementById('submit-btn').style = "opacity: 1";
+        //document.getElementById('submit-btn').disabled = false;
+        //document.getElementById('submit-btn').style = "opacity: 1";
       }
     }
   </script>
@@ -116,42 +116,44 @@
         </div>
       </div> --}}
 
-      <form method="POST" action="/signup">
-        <div class="input-text">
-          <input
-            type="email"
-            placeholder="Nhập email"
-            name="email"
-            id="email"
-            required
-          />
-          <div class="password-wapper">
+      <form id="regForm" method="POST" action="/signup">
+        <div class="tab">
+          <div class="input-text">
             <input
-              type="password"
-              placeholder="Nhập password"
-              name="password"
-              id="password"
-              oninput="checkPassword('password-check', 'password')"
+              type="email"
+              placeholder="Nhập email"
+              name="email"
+              id="email"
               required
             />
-            <span class="password-toggle-icon"><i class="fas fa-eye-slash"></i></span>
+            <div class="password-wapper">
+              <input
+                type="password"
+                placeholder="Nhập password"
+                name="password"
+                id="password"
+                oninput="checkPassword('password-check', 'password')"
+                required
+              />
+              <span class="password-toggle-icon"><i class="fas fa-eye-slash"></i></span>
+            </div>
+            <div class="password-wapper">
+              <input
+                type="password"
+                placeholder="Nhập lại password"
+                id="password-check"
+                oninput="checkPassword('password-check', 'password')"
+                required
+              />
+              <span class="password-check-toggle-icon"><i class="fas fa-eye-slash"></i></span>
+            </div>
           </div>
-          <div class="password-wapper">
-            <input
-              type="password"
-              placeholder="Nhập lại password"
-              id="password-check"
-              oninput="checkPassword('password-check', 'password')"
-              required
-            />
-            <span class="password-check-toggle-icon"><i class="fas fa-eye-slash"></i></span>
+          <div>
+            <p style="color: #FF7171; font-size:20px; font-weight:700; display: none;" id="error-noti"></p>
           </div>
-        </div>
-        <div>
-          <p style="color: #FF7171; font-size:20px; font-weight:700; display: none;" id="error-noti"></p>
         </div>
 
-        <div class="item-container mb-4">
+        <div class="item-container mb-4 tab">
           <h1 class="mt-5 mb-3">Thể loại yêu thích</h1>
           <div class="w-100 d-flex justify-content-between  mb-3">
             <div class="d-flex flex-column">
@@ -231,12 +233,12 @@
               </div>
             </div>
           </div>
-            
-            
-            
         </div>
 
-        <button class="confirm-button" id="submit-btn" type="submit" style="opacity: 0.7;">Xác nhận</button>
+        <div class="d-flex justify-content-around">
+          <button class="confirm-button" id="prevBtn" type="button" onclick="nextPrev(-1)">Quay lại</button>
+          <button class="confirm-button" id="nextBtn" type="button" onclick="nextPrev(1)">Tiếp tục</button>
+        </div>
       </form>
     </div>
 
@@ -262,3 +264,64 @@
     <p>Đã có tài khoản? <a href="/signin" id="signup">Đăng nhập</a></p>
   </div>
 </div>
+
+<script>
+  var currentTab = 0; // Current tab is set to be the first tab (0)
+  showTab(currentTab); // Display the current tab
+
+  function showTab(n) {
+    // This function will display the specified tab of the form...
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    //... and fix the Previous/Next buttons:
+    if (n == 0) {
+      document.getElementById("prevBtn").style.display = "none";
+    } else {
+      document.getElementById("prevBtn").style.display = "inline";
+    }
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").innerHTML = "Đăng ký";
+    } else {
+      document.getElementById("nextBtn").innerHTML = "Tiếp theo";
+    }
+  }
+
+  function nextPrev(n) {
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+      // ... the form gets submitted:
+      document.getElementById("regForm").submit();
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+  }
+
+  function validateForm() {
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+      // If a field is empty...
+      if (y[i].value == "") {
+        // add an "invalid" class to the field:
+        //y[i].className += " invalid";
+        document.getElementById('error-noti').style.display = "block";
+        document.getElementById('error-noti').innerText = "Thiếu thông tin đăng ký";
+        // and set the current valid status to false
+        valid = false;
+      }
+    }
+    return valid; // return the valid status
+  }
+</script>

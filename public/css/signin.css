@@ -116,14 +116,14 @@ input:focus {
 }
 
 .confirm-button {
-  width: 90%;
+  width: 45%;
   height: 57px;
   padding: 14px 0;
   margin: 0 0 10px;
   background: linear-gradient(to right, #ff8a8a, #ff8413);
   color: black;
   font-weight: 700;
-  font-size: 25px;
+  font-size: 20px;
   line-height: 25px;
   border: none;
   border-radius: 53px;
@@ -133,6 +133,14 @@ input:focus {
 
 .confirm-button:hover {
   opacity: 0.7;
+}
+
+.tab {
+  display: none;
+}
+
+input.invalid {
+  background-color: #ffdddd;
 }
 
 .divider {
