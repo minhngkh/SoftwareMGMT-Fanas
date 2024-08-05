@@ -21,7 +21,7 @@ router.get("/example", siteController.example);
 router.get("/detail", siteController.detail);
 router.get("/search", siteController.search);
 
-router.get("/homepage", isLoggedIn, siteController.homepage);
+router.get("/homepage", siteController.homepage);
 router.get("/logout", siteController.logout);
 router.get("/signin", siteController.signin);
 router.post("/signin", siteController.postSignin);
