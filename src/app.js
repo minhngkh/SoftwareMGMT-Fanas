@@ -26,6 +26,15 @@ const hbs = expressHbs.create({
     sum: (a, b) => a + b,
     json: (content) => JSON.stringify(content),
     eq: (a, b) => a == b,
+    pair: function (array, options) {
+      let result = '';
+      for (let i = 0; i < array.length; i += 2) {
+        let evenElement = array[i];
+        let oddElement = array[i + 1];
+        result += options.fn({ evenElement, oddElement });
+      }
+      return result;
+    }
   },
 });
 hbsLayouts.register(hbs.handlebars);
