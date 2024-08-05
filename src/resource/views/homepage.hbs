@@ -1,6 +1,7 @@
 {{#content "css" mode="append"}}
   <link rel="stylesheet" href="/css/homepage.css" />
 {{/content}}
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
 <div class="homepage_body">
   <div class="list-header">
@@ -8,7 +9,7 @@
       {{#each sliders}}
       <li class="list1-item">
         {{!-- {{sliders}} --}}
-        <a href="./detail?id={{id}}">
+        <a href="/detail?id={{id}}">
           <img src="{{coverPath}}" alt="" height="534" width="315">
         </a>
         {{!-- <img src="assets/img/cgdthq.jpg" alt="" height="534" width="315" /> --}}
@@ -133,46 +134,23 @@
       <i class="fa-solid fa-chevron-right"></i>
     </div>
     <ul class="list4">
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
-      <li class="list4-item">
-        <img src="assets/img/cgdthq.jpg" alt="" width="117" height="188" />
-        <img src="assets/img/hhxk.jpg" alt="" width="117" height="188" />
-      </li>
+      {{#if suggestedBooks}}
+        {{#pair suggestedBooks}}
+        <li class="list4-item">
+          <a href="/detail?id={{evenElement.id}}">
+            <img src="{{evenElement.coverPath}}" alt="" width="117" height="188" />
+          </a>
+          {{#if oddElement}}
+          <a href="/detail?id={{oddElement.id}}">
+            <img src="{{oddElement.coverPath}}" alt="" width="117" height="188" />
+          </a>
+          {{/if}}
+        </li>
+        {{/pair}}
+      {{else}}
+        <h4>Hãy chọn thể loại yêu thích để sử dụng chức năng.</h4>
+      {{/if}}
     </ul>
+    
   </div>
 </div>

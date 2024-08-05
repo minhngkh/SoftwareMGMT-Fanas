@@ -17,30 +17,28 @@ class siteController {
   }
 
   //[GET] /homepage
-  async homepage(req, res) {
-    var sliders = [];
+  async homepage(req, res) {    
+    var sliders = await Book.getAllBooks();
+    // console.log(sliders);
 
     const cookieHeader = req.headers?.cookie;
     const uid = cookieHeader.split('=')[1];
 
     let userData = await User.getUser(uid);
     // console.log(userData);
+    let favoriteGenres = userData.favoriteGenres;
 
-    await dbFirestore
-      .collection("Books")
-      .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          let item = doc.data();
-          item.id = doc.id;
-          // console.log(item);
-          // console.log(item.coverPath);
+    let suggestedBooks = sliders.filter(book => 
+      book.genres.some(genre => 
+        favoriteGenres.includes(genre)));
 
-          sliders.push(item);
-        });
-      });
+    // console.log(suggestedBooks);
 
-    res.render("homepage", { layout: "base-with-nav", sliders: sliders, avatarPath: userData.avatarPath });
+    res.render("homepage", { layout: "base-with-nav", 
+      sliders: sliders, 
+      suggestedBooks: suggestedBooks, 
+      avatarPath: userData.avatarPath 
+    });
   }
 
   //[GET] /signin
