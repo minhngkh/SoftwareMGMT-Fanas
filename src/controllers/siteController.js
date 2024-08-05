@@ -22,6 +22,10 @@ class siteController {
     // console.log(sliders);
 
     const cookieHeader = req.headers?.cookie;
+    if (!cookieHeader){
+      res.render("homepage", { layout: "base-with-nav", sliders: sliders});
+      return;
+    }
     const uid = cookieHeader.split('=')[1];
 
     let userData = await User.getUser(uid);
