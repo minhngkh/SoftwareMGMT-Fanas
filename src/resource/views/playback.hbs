@@ -2,6 +2,10 @@
   <link rel="stylesheet" href="/css/playback.css" />
 {{/content}}
 
+{{#content "js" mode="append"}}
+  <script src="/js/playback.js"></script>
+{{/content}}
+
 <div class="box box--playbackpage">
         <div class="topscreen--icon">
             <i class="icon fa-solid fa-arrow-left"></i>
@@ -36,9 +40,9 @@
         </div>
         <div class="functionbutton-container">
             {{!-- TODO: Add event for this button--}}
-            <div class="forward-step">
-                <button onclick="alert('Next chapter')">
-                    <i class="icon fa-solid fa-forward-step"></i>
+            <div class="backward-step">
+                <button onclick="alert('Prev chapter')">
+                    <i class="icon fa-solid fa-backward-step"></i>
                 </button>
             </div>
             {{!-- TODO: Add event for this button--}}
@@ -51,24 +55,25 @@
 
             {{!-- TODO: Add event for this button--}}
             {{!-- <button onclick="alert('Play')"> --}}
-            <button onclick="document.getElementById('audioPlayer').play()"> 
+            <button> 
                 <div class="button-play">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    {{!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                         <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path>
-                    </svg>
+                    </svg> --}}
+                    <i class="fa-solid fa-play"></i>
                 </div>
             </button>
+            {{!-- TODO: Add event for this button--}}
             <div class="forward-button">
                 {{!-- <button onclick="alert('Skip 10s')"> --}}
                 <button onclick="document.getElementById('audioPlayer').currentTime += 10">
                     <i class="icon fa-solid fa-arrow-rotate-right"></i>
                 </button> 
-                
             </div>
-            {{!-- TODO: Add event for this button--}}
-            <div class="backward-step">
-                <button onclick="alert('Prev chapter')">
-                    <i class="icon fa-solid fa-backward-step"></i>
+
+            <div class="forward-step">
+                <button onclick="alert('Next chapter')">
+                    <i class="icon fa-solid fa-forward-step"></i>
                 </button>
             </div>
         </div>
@@ -282,7 +287,7 @@
     </div>
 </div> --}}
 
-<script>
+{{!-- <script>
     async function fetchAudioUrl() {
         try {
             //const response = await fetch('/get-audio-url?chapters=' + 
@@ -298,4 +303,4 @@
     
     fetchAudioUrl();
     alert('Press play button to start');
-</script>
+</script> --}}

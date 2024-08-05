@@ -127,7 +127,7 @@
     text-align: center;
     border-radius: 50%;
     position: relative;
-    color: #0c5adb;
+    color: black;
     -webkit-animation: ripple-white 1s linear infinite;
     animation: ripple-blue 1s linear infinite;
     -webkit-transition: 0.5s;
@@ -135,14 +135,13 @@
     font-size: 28px;
     z-index: 44;
     cursor: pointer;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    display: grid;
+    place-items: center;
   }
-  .button-play svg {
-    height: 20px;
-    fill: black(255, 255, 255, 0.9);
-  }
+
   @keyframes ripple-blue {
     0% {
       -webkit-box-shadow: 0 0 0 0 rgba(194, 198, 196, 0.3),
@@ -585,8 +584,4 @@
     font-family: var(--font-fam);
     font-weight: var(--font-wei);
     font-size: 25px;
-}
-
-.fa-play{
-    padding: 50px 10px 50% 0 ;
 }
