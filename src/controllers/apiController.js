@@ -107,6 +107,68 @@ class ApiController {
             }
         }
     }
+
+    //[POST] /favorite
+    //For example /api/v1/favorite
+    //in body: bookId = abcxyz
+    async addFavorite(req, res) {
+        // console.log(req.query);
+        const cookieHeader = req.headers?.cookie;
+        // console.log(cookieHeader);
+        if (!cookieHeader){
+            console.log("Error fetching, user is not authenticated");
+            res.status(401).send("Error fetching, user is not authenticated");
+            return;
+        }
+        const uid = cookieHeader.split('=')[1];
+
+        let userData = await User.getUser(uid);
+
+        if (!userData){
+            res.status(500).send("User is not found!");
+            return;
+        }
+
+        try {
+            // TODO: Add book
+            const result = true;
+            res.json(result);
+        } catch (error) {
+            console.error("Error fetching the favorite list add request: ", error);
+            res.status(500).send("Error fetching the favorite list add request");
+        }
+    }
+
+    //[DELETE] /favorite
+    //For example /api/v1/favorite
+    //in body: bookId = abcxyz
+    async removeFavorite(req, res) {
+        // console.log(req.query);
+        const cookieHeader = req.headers?.cookie;
+        // console.log(cookieHeader);
+        if (!cookieHeader){
+            console.log("Error fetching, user is not authenticated");
+            res.status(401).send("Error fetching, user is not authenticated");
+            return;
+        }
+        const uid = cookieHeader.split('=')[1];
+
+        let userData = await User.getUser(uid);
+
+        if (!userData){
+            res.status(500).send("User is not found!");
+            return;
+        }
+
+        try {
+            // TODO: Remove book
+            const result = true;
+            res.json(result);
+        } catch (error) {
+            console.error("Error fetching the favorite list remove request: ", error);
+            res.status(500).send("Error fetching the favorite list remove request");
+        }
+    }
 }
 
 module.exports = new ApiController();
