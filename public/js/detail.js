@@ -1,54 +1,66 @@
-       
-async function fetchAddFavorite(bookId) {
+async function fetchGetFavorite(bookId) {
     try {
-        const response = await fetch('/api/v1/favorite', {
-            method: 'POST',
-            body: JSON.stringify({bookId: bookId})
+        const response = await fetch('/api/v1/favorite/' + bookId, {
+            method:"GET"
         });
 
-        console.log(response);
+        console.log(response.status);
+        if (response.status == 200){
+            return true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error('Error fetching favorite:', error);
+    }
+}      
+
+async function fetchAddFavorite(bookId) {
+    try {
+        const response = await fetch('/api/v1/favorite/' + bookId, {
+            method: 'POST'
+        });
+
+        console.log(response.status);
 
         if (response.status == 401){
             window.location.href = "/signin";
-            return;
         }
-        
-        const data = await response.json();
-        console.log(data);
 
-        if (data){
+        if (response.status == 200){
             alert('Book added to favorite!');
+            return true;
         }
         
+        return false;
     } catch (error) {
         console.error('Error fetching favorite:', error);
+        return false;
     }
 }
 
 async function fetchRemoveFavorite(bookId) {
     try {
-        const response = await fetch('/api/v1/favorite', {
-            method: 'DELETE',
-            body: JSON.stringify({bookId: bookId})
+        const response = await fetch('/api/v1/favorite/' + bookId, {
+            method: 'DELETE'
         });
         // const data = await response.json();
 
-        console.log(response);
+        console.log(response.status);
 
         if (response.status == 401){
             window.location.href = "/signin";
-            return;
         }
-        
-        const data = await response.json();
-        console.log(data);
 
-        if (data){
+        if (response.status == 200){
             alert('Book removed from favorite!');
+            return true;
         }
-        
+
+        return false;
     } catch (error) {
         console.error('Error fetching favorite:', error);
+        return false;
     }
 }
 
@@ -57,20 +69,32 @@ const nonHeart = document.querySelector('.non-heart');
         const urlParams = new URLSearchParams(window.location.search);
         const bookId = urlParams.get('id');
 
-        nonHeart.addEventListener('click', () => {
-            nonHeart.classList.toggle('active');
-            heart.classList.toggle('active');
-            fetchAddFavorite(bookId);
+        nonHeart.addEventListener('click', async() => {
+            let result = await fetchAddFavorite(bookId);
+            if (result){
+                nonHeart.classList.toggle('active');
+                heart.classList.toggle('active');
+            }
         });
 
-        heart.addEventListener('click', () => {
-            nonHeart.classList.toggle('active');
-            heart.classList.toggle('active');
-            fetchRemoveFavorite(bookId);
+        heart.addEventListener('click', async () => {
+            let result = await fetchRemoveFavorite(bookId);
+            if (result){
+                nonHeart.classList.toggle('active');
+                heart.classList.toggle('active');
+            }
         });
 
         
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    const bookId = urlParams.get('id');
+    let result = await fetchGetFavorite(bookId);
+    console.log(result);
+    if (result) {
+        nonHeart.classList.toggle('active');
+        heart.classList.toggle('active');
+    }
+
     const ratingGroups = document.querySelectorAll('.rating-group');
 
     ratingGroups.forEach(group => {

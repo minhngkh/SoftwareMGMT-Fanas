@@ -108,33 +108,83 @@ class ApiController {
         }
     }
 
-    //[POST] /favorite
+    //[GET] /favorite
     //For example /api/v1/favorite
     //in body: bookId = abcxyz
-    async addFavorite(req, res) {
-        // console.log(req.query);
+    async getFavorite(req, res) {
+        const bookId = req.params.bookId;
+        // console.log("get /favorite id =" + bookId);
+
         const cookieHeader = req.headers?.cookie;
         // console.log(cookieHeader);
         if (!cookieHeader){
-            console.log("Error fetching, user is not authenticated");
+            // console.log("Error fetching, user is not authenticated");
             res.status(401).send("Error fetching, user is not authenticated");
             return;
         }
         const uid = cookieHeader.split('=')[1];
 
         let userData = await User.getUser(uid);
-
         if (!userData){
-            res.status(500).send("User is not found!");
+            res.status(404).send("User is not found!");
+            // console.log("User is not found!");
             return;
         }
 
+        let favoriteList = userData.favoriteList;
+        var index =  favoriteList.indexOf(bookId);
         try {
-            // TODO: Add book
-            const result = true;
-            res.json(result);
+            if (index !== -1) {
+                res.status(200).send("Book has already been in favorite list");
+                return;
+            } else {
+                res.status(404).send("Book is not found in favorite list");
+                // console.log("Book is not found in favorite list");
+                return;
+            } 
         } catch (error) {
-            console.error("Error fetching the favorite list add request: ", error);
+            // console.error("Error fetching the favorite api get request: ", error);
+            res.status(500).send("Error fetching the favorite api get request");
+        }
+    }
+
+    //[POST] /favorite
+    //For example /api/v1/favorite
+    //in body: bookId = abcxyz
+    async addFavorite(req, res) {
+        const bookId = req.params.bookId;
+        // console.log("post /favorite id =" + bookId);
+
+        const cookieHeader = req.headers?.cookie;
+        // console.log(cookieHeader);
+        if (!cookieHeader){
+            // console.log("Error fetching, user is not authenticated");
+            res.status(401).send("Error fetching, user is not authenticated");
+            return;
+        }
+        const uid = cookieHeader.split('=')[1];
+
+        let userData = await User.getUser(uid);
+        if (!userData){
+            res.status(404).send("User is not found!");
+            return;
+        }
+
+        let favoriteList = userData.favoriteList;
+        var index =  favoriteList.indexOf(bookId);
+        if (index !== -1) {
+            res.status(409).send("Book has already been in favorite list");
+            return;
+        } else {
+            favoriteList.push(bookId);
+        } 
+
+        let updateInfo = {favoriteList: favoriteList };
+        try {
+            await User.updateUser(uid, updateInfo);
+            res.status(200).json({ message: "Favorite list updated successfully." });
+        } catch (error) {
+            // console.error("Error fetching the favorite list add request: ", error);
             res.status(500).send("Error fetching the favorite list add request");
         }
     }
@@ -142,12 +192,14 @@ class ApiController {
     //[DELETE] /favorite
     //For example /api/v1/favorite
     //in body: bookId = abcxyz
-    async removeFavorite(req, res) {
-        // console.log(req.query);
+    async removeFavorite(req, res) {        
+        const bookId = req.params.bookId;
+        // console.log("delete /favorite id =" + bookId);
+
         const cookieHeader = req.headers?.cookie;
         // console.log(cookieHeader);
         if (!cookieHeader){
-            console.log("Error fetching, user is not authenticated");
+            // console.log("Error fetching, user is not authenticated");
             res.status(401).send("Error fetching, user is not authenticated");
             return;
         }
@@ -156,16 +208,25 @@ class ApiController {
         let userData = await User.getUser(uid);
 
         if (!userData){
-            res.status(500).send("User is not found!");
+            res.status(404).send("User is not found!");
             return;
         }
 
+        let favoriteList = userData.favoriteList;
+        var index =  favoriteList.indexOf(bookId);
+        if (index !== -1) {
+            favoriteList.splice(index, 1);
+        } else {
+            res.status(404).send("Book is not found in favorite list");
+            return;
+        }
+
+        let updateInfo = {favoriteList: favoriteList };
         try {
-            // TODO: Remove book
-            const result = true;
-            res.json(result);
+            await User.updateUser(uid, updateInfo);
+            res.status(200).json({ message: "Favorite list updated successfully." });
         } catch (error) {
-            console.error("Error fetching the favorite list remove request: ", error);
+            // console.error("Error fetching the favorite list remove request: ", error);
             res.status(500).send("Error fetching the favorite list remove request");
         }
     }
