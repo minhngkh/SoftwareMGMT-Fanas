@@ -21,19 +21,19 @@ fetchAudioUrl();
 alert('Press play button to start');
 
 PausePlayBtn.addEventListener("click", () => {
-    console.log('Button clicked');
+    //console.log('Button clicked');
     if (audioPlayer.paused) {
         audioPlayer.play();
-        console.log('Playing audio');
+        //console.log('Playing audio');
     } else {
         audioPlayer.pause();
-        console.log('Pausing audio');
+        //console.log('Pausing audio');
     }
-    console.log('Audio paused state:', audioPlayer.paused);
+    //console.log('Audio paused state:', audioPlayer.paused);
 });
 
 audioPlayer.addEventListener("play", () => {
-    console.log('Audio started playing');
+    //console.log('Audio started playing');
     PausePlayBtn.classList.remove("fa-play");
     PausePlayBtn.classList.add("fa-pause");
 });
@@ -41,5 +41,5 @@ audioPlayer.addEventListener("play", () => {
 audioPlayer.addEventListener("pause", () => {
     PausePlayBtn.classList.remove("fa-pause");
     PausePlayBtn.classList.add("fa-play");
-    console.log('Audio paused');
+    //console.log('Audio paused');
 });
