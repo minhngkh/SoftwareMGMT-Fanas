@@ -1,13 +1,13 @@
-const { 
-    getAuth, 
+const {
+    getAuth,
     admin,
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
     signOut,
     collection,
-    addDoc, 
+    addDoc,
     dbFirestore
-   } = require('../config/firebase');
+} = require('../config/firebase');
 const Authentication = require("../config/Authentication");
 const User = require('../models/userModel');
 
@@ -40,19 +40,19 @@ class FirebaseAuthController {
         //     const errorMessage = error.message || "An error occurred while registering user";
         //     res.status(500).json({ error: errorMessage });
         // });
-        const {message, status, userCredential} = await Authentication.registerUser(req.body, () => {});
-        if(userCredential) {
+        const { message, status, userCredential } = await Authentication.registerUser(req.body, () => { });
+        if (userCredential) {
             const userInfo = {
                 "userID": userCredential.user?.uid,
                 "avatarPath": "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
                 "email": req.body.email,
                 "role": "customer"
             }
-            await User.createNewUser(userInfo ,() => {});
+            await User.createNewUser(userInfo, () => { });
         }
-        res.status(status).json({message});
-    } 
-    
+        res.status(status).json({ message });
+    }
+
     async loginUser(req, res) {
         // const { email, password } = req.body;
         // if (!email || !password) {
@@ -79,12 +79,36 @@ class FirebaseAuthController {
         //     const errorMessage = error.message || "An error occurred while logging in";
         //     res.status(500).json({ error: errorMessage });
         // });
-        const {message, status, userCredential} = await Authentication.loginUser(req.body, () => {});
-        if(userCredential) {
+        const { message, status, userCredential } = await Authentication.loginUser(req.body, () => { });
+        if (userCredential) {
             res.cookie("uid", userCredential.user.uid, { expires: new Date(Date.now() + 900000), httpOnly: true });
         }
-        res.status(status).json({message,userCredential});
-        console.log({message, status});
+        res.status(status).json({ message, userCredential });
+        console.log({ message, status });
+    }
+
+    async changePassword(req, res) {
+        const { newPassword, currentPassword } = req.body;
+
+        if (!newPassword || !currentPassword) {
+            return res.status(422).json({
+                message: "Both current and new passwords are required."
+            });
+        }
+
+        try {
+            const isAuthenticated = await Authentication.reAuthenticate(currentPassword);
+
+            if (!isAuthenticated) {
+                return res.status(401).json({ message: "Current password is incorrect." });
+            }
+
+            const { message, status } = await Authentication.changePassword(newPassword);
+            res.status(status).json({ message });
+        } catch (error) {
+            console.error("Error changing password:", error.message);
+            res.status(500).json({ message: "Internal server error." });
+        }
     }
 
     async logoutUser(req, res) {
@@ -98,11 +122,11 @@ class FirebaseAuthController {
         //     res.status(500).json({ error: "Internal Server Error" });
         //   });
 
-        const {message, status} = await Authentication.logoutUser(() => {});
+        const { message, status } = await Authentication.logoutUser(() => { });
         res.clearCookie("uid");
-        res.status(status).json({message});
-        console.log({message, status});
+        res.status(status).json({ message });
+        console.log({ message, status });
     }
 }
-  
+
 module.exports = new FirebaseAuthController();

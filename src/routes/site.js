@@ -12,6 +12,9 @@ router.post("/login", firebaseAuthController.loginUser);
 
 router.post("/logout", firebaseAuthController.logoutUser);
 
+router.post("/change-password", firebaseAuthController.changePassword);
+
+
 router.get("/get-audio-url", siteController.getAudio);
 
 router.get("/example", siteController.example);

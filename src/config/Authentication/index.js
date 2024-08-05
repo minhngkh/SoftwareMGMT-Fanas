@@ -52,6 +52,21 @@ class Authentication {
         }
     }
 
+    async changePassword(newPassword) {
+        try {
+            if (this.isLoggedIn()) {
+                await updatePassword(authClient.currentUser, newPassword);
+                return { message: "Password updated successfully", status: 200 };
+            }
+        } catch (error) {
+            console.error("Error in Authentication:", error.message);
+            if (error.code === 'auth/weak-password') {
+                return { message: "The new password is too weak.", status: 400 };
+            }
+            return { message: "An error occurred while updating the password", status: 500 };
+        }
+    }
+
     async reAuthenticate(currentUserPassword) {
         try {
             const userCredential = await signInWithEmailAndPassword(authClient, authClient.currentUser.email, currentUserPassword);
