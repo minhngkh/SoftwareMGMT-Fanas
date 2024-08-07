@@ -14,7 +14,6 @@ router.post("/logout", firebaseAuthController.logoutUser);
 
 router.post("/change-password", firebaseAuthController.changePassword);
 
-
 router.get("/get-audio-url", siteController.getAudio);
 
 router.get("/example", siteController.example);
@@ -28,23 +27,22 @@ router.post("/signin", siteController.postSignin);
 router.get("/signup", siteController.signup);
 router.post("/signup", siteController.postSignup);
 
+router.get("/favorite", siteController.favorite);
 router.get("/search-books", siteController.searchBooks);
 router.get("/playback", siteController.playback);
 
 router.get("/", siteController.index);
 
+function isLoggedIn(req, res, next) {
+  console.log("Authenticate checking");
 
-function isLoggedIn(req, res, next){
-    console.log("Authenticate checking");
-    
-    const cookieHeader = req.headers?.cookie;
-    // console.log(cookieHeader);
+  const cookieHeader = req.headers?.cookie;
+  // console.log(cookieHeader);
 
-    if (typeof cookieHeader !== "undefined"){
-        return next();
-    } else {
-        res.redirect("/signin");
-    }
-
+  if (typeof cookieHeader !== "undefined") {
+    return next();
+  } else {
+    res.redirect("/signin");
+  }
 }
 module.exports = router;

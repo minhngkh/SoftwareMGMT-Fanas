@@ -17,31 +17,32 @@ class siteController {
   }
 
   //[GET] /homepage
-  async homepage(req, res) {    
+  async homepage(req, res) {
     var sliders = await Book.getAllBooks();
     // console.log(sliders);
 
     const cookieHeader = req.headers?.cookie;
-    if (!cookieHeader){
-      res.render("homepage", { layout: "base-with-nav", sliders: sliders});
+    if (!cookieHeader) {
+      res.render("homepage", { layout: "base-with-nav", sliders: sliders });
       return;
     }
-    const uid = cookieHeader.split('=')[1];
+    const uid = cookieHeader.split("=")[1];
 
     let userData = await User.getUser(uid);
     // console.log(userData);
     let favoriteGenres = userData.favoriteGenres;
 
-    let suggestedBooks = sliders.filter(book => 
-      book.genres.some(genre => 
-        favoriteGenres.includes(genre)));
+    let suggestedBooks = sliders.filter((book) =>
+      book.genres.some((genre) => favoriteGenres.includes(genre))
+    );
 
     // console.log(suggestedBooks);
 
-    res.render("homepage", { layout: "base-with-nav", 
-      sliders: sliders, 
-      suggestedBooks: suggestedBooks, 
-      avatarPath: userData.avatarPath 
+    res.render("homepage", {
+      layout: "base-with-nav",
+      sliders: sliders,
+      suggestedBooks: suggestedBooks,
+      avatarPath: userData.avatarPath,
     });
   }
 
@@ -60,7 +61,7 @@ class siteController {
     console.log("postLogin");
     const { message, status, userCredential } = await Authentication.loginUser(
       req.body,
-      () => { },
+      () => {}
     );
     if (userCredential) {
       res.cookie("uid", userCredential.user.uid, {
@@ -91,7 +92,7 @@ class siteController {
     };
 
     const { message, status, userCredential } =
-      await Authentication.registerUser(newUser, () => { });
+      await Authentication.registerUser(newUser, () => {});
     if (userCredential) {
       const userInfo = {
         userID: userCredential.user?.uid,
@@ -99,9 +100,9 @@ class siteController {
           "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
         email: req.body.email,
         role: "customer",
-        favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : []
+        favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : [],
       };
-      await User.createNewUser(userInfo, () => { });
+      await User.createNewUser(userInfo, () => {});
     }
     res.redirect("/homepage");
   }
@@ -117,15 +118,21 @@ class siteController {
     const phrase = req.query.phrase;
     let foundBooks = [];
 
-    await dbFirestore.collection("Books").get().then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        let book = doc.data();
-        if (book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())) {
-          book.id = doc.id;
-          foundBooks.push(book);
-        }
+    await dbFirestore
+      .collection("Books")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          let book = doc.data();
+          if (
+            book.bookName &&
+            book.bookName.toLowerCase().includes(phrase.toLowerCase())
+          ) {
+            book.id = doc.id;
+            foundBooks.push(book);
+          }
+        });
       });
-    });
 
     res.json(foundBooks);
   }
@@ -149,10 +156,17 @@ class siteController {
     let authorData = await Author.getAuthorById(bookData.author);
     // console.log(authorData);
 
-    res.render("detail", { layout: "base-with-nav", detail: bookData, author: authorData });
+    res.render("detail", {
+      layout: "base-with-nav",
+      detail: bookData,
+      author: authorData,
+    });
   }
 
-  
+  //[GET] /favorite
+  favorite(req, res) {
+    res.render("favorite", { layout: "base-with-nav" });
+  }
 
   //[GET] /example
   example(req, res) {
@@ -183,14 +197,13 @@ class siteController {
   //[GET] /logout
   async logout(req, res, next) {
     console.log("getLogout");
-    await Authentication.logoutUser(() => { });
+    await Authentication.logoutUser(() => {});
     res.clearCookie("uid");
     res.redirect("/homepage");
   }
 
-  playback(req, res, next){
-    res.render("playback" , { layout: "base-with-nav" })
-    
+  playback(req, res, next) {
+    res.render("playback", { layout: "base-with-nav" });
   }
 }
 
