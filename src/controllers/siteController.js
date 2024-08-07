@@ -152,6 +152,8 @@ class siteController {
     res.render("detail", { layout: "base-with-nav", detail: bookData, author: authorData });
   }
 
+  
+
   //[GET] /example
   example(req, res) {
     const exampleText = "muahahahaha";
