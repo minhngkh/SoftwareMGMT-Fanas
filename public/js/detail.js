@@ -140,4 +140,28 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 });
 
- 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('/detail')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Cập nhật nội dung trang web với dữ liệu nhận được
+            document.querySelector('.info_book img').src = data.detail.coverPath;
+            document.querySelector('.info_book h4').textContent = data.detail.bookName;
+            document.querySelector('.info_book .actor').textContent = data.author.name;
+            document.querySelector('.footer-info p').textContent = data.detail.description;
+            document.querySelector('.box-info img').src = data.author.avatarPath;
+            document.querySelector('.box-info .name-au h5').textContent = data.author.name;
+            document.querySelector('.box-info .name-au span').textContent = '40 Sách'; //có thể thay đổi
+            document.querySelector('.box-info p').textContent = data.author.description;
+            document.querySelector('.header_cost-info span:last-of-type').textContent = `${data.detail.price}đ`; 
+            document.querySelector('.box-temp1').innerHTML = data.detail.genres.map(genre => `<span class="ctg">${genre}</span>`).join('');
+        })
+        .catch(error => {
+            console.error('Error fetching the detail:', error);
+        });
+});
