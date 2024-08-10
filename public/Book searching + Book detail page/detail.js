@@ -1,5 +1,5 @@
 
-const nonHeart = document.querySelector('.non-heart');
+        const nonHeart = document.querySelector('.non-heart');
         const heart = document.querySelector('.heart');
 
         nonHeart.addEventListener('click', () => {

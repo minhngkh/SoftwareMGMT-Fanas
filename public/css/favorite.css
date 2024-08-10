@@ -11,14 +11,10 @@
     cursor: pointer;
     outline: inherit;
   }
-  
   body {
     width: 100%;
     height: 100%;
     font-family: Inter;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
     background-attachment: fixed;
   }

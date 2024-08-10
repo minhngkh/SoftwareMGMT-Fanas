@@ -18,14 +18,15 @@ button {
 }
 
 body {
+  line-height: 16px;
   width: 100%;
   height: 100%;
   font-family: Inter;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   background: linear-gradient(to top, #e4f2ff, #cbb7da, #32587a);
-  background-attachment: fixed;
+  background-attachment: fixed; 
 }
 
 .phone-wrapper {
