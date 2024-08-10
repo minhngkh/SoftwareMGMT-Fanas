@@ -162,7 +162,7 @@ class siteController {
       author: authorData,
     });
   }
-
+  
   //[GET] /favorite
   favorite(req, res) {
     res.render("favorite", { layout: "base-with-nav" });

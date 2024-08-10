@@ -130,7 +130,7 @@ html {
   display: flex;
   justify-content: space-between;
   margin-bottom: 19px;
-  position: relative;
+  position: relative;;
 }
 .header-list span {
   font-size: 16px;
@@ -147,7 +147,7 @@ html {
   width: 264px;
   height: 168px;
   border-radius: 29px;
-  background: #ffffff;
+  background: #FFFFFF;
   padding: 12px;
   top: 20px;
   transform: scale(0);
@@ -158,24 +158,26 @@ html {
 .box_sort.active {
   display: block;
 }
-.box_sort span {
-  display: block;
-}
+
 .bx {
+  display: block;
   width: 55px;
   padding: 4px;
   border-radius: 23px;
-  background: #bdbdbd;
+  background: #BDBDBD;
   margin: 0 auto 11px;
 }
-.box_sort h4 {
+.box_sort h4{
+  display: block;
   font-size: 20px;
   font-weight: 700;
   line-height: 29.05px;
   text-align: left;
   margin-bottom: 6px;
+
 }
 .box_sort .bx1 {
+  display: block;
   width: 100%;
   padding: 6px 12px;
   border-radius: 9px;
@@ -185,10 +187,10 @@ html {
   font-size: 14px;
 }
 .green {
-  background: #bfffd1;
+  background: #BFFFD1;
 }
 .red {
-  background: #ffbfbf;
+  background: #FFBFBF;
 }
 
 @keyframes appearFromSmall {
