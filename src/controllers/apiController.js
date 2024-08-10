@@ -1,6 +1,7 @@
 const Book = require("../models/bookModel");
 const User = require("../models/userModel");
 const { storage, getDownloadURL } = require("../config/firebase.js");
+const Authentication = require("../config/Authentication/index.js");
 
 class ApiController {
     //[GET] /search-books
@@ -230,6 +231,37 @@ class ApiController {
             res.status(500).send("Error fetching the favorite list remove request");
         }
     }
+
+    async createNewCustomer(req, res, next) {
+        const formData = req.body;
+        console.log(formData);
+        const newUser = {
+            email: formData.email,
+            password: formData.password,
+        };
+        try {
+            const { message, status, userCredential } =
+            await Authentication.registerUser(newUser, () => {});
+            if (userCredential) {
+                const userInfo = {
+                userID: userCredential.user?.uid,
+                avatarPath:
+                    "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+                email: req.body.email,
+                role: "customer",
+                favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : [],
+                };
+                await User.createNewUser(userInfo, () => {});
+                res.status(200).json({ message: "Create new user successfully." }); 
+            }
+            else {
+                res.status(409).json({ message: "User already existes." });
+            }
+        }catch (error) {
+          console.error("Error create new user:", error);
+          res.status(409).json({ message: "User already existes." });
+        }
+      }
 }
 
 module.exports = new ApiController();

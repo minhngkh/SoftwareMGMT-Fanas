@@ -12,6 +12,7 @@ router.get("/filter-books", ApiController.filterBooks);
 router.post("/update-profile", upload.single("avatar"), ApiController.updateProfile);
 router.get("/favorite/:bookId", ApiController.getFavorite);
 router.post("/favorite/:bookId", ApiController.addFavorite);
+router.post("/signup", ApiController.createNewCustomer);
 router.delete("/favorite/:bookId", ApiController.removeFavorite);
 
 module.exports = router;
