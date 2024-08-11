@@ -11,10 +11,10 @@
     {{#each user.favoriteList}}
       <li>
         <button class="book-button-wrapper">
-          <img class="book-cover" src="{{ book.coverPath }}" />
+          <img class="book-cover" src="{{ this.coverPath }}" />
           <div class="book-text-group">
             <div class="book-type">Sách nói</div>
-            <div class="book-title">{{ book.bookName }}</div>
+            <div class="book-title">{{ this.bookName }}</div>
           </div>
           <div class="play-button">
             <i class="fa-solid fa-play"></i>

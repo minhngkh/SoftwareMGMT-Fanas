@@ -37,10 +37,10 @@ router.get("/history", (req, res, _) => {
 router.get("/favorite", (req, res, _) => {
   const mockData = {
     fullName: "Nguyen Van A",
-    avatarUrl: "/assets/placeholders/avatar.png",
-    history: Array(5).fill({
-      title: "Thằng quỷ nhỏ",
-      coverUrl: "/assets/placeholders/book-cover.png",
+    avatarPath: "/assets/placeholders/avatar.png",
+    favoriteList: Array(5).fill({
+      bookName: "Thằng quỷ nhỏ",
+      coverPath: "/assets/placeholders/book-cover.png",
     }),
   };
 
@@ -49,7 +49,7 @@ router.get("/favorite", (req, res, _) => {
     title: "Reading history",
     currentNav: "profile",
     listName: "Yêu thích",
-    ...mockData,
+    user: mockData,
   });
 });
 
