@@ -3,6 +3,7 @@ const path = require("path");
 const ip = require("ip");
 const expressHbs = require("express-handlebars");
 const hbsLayouts = require("handlebars-layouts");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -18,6 +19,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(cookieParser()); 
 
 //Setup view engine with handlebars
 const hbs = expressHbs.create({

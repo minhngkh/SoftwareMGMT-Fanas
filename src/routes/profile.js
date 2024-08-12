@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const firebaseAuthController = require("../controllers/firebaseAuthController");
+const authenticateUser = require("../middleware/authenticateUser");
+const profileController = require("../controllers/profileController");
+
 router.get("/", (req, res, _) => {
   const mockData = {
     fullName: "Nguyen Van A",
@@ -34,59 +38,7 @@ router.get("/history", (req, res, _) => {
   });
 });
 
-router.get("/favorite", async (req, res, _) => {
-  const cookieHeader = req.headers?.cookie;
-  // console.log(cookieHeader);
-  if (!cookieHeader) {
-    // console.log("Error fetching, user is not authenticated");
-    res.status(401).send("Error fetching, user is not authenticated");
-    return;
-  }
-  const uid = cookieHeader.split("=")[1];
-
-  let userData = await User.getUser(uid);
-  if (!userData) {
-    res.status(404).send("User is not found!");
-    return;
-  }
-
-  try {
-    let userData = await User.getUser(uid);
-
-    if (!userData.favoriteList || userData.favoriteList.length === 0) {
-      res.render("profile-list", {
-        layout: "base-with-nav",
-        title: "Reading history",
-        currentNav: "profile",
-        listName: "Yêu thích",
-        user: {
-          fullName: userData.fullName,
-          avatarPath: userData.avatarPath,
-          favoriteList: [],
-        },
-      });
-      return;
-    }
-
-    let favoriteBooks = await Promise.all(
-      userData.favoriteList.map((bookId) => Book.getBookById(bookId))
-    );
-
-    res.render("profile-list", {
-      layout: "base-with-nav",
-      title: "Reading history",
-      currentNav: "profile",
-      listName: "Yêu thích",
-      user: {
-        fullName: userData.fullName,
-        avatarPath: userData.avatarPath,
-        favoriteList: favoriteBooks,
-      },
-    });
-  } catch (error) {
-    console.error("Error fetching favorite books: ", error);
-    res.status(500).send("Error fetching favorite books");
-  }
-});
+// FIX: require authenticated to access
+router.get("/favorite", profileController.favorite);
 
 module.exports = router;
