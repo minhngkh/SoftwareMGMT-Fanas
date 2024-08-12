@@ -3,13 +3,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.box_sort').classList.toggle('active');
     });
 });
+
+document.querySelectorAll('.item_ctg').forEach(item => {
+    item.addEventListener('click', function () {
+        document.querySelectorAll('.item_ctg').forEach(li => li.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+
 document.getElementById('search-btn').addEventListener('click', async function () {
     const query = document.getElementById('search-input').value;
 
     try {
         const response = await fetch(`/api/v1/search-books?phrase=${encodeURIComponent(query)}`);
         const data = await response.json();
-        
+
         console.log('Dữ liệu trả về từ server:', data);
 
         // Cập nhật danh sách sách hiển thị
@@ -48,14 +56,6 @@ function updateSearchResults(data) {
                 <div class="info">
                     <h4 class="name">${book.bookName}</h4>
                     <span class="author">${book.authorName}</span>
-                    <span class="rate">
-                        <span>4.0</span>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </span>
                 </div>
             </li>`;
         listItems += bookItem;  // Thêm mỗi thẻ li vào biến listItems

@@ -262,3 +262,8 @@ html {
   border-radius: 50px 50px 0 0;
   z-index: 0;
 }
+
+.selected {
+  background-color: #5e62e6 !important;
+  color: #333 !important; 
+}
