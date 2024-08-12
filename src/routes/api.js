@@ -14,5 +14,7 @@ router.get("/favorite/:bookId", ApiController.getFavorite);
 router.post("/favorite/:bookId", ApiController.addFavorite);
 router.post("/signup", ApiController.createNewCustomer);
 router.delete("/favorite/:bookId", ApiController.removeFavorite);
+router.post("/review", ApiController.createReview);
+router.get("/reviews/:bookId", ApiController.getReviewsByBookId);
 
 module.exports = router;
