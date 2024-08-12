@@ -8,13 +8,13 @@
   </div>
 
   <ul class="book-button-list">
-    {{#each history}}
+    {{#each user.favoriteList}}
       <li>
         <button class="book-button-wrapper">
-          <img class="book-cover" src="{{ coverUrl }}" />
+          <img class="book-cover" src="{{ this.coverPath }}" />
           <div class="book-text-group">
             <div class="book-type">Sách nói</div>
-            <div class="book-title">{{ title }}</div>
+            <div class="book-title">{{ this.bookName }}</div>
           </div>
           <div class="play-button">
             <i class="fa-solid fa-play"></i>
