@@ -80,10 +80,7 @@ router.get("/favorite", async (req, res, _) => {
       user: {
         fullName: userData.fullName,
         avatarPath: userData.avatarPath,
-        favoriteList: favoriteBooks.map((book) => ({
-          bookName: book.bookName,
-          coverPath: book.coverPath,
-        })),
+        favoriteList: favoriteBooks,
       },
     });
   } catch (error) {
