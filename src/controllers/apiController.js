@@ -1,5 +1,6 @@
 const Book = require("../models/bookModel");
 const User = require("../models/userModel");
+const Author=require("../models/authorModel.js")
 const { storage, getDownloadURL } = require("../config/firebase.js");
 const Authentication = require("../config/Authentication/index.js");
 
@@ -15,9 +16,20 @@ class ApiController {
 
         try {
             const books = await Book.getAllBooks();
-            const foundBooks = books.filter(book =>
-                book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())
-            );
+            const foundBooks = [];
+
+            for (const book of books) {
+                if (book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())) {
+                    // Fetch author details
+                    const author = await Author.getAuthorById(book.author);
+                    const authorName = author.name;
+                    foundBooks.push({
+                        ...book,
+                        authorName, // Include author names in the response
+                    });
+                }
+            }
+
             res.json(foundBooks);
         } catch (error) {
             console.error("Error searching books:", error);
@@ -36,9 +48,22 @@ class ApiController {
 
         try {
             const books = await Book.getAllBooks();
-            const foundBooks = books.filter(book =>
-                book.genres && book.genres.includes(genre)
-            );
+            const foundBooks = [];
+
+            for (const book of books) {
+                if (book.genres && book.genres.includes(genre)) {
+                    // Fetch author details
+                    const author = await Author.getAuthorById(book.author);
+                    console.log(author);
+                    const authorName = author.name;
+
+                    foundBooks.push({
+                        ...book,
+                        authorName, // Include author names in the response
+                    });
+                }
+            }
+
             res.json(foundBooks);
         } catch (error) {
             console.error("Error filtering books:", error);
@@ -118,7 +143,7 @@ class ApiController {
 
         const cookieHeader = req.headers?.cookie;
         // console.log(cookieHeader);
-        if (!cookieHeader){
+        if (!cookieHeader) {
             // console.log("Error fetching, user is not authenticated");
             res.status(401).send("Error fetching, user is not authenticated");
             return;
@@ -126,14 +151,14 @@ class ApiController {
         const uid = cookieHeader.split('=')[1];
 
         let userData = await User.getUser(uid);
-        if (!userData){
+        if (!userData) {
             res.status(404).send("User is not found!");
             // console.log("User is not found!");
             return;
         }
 
         let favoriteList = userData.favoriteList;
-        var index =  favoriteList.indexOf(bookId);
+        var index = favoriteList.indexOf(bookId);
         try {
             if (index !== -1) {
                 res.status(200).send("Book has already been in favorite list");
@@ -142,7 +167,7 @@ class ApiController {
                 res.status(404).send("Book is not found in favorite list");
                 // console.log("Book is not found in favorite list");
                 return;
-            } 
+            }
         } catch (error) {
             // console.error("Error fetching the favorite api get request: ", error);
             res.status(500).send("Error fetching the favorite api get request");
@@ -158,7 +183,7 @@ class ApiController {
 
         const cookieHeader = req.headers?.cookie;
         // console.log(cookieHeader);
-        if (!cookieHeader){
+        if (!cookieHeader) {
             // console.log("Error fetching, user is not authenticated");
             res.status(401).send("Error fetching, user is not authenticated");
             return;
@@ -166,21 +191,21 @@ class ApiController {
         const uid = cookieHeader.split('=')[1];
 
         let userData = await User.getUser(uid);
-        if (!userData){
+        if (!userData) {
             res.status(404).send("User is not found!");
             return;
         }
 
         let favoriteList = userData.favoriteList;
-        var index =  favoriteList.indexOf(bookId);
+        var index = favoriteList.indexOf(bookId);
         if (index !== -1) {
             res.status(409).send("Book has already been in favorite list");
             return;
         } else {
             favoriteList.push(bookId);
-        } 
+        }
 
-        let updateInfo = {favoriteList: favoriteList };
+        let updateInfo = { favoriteList: favoriteList };
         try {
             await User.updateUser(uid, updateInfo);
             res.status(200).json({ message: "Favorite list updated successfully." });
@@ -193,13 +218,13 @@ class ApiController {
     //[DELETE] /favorite
     //For example /api/v1/favorite
     //in body: bookId = abcxyz
-    async removeFavorite(req, res) {        
+    async removeFavorite(req, res) {
         const bookId = req.params.bookId;
         // console.log("delete /favorite id =" + bookId);
 
         const cookieHeader = req.headers?.cookie;
         // console.log(cookieHeader);
-        if (!cookieHeader){
+        if (!cookieHeader) {
             // console.log("Error fetching, user is not authenticated");
             res.status(401).send("Error fetching, user is not authenticated");
             return;
@@ -208,13 +233,13 @@ class ApiController {
 
         let userData = await User.getUser(uid);
 
-        if (!userData){
+        if (!userData) {
             res.status(404).send("User is not found!");
             return;
         }
 
         let favoriteList = userData.favoriteList;
-        var index =  favoriteList.indexOf(bookId);
+        var index = favoriteList.indexOf(bookId);
         if (index !== -1) {
             favoriteList.splice(index, 1);
         } else {
@@ -222,7 +247,7 @@ class ApiController {
             return;
         }
 
-        let updateInfo = {favoriteList: favoriteList };
+        let updateInfo = { favoriteList: favoriteList };
         try {
             await User.updateUser(uid, updateInfo);
             res.status(200).json({ message: "Favorite list updated successfully." });
@@ -241,27 +266,27 @@ class ApiController {
         };
         try {
             const { message, status, userCredential } =
-            await Authentication.registerUser(newUser, () => {});
+                await Authentication.registerUser(newUser, () => { });
             if (userCredential) {
                 const userInfo = {
-                userID: userCredential.user?.uid,
-                avatarPath:
-                    "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
-                email: req.body.email,
-                role: "customer",
-                favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : [],
+                    userID: userCredential.user?.uid,
+                    avatarPath:
+                        "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+                    email: req.body.email,
+                    role: "customer",
+                    favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : [],
                 };
-                await User.createNewUser(userInfo, () => {});
-                res.status(200).json({ message: "Create new user successfully." }); 
+                await User.createNewUser(userInfo, () => { });
+                res.status(200).json({ message: "Create new user successfully." });
             }
             else {
                 res.status(409).json({ message: "User already existes." });
             }
-        }catch (error) {
-          console.error("Error create new user:", error);
-          res.status(409).json({ message: "User already existes." });
+        } catch (error) {
+            console.error("Error create new user:", error);
+            res.status(409).json({ message: "User already existes." });
         }
-      }
+    }
 }
 
 module.exports = new ApiController();
