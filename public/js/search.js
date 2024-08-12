@@ -9,6 +9,8 @@ document.getElementById('search-btn').addEventListener('click', async function (
     try {
         const response = await fetch(`/api/v1/search-books?phrase=${encodeURIComponent(query)}`);
         const data = await response.json();
+        
+        console.log('Dữ liệu trả về từ server:', data);
 
         // Cập nhật danh sách sách hiển thị
         updateSearchResults(data);
@@ -24,6 +26,7 @@ document.querySelectorAll('.item_ctg').forEach(item => {
             const response = await fetch(`/api/v1/filter-books?genre=${encodeURIComponent(category)}`);
             const data = await response.json();
 
+            console.log('Dữ liệu trả về từ server:', data);
             // Cập nhật danh sách sách hiển thị
             updateSearchResults(data);
         } catch (error) {
@@ -36,10 +39,12 @@ function updateSearchResults(data) {
     const listBookElement = document.querySelector('.list_book');
     listBookElement.innerHTML = '';  // Xóa nội dung cũ
 
+    let listItems = ''; 
+
     data.forEach(book => {
         const bookItem = `
             <li class="item_book">
-                <img src=" ${book.imageUrl} " alt="" width="84" height="95">
+                <img src="${book.coverPath}" alt="" width="84" height="95">
                 <div class="info">
                     <h4 class="name">${book.bookName}</h4>
                     <span class="author">${book.authorName}</span>
@@ -53,6 +58,8 @@ function updateSearchResults(data) {
                     </span>
                 </div>
             </li>`;
-        listBookElement.innerHTML += bookItem;
+        listItems += bookItem;  // Thêm mỗi thẻ li vào biến listItems
     });
+
+    listBookElement.innerHTML = listItems;  // Cập nhật nội dung cho listBookElement
 }
