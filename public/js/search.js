@@ -7,7 +7,7 @@ document.getElementById('search-btn').addEventListener('click', async function (
     const query = document.getElementById('search-input').value;
 
     try {
-        const response = await fetch(`/search?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/api/v1/search-books?phrase=${encodeURIComponent(query)}`);
         const data = await response.json();
 
         // Cập nhật danh sách sách hiển thị
@@ -21,7 +21,7 @@ document.querySelectorAll('.item_ctg').forEach(item => {
         const category = this.innerText;
 
         try {
-            const response = await fetch(`/search?category=${encodeURIComponent(category)}`);
+            const response = await fetch(`/api/v1/filter-books?genre=${encodeURIComponent(category)}`);
             const data = await response.json();
 
             // Cập nhật danh sách sách hiển thị
@@ -41,10 +41,10 @@ function updateSearchResults(data) {
             <li class="item_book">
                 <img src=" ${book.imageUrl} " alt="" width="84" height="95">
                 <div class="info">
-                    <h4 class="name">${book.name}</h4>
-                    <span class="author">${book.author}</span>
+                    <h4 class="name">${book.bookName}</h4>
+                    <span class="author">${book.authorName}</span>
                     <span class="rate">
-                        ${book.rating}
+                        <span>4.0</span>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
