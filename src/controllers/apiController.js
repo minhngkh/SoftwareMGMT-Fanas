@@ -1,6 +1,7 @@
 const Book = require("../models/bookModel");
 const User = require("../models/userModel");
-const Author=require("../models/authorModel.js")
+const Author=require("../models/authorModel.js");
+const Review=require("../models/reviewModel.js")
 const { storage, getDownloadURL } = require("../config/firebase.js");
 const Authentication = require("../config/Authentication/index.js");
 
@@ -9,27 +10,26 @@ class ApiController {
     //For example /api/v1/search-books?phrase=hoa
     async searchBooks(req, res) {
         const phrase = req.query.phrase;
-
+    
         if (!phrase) {
             return res.status(400).json({ error: "Query parameter 'phrase' is required." });
         }
-
+    
         try {
             const books = await Book.getAllBooks();
-            const foundBooks = [];
-
-            for (const book of books) {
-                if (book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())) {
-                    // Fetch author details
-                    const author = await Author.getAuthorById(book.author);
-                    const authorName = author.name;
-                    foundBooks.push({
-                        ...book,
-                        authorName, // Include author names in the response
-                    });
-                }
-            }
-
+    
+            const filteredBooks = books.filter(book => 
+                book.bookName && book.bookName.toLowerCase().includes(phrase.toLowerCase())
+            );
+    
+            const foundBooks = await Promise.all(filteredBooks.map(async (book) => {
+                const author = await Author.getAuthorById(book.author);
+                return {
+                    ...book,
+                    authorName: author.name, // Include author's name in the response
+                };
+            }));
+    
             res.json(foundBooks);
         } catch (error) {
             console.error("Error searching books:", error);
@@ -41,29 +41,26 @@ class ApiController {
     //For example /api/v1/filter-books?genre=Tiểu thuyết
     async filterBooks(req, res) {
         const genre = req.query.genre;
-
+    
         if (!genre) {
             return res.status(400).json({ error: "Query parameter 'genre' is required." });
         }
-
+    
         try {
             const books = await Book.getAllBooks();
-            const foundBooks = [];
-
-            for (const book of books) {
-                if (book.genres && book.genres.includes(genre)) {
-                    // Fetch author details
-                    const author = await Author.getAuthorById(book.author);
-                    console.log(author);
-                    const authorName = author.name;
-
-                    foundBooks.push({
-                        ...book,
-                        authorName, // Include author names in the response
-                    });
-                }
-            }
-
+    
+            const filteredBooks = books.filter(book => 
+                book.genres && book.genres.includes(genre)
+            );
+    
+            const foundBooks = await Promise.all(filteredBooks.map(async (book) => {
+                const author = await Author.getAuthorById(book.author);
+                return {
+                    ...book,
+                    authorName: author.name, // Include author's name in the response
+                };
+            }));
+    
             res.json(foundBooks);
         } catch (error) {
             console.error("Error filtering books:", error);
@@ -287,6 +284,68 @@ class ApiController {
             res.status(409).json({ message: "User already existes." });
         }
     }
+
+    //[POST] /api/v1/review
+    async createReview(req, res) {
+        const { bookID, reviewContent } = req.body;
+        const uid = req.cookies.uid;
+    
+        if (!bookID || !reviewContent) {
+            return res.status(400).json({ error: "bookID and reviewContent are required." });
+        }
+    
+        if (!uid) {
+            return res.status(401).json({ error: "User is not authenticated." });
+        }
+    
+        const reviewInfo = {
+            bookID,
+            userID: uid,
+            reviewContent,
+        };
+    
+        try {
+            await Review.createReview(reviewInfo);
+            res.status(201).json({ message: "Review created successfully." });
+        } catch (error) {
+            console.error("Error creating review:", error);
+            res.status(500).json({ error: "Error creating review." });
+        }
+    }
+
+    //[GET] /api/v1/reviews/:bookId
+    //Example data response:
+    // [
+    //     {
+    //       "id": "HU4zwg2OjWNo7tYZt6qj",
+    //       "createdAt": "Monday, August 12, 2024",
+    //       "reviewContent": "Sách rất hay, 10 điểm.",
+    //       "userID": "IqpjHNgIprRI4GesjrzHTrk8rrO2",
+    //       "bookID": "xrBHRG605RuVb4qoAc7B",
+    //       "userEmail": "thanhthiennhan@gmail.com"
+    //     }
+    // ]
+    async getReviewsByBookId(req, res) {
+        const bookId = req.params.bookId;
+    
+        try {
+            const reviews = await Review.getReviewsByBookId(bookId);
+            
+            const foundReviews = await Promise.all(reviews.map(async (review) => {
+                const user = await User.getUser(review.userID);
+                return {
+                    ...review,
+                    userEmail: user.email
+                };
+            }));
+            
+            res.json(foundReviews);
+        } catch (error) {
+            console.error("Error fetching reviews:", error);
+            res.status(500).json({ error: "Error fetching reviews." });
+        }
+    }
+    
 }
 
 module.exports = new ApiController();
