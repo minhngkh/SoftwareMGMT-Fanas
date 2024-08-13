@@ -119,6 +119,9 @@
     gap: 40px;
 }
 
+#progress-slider {
+    width: 90%;
+}
 
 .button-play {
     width: 50px;

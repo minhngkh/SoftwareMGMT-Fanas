@@ -16,25 +16,27 @@
             <div class="font book-name">Cô gái đến từ hôm qua</div>
             {{!-- <div class="font book-name">{{bookname}}</div> --}}
         </div>
-        <div class="progress-container">
+        <div class="progress-container" id="progress-container">
             <div class="font chapter-number">Chương 1</div>
-            <div class="progress-bar">
-                {{!-- TODO: Update progress using audioPlayer attribute --}}
-                <div class="progress"></div> 
-                <div class="progress-handle"></div>
-            </div>
-            <audio id="audioPlayer">
+            {{!-- <div class="progress-bar"> --}}
+                {{!-- <div class="progress"></div>  --}}
+                {{!-- <div class="progress-handle"></div> --}}
+                {{!-- <input type="range class="progress" id="audio-progress" max="100" value="0"> --}}
+            {{!-- </div> --}}
+            {{!-- TODO: Update progress using audioPlayer attribute --}}
+            <input type="range" id="progress-slider" max="100" value="0">
+            <audio id="audioPlayer" preload="metadata">
                 <!-- <source src="/audio" type="audio/mpeg">
                 Your browser does not support the audio element. -->
             </audio>
             <div class="time-container">
                 {{!-- TODO: Update progress using audioPlayer attribute --}}
 
-                <div class="font time-current">
-                    0:5:20
+                <div class="font time-current" id="current-time">
+                    0:00
                 </div>
-                <div class="font time-remain">
-                    -0:55:40
+                <div class="font time-duration" id="duration">
+                    -:--
                 </div>
             </div>
         </div>
