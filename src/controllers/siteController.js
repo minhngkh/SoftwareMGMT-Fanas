@@ -13,7 +13,8 @@ const { firebaseAuthController } = require("./firebaseAuthController.js");
 class siteController {
   //[GET] /
   index(req, res) {
-    res.render("index", { layout: "main" });
+    res.redirect("/homepage");
+    // res.render("index", { layout: "main" });
   }
 
   //[GET] /homepage

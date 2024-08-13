@@ -30,7 +30,10 @@ router.post("/signup", siteController.postSignup);
 router.get("/search-books", siteController.searchBooks);
 router.get("/playback", siteController.playback);
 
-router.get("/", siteController.index);
+router.get('/', siteController.index);
+router.get('*', (req, res) => {
+  res.send("ERROR 404: Page not found!")
+});
 
 function isLoggedIn(req, res, next) {
   console.log("Authenticate checking");
