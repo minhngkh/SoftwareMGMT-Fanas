@@ -87,27 +87,29 @@
     justify-content: space-between;
 }
 
+.progress-area{
+    height: 13px;
+    width: 90%;
+}
+
 .progress{
     position: relative;
-    height: 100%;
+    height: inherit;
     width: 10%;
     border-radius: 10px;
     background-color: #ccc7;
 }
 
-.progress-handle{
-    position: relative;
-    height: 0px;
-    width: 0px;
+.progress-bar .progress::before{
+    content: "";
+    right: 0;
+    top: 50%;
+    height: 13px;
+    width: 13px;
+    background-color: inherit;
+    position: absolute;
     border-radius: 50%;
-    background-color: white;
-}
-.progress-bar:hover .progress-handle{
-    height: 20px;
-    width: 20px;
-    top: -14px;
-    left: 25px;
-    cursor: pointer;
+    transform: translateY(-50%);
 }
 
 .progress-bar:hover .progress{
