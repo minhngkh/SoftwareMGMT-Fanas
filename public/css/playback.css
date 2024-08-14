@@ -17,10 +17,10 @@
     cursor: pointer;
 }
 
-/* .stop-scrolling {
+.stop-scrolling {
     height: 100%;
     overflow: hidden;
-  } */
+  }
 
 .box{
     width: 430px;
