@@ -1,111 +1,113 @@
 {{#content "css" mode="append"}}
   <link rel="stylesheet" href="/css/playback.css" />
+  <link rel="stylesheet" href="/css/playbackMenu.css" />
 {{/content}}
 
 {{#content "js" mode="append"}}
   <script src="/js/playback.js"></script>
+  <script src="/js/playbackMenu.js"></script>
 {{/content}}
 
 <div class="box box--playbackpage">
-        <div class="topscreen--icon">
-            <i class="icon fa-solid fa-arrow-left"></i>
-            <i class="icon fa-solid fa-share-nodes"></i>
-        </div>
-        <div class="pb-image">
-            <img class ="book-image" src="./assets/img/Book-Image1.jpg" alt="">
-            <div class="font book-name">Cô gái đến từ hôm qua</div>
-            {{!-- <div class="font book-name">{{bookname}}</div> --}}
-        </div>
-        <div class="progress-container" id="progress-container">
-            <div class="font chapter-number">Chương 1</div>
-            {{!-- <div class="progress-bar"> --}}
-                {{!-- <div class="progress"></div>  --}}
-                {{!-- <div class="progress-handle"></div> --}}
-                {{!-- <input type="range class="progress" id="audio-progress" max="100" value="0"> --}}
-            {{!-- </div> --}}
+    <div class="topscreen--icon">
+        <i class="icon fa-solid fa-arrow-left"></i>
+        <i class="icon fa-solid fa-share-nodes"></i>
+    </div>
+    <div class="pb-image">
+        <img class ="book-image" src="./assets/img/Book-Image1.jpg" alt="">
+        <h1 class="font book-name">Cô gái đến từ hôm qua</h1>
+        {{!-- <div class="font book-name">{{bookname}}</div> --}}
+    </div>
+    <div class="progress-container" id="progress-container">
+        <div class="font chapter-number">Chương 1</div>
+        {{!-- <div class="progress-bar"> --}}
+            {{!-- <div class="progress"></div>  --}}
+            {{!-- <div class="progress-handle"></div> --}}
+            {{!-- <input type="range class="progress" id="audio-progress" max="100" value="0"> --}}
+        {{!-- </div> --}}
+        {{!-- TODO: Update progress using audioPlayer attribute --}}
+        <input type="range" id="progress-slider" max="100" value="0">
+        <audio id="audioPlayer" preload="metadata">
+            <!-- <source src="/audio" type="audio/mpeg">
+            Your browser does not support the audio element. -->
+        </audio>
+        <div class="time-container">
             {{!-- TODO: Update progress using audioPlayer attribute --}}
-            <input type="range" id="progress-slider" max="100" value="0">
-            <audio id="audioPlayer" preload="metadata">
-                <!-- <source src="/audio" type="audio/mpeg">
-                Your browser does not support the audio element. -->
-            </audio>
-            <div class="time-container">
-                {{!-- TODO: Update progress using audioPlayer attribute --}}
 
-                <div class="font time-current" id="current-time">
-                    0:00
-                </div>
-                <div class="font time-duration" id="duration">
-                    -:--
-                </div>
+            <div class="font time-current" id="current-time">
+                0:00
             </div>
-        </div>
-        <div class="functionbutton-container">
-            {{!-- TODO: Add event for this button--}}
-            <div class="backward-step">
-                <button onclick="alert('Prev chapter')">
-                    <i class="icon fa-solid fa-backward-step"></i>
-                </button>
-            </div>
-            {{!-- TODO: Add event for this button--}}
-            <div class="backward-button">
-                {{!-- <button onclick="alert('Back 10s')"> --}}
-                <button onclick="document.getElementById('audioPlayer').currentTime -= 10">
-                    <i class="icon fa-solid fa-arrow-rotate-left"></i>
-                </button> 
-            </div>
-
-            {{!-- TODO: Add event for this button--}}
-            {{!-- <button onclick="alert('Play')"> --}}
-            <button> 
-                <div class="button-play">
-                    {{!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                        <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path>
-                    </svg> --}}
-                    <i class="fa-solid fa-play"></i>
-                </div>
-            </button>
-            {{!-- TODO: Add event for this button--}}
-            <div class="forward-button">
-                {{!-- <button onclick="alert('Skip 10s')"> --}}
-                <button onclick="document.getElementById('audioPlayer').currentTime += 10">
-                    <i class="icon fa-solid fa-arrow-rotate-right"></i>
-                </button> 
-            </div>
-
-            <div class="forward-step">
-                <button onclick="alert('Next chapter')">
-                    <i class="icon fa-solid fa-forward-step"></i>
-                </button>
-            </div>
-        </div>
-        <div class="optionbutton--container">
-            <div class="btn btn--Timer">
-                <i class="icon fa-regular fa-clock"></i>
-                <div class="btn--content">
-                    Hẹn giờ
-                </div>
-            </div>
-            <div class="btn btn--Chapter">
-                <i class="icon fa-solid fa-list"></i>
-                <div class="btn--content">
-                    Chương
-                </div>
-            </div>
-            <div class="btn btn--Speed">
-                <div class="icon speed-amount">1.0x</div>
-                <div class="btn--content">
-                    Tốc độ
-                </div>
-            </div>
-            <div class="btn btn--Voice">
-                <div class="icon voice-name">MAI</div>
-                <div class="btn--content">
-                    Đổi giọng
-                </div>
+            <div class="font time-duration" id="duration">
+                -:--
             </div>
         </div>
     </div>
+    <div class="functionbutton-container">
+        {{!-- TODO: Add event for this button--}}
+        <div class="backward-step">
+            <button onclick="alert('Prev chapter')">
+                <i class="icon fa-solid fa-backward-step"></i>
+            </button>
+        </div>
+        {{!-- TODO: Add event for this button--}}
+        <div class="backward-button">
+            {{!-- <button onclick="alert('Back 10s')"> --}}
+            <button onclick="document.getElementById('audioPlayer').currentTime -= 10">
+                <i class="icon fa-solid fa-arrow-rotate-left"></i>
+            </button> 
+        </div>
+
+        {{!-- TODO: Add event for this button--}}
+        {{!-- <button onclick="alert('Play')"> --}}
+        <button> 
+            <div class="button-play">
+                {{!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path>
+                </svg> --}}
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </button>
+        {{!-- TODO: Add event for this button--}}
+        <div class="forward-button">
+            {{!-- <button onclick="alert('Skip 10s')"> --}}
+            <button onclick="document.getElementById('audioPlayer').currentTime += 10">
+                <i class="icon fa-solid fa-arrow-rotate-right"></i>
+            </button> 
+        </div>
+
+        <div class="forward-step">
+            <button onclick="alert('Next chapter')">
+                <i class="icon fa-solid fa-forward-step"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="optionbutton--container">
+    <div class="btn btn--Timer">
+        <i class="icon fa-regular fa-clock"></i>
+        <div class="btn--content">
+            Hẹn giờ
+        </div>
+    </div>
+    <div class="btn btn--Chapter">
+        <i class="icon fa-solid fa-list"></i>
+        <div class="btn--content">
+            Chương
+        </div>
+    </div>
+    <div class="btn btn--Speed">
+        <div class="icon speed-amount">1.0x</div>
+        <div class="btn--content">
+            Tốc độ
+        </div>
+    </div>
+    {{!-- <div class="btn btn--Voice">
+        <div class="icon voice-name">MAI</div>
+        <div class="btn--content">
+            Đổi giọng
+        </div>
+    </div> --}}
+</div>
 
     <!-- Màn hình chương -->
 
