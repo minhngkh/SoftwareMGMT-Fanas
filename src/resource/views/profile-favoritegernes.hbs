@@ -1,0 +1,56 @@
+{{#content "css" mode="append"}}
+  <link rel="stylesheet" href="/css/favoritegenres.css" />
+{{/content}}
+
+{{#> profile}}
+  <div class="genres-list-header">
+    <div class="font genres-info-line">
+        Chọn thể loại yêu thích
+    </div>
+    <i class="icon fa-regular fa-circle-question"></i>
+  </div>
+
+
+    {{!-- Này là để hiện mấy các gerne tĩnh để code  --}}
+  <ul class="gernes-list">
+    <div class="card genre1">
+        <div class="small-font genre-type">
+        Khoa học
+        </div>
+    </div>
+
+    <div class="card genre2">
+        <div class="small-font genre-type">
+        Trinh Thám
+
+        </div>
+    </div>
+
+    <div class="card genre3">
+        <div class="small-font genre-type">
+        Giả tưởng
+
+        </div>
+    </div>
+    <div class="card genre4">
+        <div class="small-font genre-type">
+        Cổ tích
+
+        </div>
+    </div>
+    
+    {{#each user.favoriteGenres}}
+      <ul class="gernes-list">
+        <div class="card genre">
+            <div class="small-font genre-type">
+                {{this.gerne}}
+            </div>
+        </div>
+      </ul>
+    {{/each}}
+  </ul>
+
+  <div class="user-confirm">
+    <button class="confirm-button">Xác nhận</button>
+  </div>
+{{/profile}}

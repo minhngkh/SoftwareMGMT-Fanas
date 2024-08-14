@@ -20,14 +20,14 @@
         </div>
         <div class="progress-container" id="progress-container">
             <div class="font chapter-number">Chương 1</div>
-            <div class="progress-area">
-                <div class="progress-bar">
-                {{!-- TODO: Update progress using audioPlayer attribute --}}
-                    <div class="progress"></div> 
+            {{!-- <div class="progress-bar"> --}}
+                {{!-- <div class="progress"></div>  --}}
                 {{!-- <div class="progress-handle"></div> --}}
-                </div>
-            </div>
-            <audio id="audioPlayer">
+                {{!-- <input type="range class="progress" id="audio-progress" max="100" value="0"> --}}
+            {{!-- </div> --}}
+            {{!-- TODO: Update progress using audioPlayer attribute --}}
+            <input type="range" id="progress-slider" max="100" value="0">
+            <audio id="audioPlayer" preload="metadata">
                 <!-- <source src="/audio" type="audio/mpeg">
                 Your browser does not support the audio element. -->
             </audio>

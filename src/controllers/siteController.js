@@ -223,6 +223,10 @@ class siteController {
     console.log(chapter);
     res.render("playback", { layout: "base-with-nav", book: bookData, chapter });
   }
+
+  favoriteGenres(req, res, next){
+    res.render("profile-favoritegernes", { layout: "base-with-nav" })
+  }
 }
 
 module.exports = new siteController();
