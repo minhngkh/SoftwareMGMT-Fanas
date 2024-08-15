@@ -15,18 +15,18 @@
             <i class="icon fa-solid fa-share-nodes"></i>
         </div>
         <div class="pb-image">
-            <img class ="book-image" src="./assets/img/Book-Image1.jpg" alt="">
-            <h1 class="font book-name">Cô gái đến từ hôm qua</h1>
-            {{!-- <div class="font book-name">{{bookname}}</div> --}}
+            {{!-- <img class ="book-image" src="./assets/img/Book-Image1.jpg" alt=""> --}}
+            <img class ="book-image" src="{{book.coverPath}}" alt="">
+            {{!-- <h1 class="font book-name">Cô gái đến từ hôm qua</h1> --}}
+            <div class="font book-name">{{book.bookName}}</div>
         </div>
         <div class="progress-container" id="progress-container">
-            <div class="font chapter-number">Chương 1</div>
+            <div class="font chapter-number">Chương {{chapter}}</div>
             {{!-- <div class="progress-bar"> --}}
                 {{!-- <div class="progress"></div>  --}}
                 {{!-- <div class="progress-handle"></div> --}}
                 {{!-- <input type="range class="progress" id="audio-progress" max="100" value="0"> --}}
             {{!-- </div> --}}
-            {{!-- TODO: Update progress using audioPlayer attribute --}}
             <input type="range" id="progress-slider" max="100" value="0">
             <audio id="audioPlayer" preload="metadata">
                 <!-- <source src="/audio" type="audio/mpeg">
@@ -50,7 +50,6 @@
                     <i class="icon fa-solid fa-backward-step"></i>
                 </button>
             </div>
-            {{!-- TODO: Add event for this button--}}
             <div class="backward-button">
                 {{!-- <button onclick="alert('Back 10s')"> --}}
                 <button onclick="document.getElementById('audioPlayer').currentTime -= 10">
@@ -58,7 +57,6 @@
                 </button> 
             </div>
 
-            {{!-- TODO: Add event for this button--}}
             {{!-- <button onclick="alert('Play')"> --}}
             <button> 
                 <div class="button-play">

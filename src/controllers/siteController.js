@@ -178,10 +178,13 @@ class siteController {
   //[GET] /get-audio-url
   async getAudio(req, res) {
     console.log(req.query);
+    let bookId = req.query.id;
+    let chapter = req.query.chapter;
 
     try {
-      const filename = "sw" + req.query.chapters + ".mp3";
-      const fileRef = storage.bucket().file("SnowWhite/" + filename);
+      const filename = bookId + "|" + chapter + ".mp3";
+      console.log(filename);
+      const fileRef = storage.bucket().file("Audio/" + filename);
       const url = await getDownloadURL(fileRef);
       res.json({ url });
     } catch (error) {
@@ -203,8 +206,13 @@ class siteController {
     res.redirect("/homepage");
   }
 
-  playback(req, res, next) {
-    res.render("playback", { layout: "base-with-nav" });
+  async playback(req, res, next) {
+    // console.log(req.query);
+    let bookId = req.query.id;
+    let chapter = req.query.chapter;
+    let bookData = await Book.getBookById(bookId);
+    // console.log(bookData);
+    res.render("playback", { layout: "base-with-nav", book: bookData, chapter });
   }
 }
 

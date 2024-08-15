@@ -10,10 +10,13 @@ const currentTimeContainer = document.getElementById('current-time');
 let rAF = null;
 
 async function fetchAudioUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
     try {
         //const response = await fetch('/get-audio-url?chapters=' + 
         //                document.getElementById("chapters").value);
-        const response = await fetch('/get-audio-url?chapters=0');
+        const bookId = urlParams.get('id');
+        const chapter = urlParams.get('chapter');
+        const response = await fetch(`/get-audio-url?id=${bookId}&chapter=${chapter}`);
         const data = await response.json();
         audioPlayer.src = data.url;
         
