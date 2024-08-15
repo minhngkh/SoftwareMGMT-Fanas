@@ -1,3 +1,4 @@
 node_modules
 .env
 .zed
+src/config/firebaseServiceAccountKey.json
