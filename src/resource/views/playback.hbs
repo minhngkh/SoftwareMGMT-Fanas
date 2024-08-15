@@ -5,6 +5,7 @@
 
 {{#content "js" mode="append"}}
   <script src="/js/playback.js"></script>
+  <script src="/js/playbackMenu.js"></script>
 {{/content}}
 
 <div class="stop-scrolling">
@@ -15,7 +16,7 @@
         </div>
         <div class="pb-image">
             <img class ="book-image" src="{{book.coverPath}}" alt="">
-            <h2 class="font book-name">{{book.bookName}}</h2>
+            <div class="font book-name">{{book.bookName}}</div>
         </div>
         <div class="progress-container" id="progress-container">
             <div class="font chapter-number" id="chapter" value="{{chapter}}">Chương {{chapter}}</div>
@@ -170,34 +171,25 @@
         <div class="container_list">
             <div class="interact-bar-chapter interact-bar"></div>
             <h3 style="font-size: 20px;">CHƯƠNG</h3>
-            <p> Chương và thời gian dự tính </p>
+            <p> Danh sách chương</p>
+            {{#each book.chapterList}}
             <div class="row_list">
                 <div class="col_chap">
                     <p> Chương {{this}} </p>
                     {{!-- <p class = "chapter-time" > 60 phút</p> --}}
                 </div>
                 <label>
-                   <input class="radio-design" type="radio" />
+                   <input class="radio-design" type="radio" name="current-chapter"/>
                 </label> 
              </div>
              {{/each}}
             {{!-- <div class="row_list">
                 <div class="col_chap">
-                    <p> Chương {{this}} </p>
-                    {{!-- <p class = "chapter-time" > 60 phút</p> --}}
+                    <p> Chương 1 </p>
+                    <p class = "chapter-time" > 60 phút</p>
                 </div>
                 <label>
                    <input class="radio-design" type="radio" />
-                </label> 
-             </div>
-             {{/each}}
-            {{!-- <div class="row_list">
-                <div class="col_chap">
-                    <p> {{this}} </p>
-                    {{!-- <p class = "chapter-time" > 60 phút</p> --}}
-                </div>
-                <label>
-                   <input class="radio-design" type="radio" name="chapter-name"/>
                 </label> 
              </div>
             <div class="row_list">
@@ -244,7 +236,7 @@
                <label>
                   <input class="radio-design" type="radio" />
                </label> 
-            </div>
+            </div> --}}
         </div>
         <div class="user-confirm">
             <button class="confirm-button">Xác nhận</button>
