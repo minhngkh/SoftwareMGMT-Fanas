@@ -185,8 +185,17 @@ class siteController {
       const filename = bookId + "|" + chapter + ".mp3";
       console.log(filename);
       const fileRef = storage.bucket().file("Audio/" + filename);
-      const url = await getDownloadURL(fileRef);
-      res.json({ url });
+      fileRef.exists()
+      .then(async(exists) => {
+        if (exists[0]) {
+          // console.log("File exists");
+          const url = await getDownloadURL(fileRef);
+          res.json({ url });
+        } else {
+          console.log("File does not exist");
+          res.status(404).send("File does not exist");
+        }
+      })
     } catch (error) {
       console.error("Error fetching the download URL: ", error);
       res.status(500).send("Error fetching the download URL");
@@ -209,9 +218,9 @@ class siteController {
   async playback(req, res, next) {
     // console.log(req.query);
     let bookId = req.query.id;
-    let chapter = req.query.chapter;
     let bookData = await Book.getBookById(bookId);
-    // console.log(bookData);
+    let chapter = bookData.chapterList[0];
+    console.log(chapter);
     res.render("playback", { layout: "base-with-nav", book: bookData, chapter });
   }
 }

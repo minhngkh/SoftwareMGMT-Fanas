@@ -15,17 +15,14 @@
             <i class="icon fa-solid fa-share-nodes"></i>
         </div>
         <div class="pb-image">
-            {{!-- <img class ="book-image" src="./assets/img/Book-Image1.jpg" alt=""> --}}
             <img class ="book-image" src="{{book.coverPath}}" alt="">
-            {{!-- <h1 class="font book-name">Cô gái đến từ hôm qua</h1> --}}
             <div class="font book-name">{{book.bookName}}</div>
         </div>
         <div class="progress-container" id="progress-container">
-            <div class="font chapter-number">Chương {{chapter}}</div>
+            <div class="font chapter-number" id="chapter" value="{{chapter}}">Chương {{chapter}}</div>
             {{!-- <div class="progress-bar"> --}}
                 {{!-- <div class="progress"></div>  --}}
                 {{!-- <div class="progress-handle"></div> --}}
-                {{!-- <input type="range class="progress" id="audio-progress" max="100" value="0"> --}}
             {{!-- </div> --}}
             <input type="range" id="progress-slider" max="100" value="0">
             <audio id="audioPlayer" preload="metadata">
@@ -33,8 +30,6 @@
                 Your browser does not support the audio element. -->
             </audio>
             <div class="time-container">
-                {{!-- TODO: Update progress using audioPlayer attribute --}}
-
                 <div class="font time-current" id="current-time">
                     0:00
                 </div>
@@ -44,11 +39,8 @@
             </div>
         </div>
         <div class="functionbutton-container">
-            {{!-- TODO: Add event for this button--}}
-            <div class="backward-step">
-                <button onclick="alert('Prev chapter')">
-                    <i class="icon fa-solid fa-backward-step"></i>
-                </button>
+            <div class="backward-step" id="prev-btn">
+                <i class="icon fa-solid fa-backward-step"></i>
             </div>
             <div class="backward-button">
                 {{!-- <button onclick="alert('Back 10s')"> --}}
@@ -66,7 +58,6 @@
                     <i class="fa-solid fa-play"></i>
                 </div>
             </button>
-            {{!-- TODO: Add event for this button--}}
             <div class="forward-button">
                 {{!-- <button onclick="alert('Skip 10s')"> --}}
                 <button onclick="document.getElementById('audioPlayer').currentTime += 10">
@@ -74,10 +65,8 @@
                 </button> 
             </div>
 
-            <div class="forward-step">
-                <button onclick="alert('Next chapter')">
-                    <i class="icon fa-solid fa-forward-step"></i>
-                </button>
+            <div class="forward-step" id="next-btn">
+                <i class="icon fa-solid fa-forward-step"></i>
             </div>
         </div>
     </div>

@@ -1,4 +1,6 @@
 const PausePlayBtn = document.querySelector('.button-play i')
+const previousChapterBtn = document.getElementById('prev-btn');
+const nextChapterBtn = document.getElementById('next-btn');
 
 // code mới được chuyển từ hbs qua
 const audioPlayer = document.getElementById('audioPlayer');
@@ -7,16 +9,24 @@ const slider = document.getElementById('progress-slider');
 const currentTimeContainer = document.getElementById('current-time');
 // const progressContainer = document.getElementById('progress-container');
 
+const urlParams = new URLSearchParams(window.location.search);
+let chapter = document.getElementById('chapter').getAttribute("value");
 let rAF = null;
+const bookId = urlParams.get('id');
 
-async function fetchAudioUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
+async function fetchAudioUrl(fetchChapter) {
     try {
         //const response = await fetch('/get-audio-url?chapters=' + 
         //                document.getElementById("chapters").value);
-        const bookId = urlParams.get('id');
-        const chapter = urlParams.get('chapter');
-        const response = await fetch(`/get-audio-url?id=${bookId}&chapter=${chapter}`);
+        const response = await fetch(`/get-audio-url?id=${bookId}&chapter=${fetchChapter}`);
+        if (response.status === 404){
+            alert("404");
+            audioPlayer.currentTime = 0;
+            return;
+        }
+        document.getElementById('chapter').value = fetchChapter;
+        document.getElementById('chapter').innerHTML = "Chương " + fetchChapter;
+        
         const data = await response.json();
         audioPlayer.src = data.url;
         
@@ -25,11 +35,10 @@ async function fetchAudioUrl() {
     }
 }
 
-fetchAudioUrl();
-// alert('Press play button to start');
+fetchAudioUrl(chapter);
 
 PausePlayBtn.addEventListener("click", () => {
-    //console.log('Button clicked');
+    // console.log('Button clicked');
     if (audioPlayer.paused) {
         audioPlayer.play();
         //console.log('Playing audio');
@@ -39,6 +48,18 @@ PausePlayBtn.addEventListener("click", () => {
         //console.log('Pausing audio');
     }
     //console.log('Audio paused state:', audioPlayer.paused);
+});
+
+previousChapterBtn.addEventListener("click", () =>{
+    let chapter = document.getElementById('chapter').value;
+    // alert("Prev");
+    fetchAudioUrl(+chapter-1);
+});
+
+nextChapterBtn.addEventListener("click", () =>{
+    let chapter = document.getElementById('chapter').value;
+    // alert("Next");
+    fetchAudioUrl(+chapter+1);
 });
 
 audioPlayer.addEventListener("play", () => {
@@ -105,4 +126,4 @@ if (audioPlayer.readyState > 0) {
         setSliderMax();
         // displayBufferedAmount();
     });
-  }
+}
