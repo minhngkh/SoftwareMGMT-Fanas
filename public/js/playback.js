@@ -18,6 +18,7 @@ async function fetchAudioUrl(fetchChapter) {
     try {
         //const response = await fetch('/get-audio-url?chapters=' + 
         //                document.getElementById("chapters").value);
+        audioPlayer.pause();
         const response = await fetch(`/get-audio-url?id=${bookId}&chapter=${fetchChapter}`);
         if (response.status === 404){
             alert("404");
