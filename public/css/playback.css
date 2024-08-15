@@ -55,14 +55,15 @@
 .book-name{
     display: grid;
     place-items: center;
-    margin-top: 20px;
-    font-size: 30px;
+    margin-top: 10px;
+    font-size: 25px;
+    text-align: center;
 }
 
 .chapter-number{
     align-self: flex-start;
     padding-left: 15px;
-    padding-top: 30px;
+    padding-top: 10px;
     font-size: 20px;
 }
 
@@ -650,9 +651,9 @@
 }
 
 .open-speed {
-    -webkit-transform:translateY(-602%);
-    -moz-transform:translateY(-602%);
-    transform:translateY(-602%);
+    -webkit-transform:translateY(-502%);
+    -moz-transform:translateY(-502%);
+    transform:translateY(-502%);
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
