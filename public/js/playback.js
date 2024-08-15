@@ -12,13 +12,19 @@ const currentTimeContainer = document.getElementById('current-time');
 const urlParams = new URLSearchParams(window.location.search);
 let chapter = document.getElementById('chapter').getAttribute("value");
 let rAF = null;
+let audioTimeout = null;
 const bookId = urlParams.get('id');
 
 async function fetchAudioUrl(fetchChapter) {
     try {
         //const response = await fetch('/get-audio-url?chapters=' + 
         //                document.getElementById("chapters").value);
+
+        // reset audioPlayer settings
+        adjustPlaybackRate(1);
         audioPlayer.pause();
+        removeCountdownAudio();
+
         const response = await fetch(`/get-audio-url?id=${bookId}&chapter=${fetchChapter}`);
         if (response.status === 404){
             alert("404");
@@ -75,6 +81,23 @@ audioPlayer.addEventListener("pause", () => {
     PausePlayBtn.classList.add("fa-play");
     //console.log('Audio paused');
 });
+
+function adjustPlaybackRate(rate){
+    audioPlayer.playbackRate = rate;
+}
+
+function countdownAudio(){
+    audioPlayer.pause();
+}
+
+function setCountdownAudio(minutes){
+    const millis = minutes * 60 * 1000;
+    audioTimeout = setTimeout(countdownAudio, millis);
+}
+
+function removeCountdownAudio(){
+    if (audioTimeout) clearTimeout(audioTimeout);
+}
 
 slider.addEventListener('input', () => {
     currentTimeContainer.textContent = calculateTime(slider.value);
