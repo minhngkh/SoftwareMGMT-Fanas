@@ -34,6 +34,9 @@ const {
   signOut,
 } = require("firebase/auth");
 
+// No state needed since we are using the client SDK in the server
+getAuthClient().setPersistence("NONE");
+
 const storage = getStorage();
 
 module.exports = {

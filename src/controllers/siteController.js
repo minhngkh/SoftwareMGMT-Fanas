@@ -2,6 +2,7 @@ const Authentication = require("../config/Authentication");
 const User = require("../models/userModel");
 const Book = require("../models/bookModel");
 const Author = require("../models/authorModel");
+const createError = require("http-errors");
 
 const {
   storage,
@@ -19,22 +20,22 @@ class siteController {
 
   //[GET] /homepage
   async homepage(req, res) {
-    var sliders = await Book.getAllBooks();
+    const sliders = await Book.getAllBooks();
     // console.log(sliders);
 
-    const cookieHeader = req.headers?.cookie;
-    if (!cookieHeader) {
+    if (!res.locals.isAuthenticated) {
       res.render("homepage", { layout: "base-with-nav", sliders: sliders });
       return;
     }
-    const uid = cookieHeader.split("=")[1];
 
-    let userData = await User.getUser(uid);
+    const uid = res.locals.userUid;
+
+    const userData = await User.getUser(uid);
     // console.log(userData);
-    let favoriteGenres = userData.favoriteGenres;
+    const favoriteGenres = userData.favoriteGenres;
 
-    let suggestedBooks = sliders.filter((book) =>
-      book.genres.some((genre) => favoriteGenres.includes(genre))
+    const suggestedBooks = sliders.filter((book) =>
+      book.genres.some((genre) => favoriteGenres.includes(genre)),
     );
 
     // console.log(suggestedBooks);
@@ -60,15 +61,18 @@ class siteController {
   //[POST] /signin
   async postSignin(req, res) {
     console.log("postLogin");
-    const { message, status, userCredential } = await Authentication.loginUser(
-      req.body,
-      () => {}
-    );
+
+    const { message, status, userCredential, sessionCookie, expirationTime } =
+      await Authentication.loginUser(req.body, () => {});
+
     if (userCredential) {
-      res.cookie("uid", userCredential.user.uid, {
-        expires: new Date(Date.now() + 900000),
-        httpOnly: true,
-      });
+      // res.cookie("uid", userCredential.user.uid, {
+      //   expires: new Date(Date.now() + 900000),
+      //   httpOnly: true,
+      // });
+
+      const options = { maxAge: expirationTime, httpOnly: true, secure: true };
+      res.cookie("session", sessionCookie, options);
     }
 
     if (status === 500) {
@@ -163,7 +167,7 @@ class siteController {
       author: authorData,
     });
   }
-  
+
   //[GET] /favorite
   favorite(req, res) {
     res.render("favorite", { layout: "base-with-nav" });
@@ -197,10 +201,15 @@ class siteController {
 
   //[GET] /logout
   async logout(req, res, next) {
-    console.log("getLogout");
-    await Authentication.logoutUser(() => {});
-    res.clearCookie("uid");
-    res.redirect("/homepage");
+    const cookieSession = req.cookies.session || "";
+    res.clearCookie("session");
+    const result = await Authentication.logoutUser(cookieSession);
+
+    if (result.success) {
+      res.redirect("/homepage");
+    } else {
+      next(createError(500, result.message));
+    }
   }
 
   playback(req, res, next) {

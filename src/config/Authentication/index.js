@@ -1,5 +1,6 @@
 const {
   getAuthClient,
+  getAuthAdmin,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updatePassword,
@@ -10,6 +11,9 @@ const User = require("../../models/userModel");
 const sendEmail = require("../../utils/sendEmail");
 
 const authClient = getAuthClient();
+const authAdmin = getAuthAdmin();
+
+const SESSION_EXPIRATION_TIME = 60 * 60 * 24 * 5 * 1000; // 5 days
 
 class Authentication {
   async registerUser(userAccount, next) {
@@ -56,14 +60,23 @@ class Authentication {
         email,
         password,
       );
+
       if (await User.isAdmin(userCredential.user?.uid, () => {})) {
-        await signOut(authClient);
+        // await signOut(authClient);
         return { message: "This is admin account", status: 200 };
       }
+
+      const idToken = await userCredential.user.getIdToken();
+      const sessionCookie = await authAdmin.createSessionCookie(idToken, {
+        expiresIn: SESSION_EXPIRATION_TIME,
+      });
+
       return {
         message: "Login successfully",
         status: 200,
         userCredential: userCredential,
+        sessionCookie: sessionCookie,
+        expirationTime: SESSION_EXPIRATION_TIME,
       };
     } catch (error) {
       console.log("Error in Authentication", error.message);
@@ -106,15 +119,18 @@ class Authentication {
     }
   }
 
-  async logoutUser(next) {
+  async logoutUser(sessionCookie) {
     try {
-      await signOut(authClient);
-    } catch (error) {
-      console.log("Error in Authentication", error.message);
-      next();
-      return { message: "Internal Server Error", status: 500 };
+      await authAdmin
+        .verifySessionCookie(sessionCookie)
+        .then((decodedClaims) => {
+          return authAdmin.revokeRefreshTokens(decodedClaims.sub);
+        });
+
+      return { success: true };
+    } catch {
+      return { message: "An error occurred while logout", success: false };
     }
-    return { message: "User logged out successfully", status: 200 };
   }
 
   isLoggedIn() {
