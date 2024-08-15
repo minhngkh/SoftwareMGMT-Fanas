@@ -179,7 +179,8 @@
                     {{!-- <p class = "chapter-time" > 60 phút</p> --}}
                 </div>
                 <label>
-                   <input class="radio-design" type="radio" name="current-chapter"/>
+                    {{!-- {{#if (eq this ../chapter)}} --}}
+                        <input class="radio-design" type="radio" name="current-chapter" value="{{this}}"/>
                 </label> 
              </div>
              {{/each}}
@@ -239,7 +240,7 @@
             </div> --}}
         </div>
         <div class="user-confirm">
-            <button class="confirm-button">Xác nhận</button>
+            <button class="confirm-button" id="chapter-confirm-btn">Xác nhận</button>
         </div>
     </div>
 
