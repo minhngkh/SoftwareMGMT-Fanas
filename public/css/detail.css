@@ -332,7 +332,7 @@ html {
 }
 .box-cmt {
   width: 372px;
-  height: 198px;
+  height: auto;
   border-radius: 30px;
   padding: 19px 25px;
 }
