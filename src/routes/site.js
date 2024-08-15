@@ -26,6 +26,7 @@ router.get("/signin", siteController.signin);
 router.post("/signin", siteController.postSignin);
 router.get("/signup", siteController.signup);
 router.post("/signup", siteController.postSignup);
+router.get("/forgot-password", siteController.resetPassword);
 
 router.get("/search-books", siteController.searchBooks);
 router.get("/playback", siteController.playback);

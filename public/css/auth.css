@@ -1,16 +1,17 @@
 .wrapper {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   padding-top: 80px;
   /* max-width: 430px; */
-  width: 100%;
+  /* width: 100%; */
   text-align: center;
+  margin: 0 50px;
 }
 
 .wrapper h1 {
   margin-bottom: 3rem;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 30px;
+  color: white;
+  font-size: var(--sl-font-size-2x-large);
+  font-weight: var(--sl-font-weight-bold);
 }
 
 .container1 {
@@ -19,6 +20,7 @@
   max-width: 430px;
   text-align: center;
 }
+
 
 .signin_header {
   padding: 194px 25px 20px;
@@ -32,10 +34,51 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin: 0 25px 15px;
 }
 
-.phone-input input {
+
+.input-text>sl-input::part(base) {
+  margin-bottom: 30px;
+}
+
+.error-noti {
+  margin-bottom: 30px;
+  color: var(--sl-color-orange-400);
+  font-size: var(--sl-font-size-large);
+  font-weight: var(--sl-font-weight-bold);
+}
+
+.confirm-button::part(base) {
+  margin-bottom: 30px;
+  background: var(--primary-gradient);
+  font-size: var(--sl-font-size-large);
+  font-weight: var(--sl-font-weight-bold);
+  transition: background-color 0.3s;
+}
+
+.link-group {
+  display: flex;
+  font-size: var(--sl-font-size-large);
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  color: var(--sl-color-primary-500);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* .phone-input input {
   width: 300px;
   border: 1px solid #ffffff;
   border-radius: 22px;
@@ -74,12 +117,10 @@
   position: absolute;
   top: 42px;
 }
-
 .list-D {
   padding-left: 0;
   list-style: none;
 }
-
 .item-D {
   display: flex;
   align-items: center;
@@ -91,7 +132,6 @@
   padding: 3px 10px;
   border-bottom: 1px solid #ddd;
 }
-
 .item-D1 {
   display: flex;
   align-items: center;
@@ -102,22 +142,18 @@
   text-align: center;
   padding: 3px 10px;
 }
-
 .item-D1 img {
   display: inline-block;
   margin-right: 5px;
 }
-
 .item-D img {
   display: inline-block;
   margin-right: 5px;
 }
-
 .item-D:hover {
   background-color: #ddd;
   cursor: pointer;
 }
-
 input:focus {
   outline: none;
 }
@@ -181,14 +217,12 @@ input.invalid {
   transition: color 0.3s;
   color: black;
 }
-
 .social-buttons a i {
   font-size: 35px;
   position: absolute;
   top: 3px;
   right: 13px;
 }
-
 .social-buttons i:hover {
   color: #555;
 }
@@ -225,4 +259,4 @@ input.invalid {
 #password,
 #password-check {
   padding-right: 40px;
-}
+} */

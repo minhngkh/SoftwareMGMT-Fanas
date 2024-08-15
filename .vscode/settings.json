@@ -12,6 +12,9 @@
   "[html]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   }

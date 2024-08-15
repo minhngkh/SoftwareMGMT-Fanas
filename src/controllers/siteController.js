@@ -55,7 +55,7 @@ class siteController {
     if (req.query.status === "failed") {
       messFailed = "Wrong username or password.";
     }
-    res.render("signin", { layout: "base", messFailed });
+    res.render("signin", { layout: "base-with-nav", messFailed });
   }
 
   //[POST] /signin
@@ -84,7 +84,7 @@ class siteController {
 
   //[GET] /signup
   signup(req, res) {
-    res.render("signup", { layout: "base" });
+    res.render("signup", { layout: "base-with-nav" });
   }
 
   //[POST] /signup
@@ -194,14 +194,14 @@ class siteController {
     }
   }
 
-  //[GET] /login
-  login(req, res, next) {
-    res.render("login", { layout: "main" });
-  }
-
   //[GET] /logout
   async logout(req, res, next) {
-    const cookieSession = req.cookies.session || "";
+    const cookieSession = req.cookies.session;
+
+    if (!cookieSession) {
+      return res.redirect("/homepage");
+    }
+
     res.clearCookie("session");
     const result = await Authentication.logoutUser(cookieSession);
 
@@ -210,6 +210,11 @@ class siteController {
     } else {
       next(createError(500, result.message));
     }
+  }
+
+  //[GET] /forgot-password
+  async resetPassword(_, res) {
+    res.render("forgot-password", { layout: "base-with-nav" });
   }
 
   playback(req, res, next) {

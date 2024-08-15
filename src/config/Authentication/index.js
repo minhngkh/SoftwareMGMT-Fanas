@@ -110,7 +110,7 @@ class Authentication {
         authClient.currentUser.email,
         currentUserPassword,
       );
-      if (!!userCredential) {
+      if (userCredential) {
         return true;
       }
     } catch (error) {
