@@ -1,9 +1,9 @@
 {{#content "css" mode="append"}}
-  <link rel="stylesheet" href="/css/detail.css">
+<link rel="stylesheet" href="/css/detail.css">
 {{/content}}
 
 {{#content "js" mode="append"}}
-  <script src="/js/detail.js"></script>
+<script src="/js/detail.js"></script>
 {{/content}}
 
 <div class="app_body">
@@ -52,17 +52,17 @@
         </div>
         <div class="footer-info" id="footer-info">
             <h3>Giới thiệu nội dung</h3>
-              <p>{{detail.description}}</p>
-              <h4>Về tác giả</h4>
-              <div class="box-info">
+            <p>{{detail.description}}</p>
+            <h4>Về tác giả</h4>
+            <div class="box-info">
                 {{!-- <img src="assets/img/nnaimg.jpg" alt="" width="71" height="71"> --}}
                 <img src="{{author.avatarPath}}" alt="" width="71" height="71">
                 <div class="name-au">
                     <h5>{{author.name}}</h5>
-                    <span>40 Sách</span>
+                    <span>{{author.bookList.length}} Sách</span>
                 </div>
-              </div>
-              <p>
+            </div>
+            <p>
                 {{author.description}}
                 {{!-- Nguyễn Nhật Ánh (sinh ngày 7 tháng 5 năm 1955) 
                 là một nhà văn người Việt Nam. Được xem là một
@@ -75,7 +75,7 @@
             <p>Nhà xuất bản sách giấy NXB trẻ</p>
             <div class="box-temp1">
                 {{#each detail.genres}}
-                  <span class="ctg">{{this}}</span>
+                <span class="ctg">{{this}}</span>
                 {{/each}}
             </div>
             {{!-- <h4>Thông tin cần đọc</h4>
@@ -83,7 +83,8 @@
             <span class="underline"></span>
             <div style="width: 100%; padding:20px;">
                 <div class="box-temp2">
-                    <img src="{{detail.coverPath}}" alt="" width="103" height="176" style="border-radius: 14px; margin-right: 11px ;">
+                    <img src="{{detail.coverPath}}" alt="" width="103" height="176"
+                        style="border-radius: 14px; margin-right: 11px ;">
                     <div class="box-info1">
                         <div class="eval">
                             <span>4.0</span>
@@ -131,7 +132,8 @@
                     <h4>Đánh giá của độc giả khác</h4>
                     <ul class="list-eval" style="padding-left: 0;">
                         <li class="item-eval box-cmt f-cmt">
-                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày 27/05/2024</span>
+                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày
+                                27/05/2024</span>
                             <p>
                                 <span>Nội dung</span>
                                 <i class="fa-solid fa-star"></i>
@@ -153,7 +155,8 @@
                             </p>
                         </li>
                         <li class="item-eval box-cmt f-cmt">
-                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày 27/05/2024</span>
+                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày
+                                27/05/2024</span>
                             <p>
                                 <span>Nội dung</span>
                                 <i class="fa-solid fa-star"></i>
@@ -175,7 +178,8 @@
                             </p>
                         </li>
                         <li class="item-eval box-cmt f-cmt">
-                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày 27/05/2024</span>
+                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày
+                                27/05/2024</span>
                             <p>
                                 <span>Nội dung</span>
                                 <i class="fa-solid fa-star"></i>
@@ -197,7 +201,8 @@
                             </p>
                         </li>
                         <li class="item-eval box-cmt f-cmt">
-                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày 27/05/2024</span>
+                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày
+                                27/05/2024</span>
                             <p>
                                 <span>Nội dung</span>
                                 <i class="fa-solid fa-star"></i>
@@ -219,7 +224,8 @@
                             </p>
                         </li>
                         <li class="item-eval box-cmt f-cmt">
-                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày 27/05/2024</span>
+                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày
+                                27/05/2024</span>
                             <p>
                                 <span>Nội dung</span>
                                 <i class="fa-solid fa-star"></i>
@@ -241,7 +247,8 @@
                             </p>
                         </li>
                         <li class="item-eval box-cmt f-cmt">
-                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày 27/05/2024</span>
+                            <span style="color: #00000099; margin-bottom: 5px; font-size: 16px;">Bởi A vào ngày
+                                27/05/2024</span>
                             <p>
                                 <span>Nội dung</span>
                                 <i class="fa-solid fa-star"></i>

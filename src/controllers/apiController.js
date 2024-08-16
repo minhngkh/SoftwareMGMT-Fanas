@@ -145,18 +145,18 @@ class ApiController {
             res.status(401).send("Error fetching, user is not authenticated");
             return;
         }
-        const uid = cookieHeader.split('=')[1];
+        const uid = res.locals.userUid;
 
-        let userData = await User.getUser(uid);
-        if (!userData) {
-            res.status(404).send("User is not found!");
-            // console.log("User is not found!");
-            return;
-        }
-
-        let favoriteList = userData.favoriteList;
-        var index = favoriteList.indexOf(bookId);
         try {
+             let userData = await User.getUser(uid);
+            if (!userData) {
+                res.status(404).send("User is not found!");
+                // console.log("User is not found!");
+                return;
+            }
+
+            let favoriteList = userData.favoriteList;
+            let index = favoriteList.indexOf(bookId);
             if (index !== -1) {
                 res.status(200).send("Book has already been in favorite list");
                 return;
@@ -185,25 +185,25 @@ class ApiController {
             res.status(401).send("Error fetching, user is not authenticated");
             return;
         }
-        const uid = cookieHeader.split('=')[1];
+        const uid = res.locals.userUid;
 
-        let userData = await User.getUser(uid);
-        if (!userData) {
-            res.status(404).send("User is not found!");
-            return;
-        }
-
-        let favoriteList = userData.favoriteList;
-        var index = favoriteList.indexOf(bookId);
-        if (index !== -1) {
-            res.status(409).send("Book has already been in favorite list");
-            return;
-        } else {
-            favoriteList.push(bookId);
-        }
-
-        let updateInfo = { favoriteList: favoriteList };
         try {
+            let userData = await User.getUser(uid);
+            if (!userData) {
+                res.status(404).send("User is not found!");
+                return;
+            }
+    
+            let favoriteList = userData.favoriteList;
+            var index = favoriteList.indexOf(bookId);
+            if (index !== -1) {
+                res.status(409).send("Book has already been in favorite list");
+                return;
+            } else {
+                favoriteList.push(bookId);
+            }
+    
+            let updateInfo = { favoriteList: favoriteList };
             await User.updateUser(uid, updateInfo);
             res.status(200).json({ message: "Favorite list updated successfully." });
         } catch (error) {
