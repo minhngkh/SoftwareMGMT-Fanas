@@ -114,56 +114,56 @@
             <div class="row_list">
                 <p> 5 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" name="timeout" value="5" value="5" name="timer" />
+                    <input class="radio-design" type="radio" name="timeout" value="5" value="5" />
                 </label>
             </div>
             <div class="row_list">
                 <p> 10 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" value="10" name="timer" name="timeout" value="5" />
+                    <input class="radio-design" type="radio" value="10" name="timeout" value="5" />
                 </label>
             </div>
             <div class="row_list">
                 <p> 15 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" name="timeout" value="15" value="15" name="timer" />
+                    <input class="radio-design" type="radio" name="timeout" value="15" value="15" />
                 </label>
             </div>
             <div class="row_list">
                 <p> 20 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" value="20" name="timer" name="timeout" value="20" />
+                    <input class="radio-design" type="radio" value="20" name="timeout" value="20" />
                 </label>
             </div>
             <div class="row_list">
                 <p> 30 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" value="30" name="timer" name="timeout" value="30" />
+                    <input class="radio-design" type="radio" value="30" name="timeout" value="30" />
                 </label>
             </div>
             <div class="row_list">
                 <p> 40 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" value="40" name="timer" name="timeout" value="40" />
+                    <input class="radio-design" type="radio" value="40" name="timeout" value="40" />
                 </label>
             </div>
 
             <div class="row_list">
                 <p> 50 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" value="50" name="timer" name="timeout" value="50" />
+                    <input class="radio-design" type="radio" value="50" name="timeout" value="50" />
                 </label>
             </div>
 
             <div class="row_list">
                 <p> 60 phút </p>
                 <label>
-                    <input class="radio-design" type="radio" value="60" name="timer" name="timeout" value="60" />
+                    <input class="radio-design" type="radio" value="60" name="timeout" value="60" />
                 </label>
             </div>
         </div>
         <div class="user-confirm">
-            <button class="confirm-button" id="timeout-confirm-btn" id="timer-btn">Xác nhận</button>
+            <button class="confirm-button" id="timeout-confirm-btn">Xác nhận</button>
         </div>
     </div>
 
@@ -275,8 +275,8 @@
 
     sliderSpeed.addEventListener('input', setSlider);
 
-    document.getElementById('timer-btn').addEventListener('click', () => {
-        const timerValue = document.querySelector("input[type='radio'][name=timer]:checked").value;
+    document.getElementById('timeout-confirm-btn').addEventListener('click', () => {
+        const timerValue = document.querySelector("input[type='radio'][name=timeout]:checked").value;
         console.log(timerValue);
     })
 </script>
