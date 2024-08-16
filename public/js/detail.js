@@ -28,7 +28,7 @@ async function fetchAddFavorite(bookId) {
         }
 
         if (response.status == 200){
-            alert('Book added to favorite!');
+            // alert('Book added to favorite!');
             return true;
         }
         
@@ -53,7 +53,7 @@ async function fetchRemoveFavorite(bookId) {
         }
 
         if (response.status == 200){
-            alert('Book removed from favorite!');
+            // alert('Book removed from favorite!');
             return true;
         }
 
