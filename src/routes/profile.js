@@ -52,5 +52,6 @@ router.get("/history", (req, res, _) => {
 router.get("/favorite", profileController.favorite);
 
 router.get("/favorite-genres", profileController.favoriteGenres);
+router.post("/favorite-genres", profileController.postFavoriteGenres);
 
 module.exports = router;

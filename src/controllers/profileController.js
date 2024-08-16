@@ -105,6 +105,37 @@ class profileController {
             res.status(500).send("Error fetching favorite genres");
         }
     }
+
+    //[POST] /favorite-genres
+    async postFavoriteGenres(req, res){
+        const cookieHeader = req.headers?.cookie;
+        // console.log(cookieHeader);
+        if (!cookieHeader) {
+            // console.log("Error fetching, user is not authenticated");
+            res.status(401).send("Error fetching, user is not authenticated");
+            return;
+        }
+
+        const formData = req.body;
+        console.log(formData);
+        try {
+            const uid = res.locals.userUid;
+            const updateInfo = {favoriteGenres: formData.favoriteGenres};
+        
+            let userData = await User.getUser(uid);
+            if (!userData) {
+                res.status(404).send("User is not found!");
+                return;
+            }
+
+            await User.updateUser(uid, updateInfo)
+        
+            res.redirect("/profile/favorite-genres");
+        } catch (error) {
+            console.error("Error fetching favorite genres: ", error);
+            res.status(500).send("Error fetching favorite genres");
+        }
+    }
 }
 
 module.exports = new profileController();
