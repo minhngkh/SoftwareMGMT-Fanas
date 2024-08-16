@@ -68,6 +68,43 @@ class profileController {
             res.status(500).send("Error fetching favorite books");
         }
     }
+
+    //[GET] /favorite-genres
+    async favoriteGenres(req, res){
+        const cookieHeader = req.headers?.cookie;
+        // console.log(cookieHeader);
+        if (!cookieHeader) {
+        // console.log("Error fetching, user is not authenticated");
+        res.status(401).send("Error fetching, user is not authenticated");
+        return;
+        }
+        const uid = res.locals.userUid;
+    
+        let userData = await User.getUser(uid);
+        if (!userData) {
+        res.status(404).send("User is not found!");
+        return;
+        }
+    
+        try {
+            let userData = await User.getUser(uid);
+        
+            res.render("profile-favoritegernes", {
+                layout: "base-with-nav",
+                title: "Favorite genres",
+                currentNav: "profile",
+                listName: "Thể loại yêu thích",
+                user: {
+                    email: userData.email,
+                    avatarPath: userData.avatarPath,
+                    favoriteGenres: userData.favoriteGenres,
+                },
+            });
+        } catch (error) {
+            console.error("Error fetching favorite genres: ", error);
+            res.status(500).send("Error fetching favorite genres");
+        }
+    }
 }
 
 module.exports = new profileController();

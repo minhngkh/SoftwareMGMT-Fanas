@@ -51,4 +51,6 @@ router.get("/history", (req, res, _) => {
 // FIX: require authenticated to access
 router.get("/favorite", profileController.favorite);
 
+router.get("/favorite-genres", profileController.favoriteGenres);
+
 module.exports = router;
