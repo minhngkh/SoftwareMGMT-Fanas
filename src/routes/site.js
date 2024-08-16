@@ -26,14 +26,12 @@ router.get("/signin", siteController.signin);
 router.post("/signin", siteController.postSignin);
 router.get("/signup", siteController.signup);
 router.post("/signup", siteController.postSignup);
+router.get("/forgot-password", siteController.resetPassword);
 
 router.get("/search-books", siteController.searchBooks);
 router.get("/playback", siteController.playback);
 
-router.get('/', siteController.index);
-router.get('*', (req, res) => {
-  res.send("ERROR 404: Page not found!")
-});
+router.get("/", siteController.index);
 
 function isLoggedIn(req, res, next) {
   console.log("Authenticate checking");
@@ -43,8 +41,8 @@ function isLoggedIn(req, res, next) {
 
   if (typeof cookieHeader !== "undefined") {
     return next();
-  } else {
-    res.redirect("/signin");
   }
+
+  res.redirect("/signin");
 }
 module.exports = router;

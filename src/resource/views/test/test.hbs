@@ -1,0 +1,11 @@
+<sl-button class="rainbow-background">Button</sl-button>
+
+{{#content "css" mode="append"}}
+<style>
+  .rainbow-background::part(base) {
+    background: linear-gradient(90deg, #fd877f 0%, #de9948 100%);
+  }
+
+  .rainbow-background::part(label) {}
+</style>
+{{/content}}

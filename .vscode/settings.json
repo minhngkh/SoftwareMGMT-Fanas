@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+
+  "editor.defaultFormatter": "biomejs.biome",
+
+  "html.customData": [
+    "./node_modules/@shoelace-style/shoelace/dist/vscode.html-custom-data.json"
+  ],
+  "[handlebars]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
+}

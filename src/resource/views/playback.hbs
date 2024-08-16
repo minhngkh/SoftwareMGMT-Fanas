@@ -1,10 +1,10 @@
 {{#content "css" mode="append"}}
-  <link rel="stylesheet" href="/css/playback.css" />
-  <link rel="stylesheet" href="/css/playbackMenu.css" />
+<link rel="stylesheet" href="/css/playback.css" />
+<link rel="stylesheet" href="/css/playbackMenu.css" />
 {{/content}}
 
 {{#content "js" mode="append"}}
-  <script src="/js/playback.js"></script>
+<script src="/js/playback.js"></script>
 {{/content}}
 
 <div class="stop-scrolling">
@@ -14,15 +14,15 @@
             <i class="icon fa-solid fa-share-nodes"></i>
         </div>
         <div class="pb-image">
-            <img class ="book-image" src="{{book.coverPath}}" alt="">
+            <img class="book-image" src="{{book.coverPath}}" alt="">
             <div class="font book-name">{{book.bookName}}</div>
         </div>
         <div class="progress-container" id="progress-container">
             <div class="font chapter-number" id="chapter" value="{{chapter}}">Chương {{chapter}}</div>
             {{!-- <div class="progress-bar"> --}}
-                {{!-- <div class="progress"></div>  --}}
+                {{!-- <div class="progress"></div> --}}
                 {{!-- <div class="progress-handle"></div> --}}
-            {{!-- </div> --}}
+                {{!-- </div> --}}
             <input type="range" id="progress-slider" max="100" value="0">
             <audio id="audioPlayer" preload="metadata">
                 <!-- <source src="/audio" type="audio/mpeg">
@@ -43,28 +43,30 @@
             </div>
             <div class="backward-button">
                 {{!-- <button onclick="alert('Back 10s')"> --}}
-                <button onclick="document.getElementById('audioPlayer').currentTime -= 10">
-                    <i class="icon fa-solid fa-arrow-rotate-left"></i>
-                </button> 
+                    <button onclick="document.getElementById('audioPlayer').currentTime -= 10">
+                        <i class="icon fa-solid fa-arrow-rotate-left"></i>
+                    </button>
             </div>
 
             {{!-- <button onclick="alert('Play')"> --}}
-            <div class="button-play">
-                {{!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path>
-                </svg> --}}
-                <i class="fa-solid fa-play"></i>
-            </div>
-            <div class="forward-button">
-                {{!-- <button onclick="alert('Skip 10s')"> --}}
-                <button onclick="document.getElementById('audioPlayer').currentTime += 10">
-                    <i class="icon fa-solid fa-arrow-rotate-right"></i>
-                </button> 
-            </div>
+                <div class="button-play">
+                    {{!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                        <path
+                            d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z">
+                        </path>
+                    </svg> --}}
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="forward-button">
+                    {{!-- <button onclick="alert('Skip 10s')"> --}}
+                        <button onclick="document.getElementById('audioPlayer').currentTime += 10">
+                            <i class="icon fa-solid fa-arrow-rotate-right"></i>
+                        </button>
+                </div>
 
-            <div class="forward-step" id="next-btn">
-                <i class="icon fa-solid fa-forward-step"></i>
-            </div>
+                <div class="forward-step" id="next-btn">
+                    <i class="icon fa-solid fa-forward-step"></i>
+                </div>
         </div>
     </div>
 
@@ -105,62 +107,63 @@
             <div class="row_list">
                 <p> Không hẹn giờ </p>
                 <label>
-                   <input class="radio-design" type="radio" value="0"  name="timer" checked/>
-                </label> 
-             </div>
-            <div class="row_list">
-               <p> 5 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="5"  name="timer"/>
-               </label> 
+                    <input class="radio-design" type="radio" name="timeout" value="0" checkedvalue="0" name="timer"
+                        checked />
+                </label>
             </div>
             <div class="row_list">
-               <p> 10 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="10" name="timer" />
-               </label> 
+                <p> 5 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" name="timeout" value="5" value="5" name="timer" />
+                </label>
             </div>
             <div class="row_list">
-               <p> 15 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="15" name="timer"  />
-               </label> 
+                <p> 10 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" value="10" name="timer" name="timeout" value="5" />
+                </label>
             </div>
             <div class="row_list">
-               <p> 20 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="20" name="timer" />
-               </label> 
+                <p> 15 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" name="timeout" value="15" value="15" name="timer" />
+                </label>
             </div>
             <div class="row_list">
-               <p> 30 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="30" name="timer" />
-               </label> 
+                <p> 20 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" value="20" name="timer" name="timeout" value="20" />
+                </label>
             </div>
             <div class="row_list">
-               <p> 40 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="40" name="timer" />
-               </label> 
+                <p> 30 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" value="30" name="timer" name="timeout" value="30" />
+                </label>
             </div>
-
             <div class="row_list">
-               <p> 50 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="50" name="timer" />
-               </label> 
+                <p> 40 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" value="40" name="timer" name="timeout" value="40" />
+                </label>
             </div>
 
             <div class="row_list">
-               <p> 60 phút </p>
-               <label>
-                  <input class="radio-design" type="radio" value="60" name="timer" />
-               </label> 
+                <p> 50 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" value="50" name="timer" name="timeout" value="50" />
+                </label>
+            </div>
+
+            <div class="row_list">
+                <p> 60 phút </p>
+                <label>
+                    <input class="radio-design" type="radio" value="60" name="timer" name="timeout" value="60" />
+                </label>
             </div>
         </div>
         <div class="user-confirm">
-            <button class="confirm-button" id="timer-btn">Xác nhận</button>
+            <button class="confirm-button" id="timeout-confirm-btn" id="timer-btn">Xác nhận</button>
         </div>
     </div>
 
@@ -175,16 +178,17 @@
             <div class="row_list">
                 <div class="col_chap">
                     <p> Chương {{this}} </p>
-                    {{!-- <p class = "chapter-time" > 60 phút</p> --}}
+                    {{!-- <p class="chapter-time"> 60 phút</p> --}}
                 </div>
                 <label>
-                   <input class="radio-design" type="radio" name="current-chapter"/>
-                </label> 
-             </div>
-             {{/each}}
+                    {{!-- {{#if (eq this ../chapter)}} --}}
+                    <input class="radio-design" type="radio" name="current-chapter" value="{{this}}" />
+                </label>
+            </div>
+            {{/each}}
         </div>
         <div class="user-confirm">
-            <button class="confirm-button">Xác nhận</button>
+            <button class="confirm-button" id="chapter-confirm-btn">Xác nhận</button>
         </div>
     </div>
 
@@ -236,22 +240,22 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 <script>
-    $(document).ready(function(){
-        $('.box--playbackpage').click(function() {
+    $(document).ready(function () {
+        $('.box--playbackpage').click(function () {
             $('.box--timer').removeClass('open-timer');
             $('.box--chapterlist').removeClass('open-chapter');
             $('.box--speed').removeClass('open-speed');
         })
 
-        $('.btn--Timer, .interact-bar-timer').click(function() {
+        $('.btn--Timer, .interact-bar-timer').click(function () {
             $('.box--timer').toggleClass('open-timer');
         });
 
-        $('.btn--Chapter, .interact-bar-chapter').click(function() {
+        $('.btn--Chapter, .interact-bar-chapter').click(function () {
             $('.box--chapterlist').toggleClass('open-chapter');
         });
 
-        $('.btn--Speed, .interact-bar-speed').click(function() {
+        $('.btn--Speed, .interact-bar-speed').click(function () {
             $('.box--speed').toggleClass('open-speed');
         });
     });
@@ -277,7 +281,8 @@
     })
 </script>
 
-{{!-- <script>
+{{!--
+<script>
     async function fetchAudioUrl() {
         try {
             //const response = await fetch('/get-audio-url?chapters=' + 
@@ -290,7 +295,7 @@
             console.error('Error fetching audio URL:', error);
         }
     }
-    
+
     fetchAudioUrl();
     alert('Press play button to start');
 </script> --}}

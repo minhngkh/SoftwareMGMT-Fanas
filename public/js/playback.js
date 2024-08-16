@@ -1,6 +1,8 @@
 const PausePlayBtn = document.querySelector('.button-play i')
 const previousChapterBtn = document.getElementById('prev-btn');
 const nextChapterBtn = document.getElementById('next-btn');
+const chapterConfirmBtn = document.getElementById('chapter-confirm-btn');
+const timeoutConfirmBtn = document.getElementById('timeout-confirm-btn');
 
 // code mới được chuyển từ hbs qua
 const audioPlayer = document.getElementById('audioPlayer');
@@ -10,10 +12,31 @@ const currentTimeContainer = document.getElementById('current-time');
 // const progressContainer = document.getElementById('progress-container');
 
 const urlParams = new URLSearchParams(window.location.search);
-let chapter = document.getElementById('chapter').getAttribute("value");
 let rAF = null;
 let audioTimeout = null;
 const bookId = urlParams.get('id');
+
+document.addEventListener("DOMContentLoaded", () => {
+    let chapter = document.getElementById('chapter').getAttribute("value");
+    fetchAudioUrl(chapter);
+});
+
+/////////////////// Chapter related handler
+
+function updateCheckedRadioBtn(chapter){
+    let ele = document.getElementsByName('current-chapter');
+    for (i = 0; i < ele.length; i++) {
+        if (ele[i].type = "radio") {
+            ele[i].checked = false;
+            // console.log(ele[i].value + "|" + chapter);
+
+            if (ele[i].value == chapter) {
+                ele[i].checked=true;
+                // console.log("Update check to btn " + i);
+            }
+        }
+    }
+}
 
 async function fetchAudioUrl(fetchChapter) {
     try {
@@ -33,6 +56,7 @@ async function fetchAudioUrl(fetchChapter) {
         }
         document.getElementById('chapter').value = fetchChapter;
         document.getElementById('chapter').innerHTML = "Chương " + fetchChapter;
+        updateCheckedRadioBtn(fetchChapter);
         
         const data = await response.json();
         audioPlayer.src = data.url;
@@ -42,7 +66,27 @@ async function fetchAudioUrl(fetchChapter) {
     }
 }
 
-fetchAudioUrl(chapter);
+previousChapterBtn.addEventListener("click", () =>{
+    let chapter = document.getElementById('chapter').value;
+    // alert("Prev");
+    fetchAudioUrl(+chapter-1);
+    updateCheckedRadioBtn();
+});
+
+nextChapterBtn.addEventListener("click", () =>{
+    let chapter = document.getElementById('chapter').value;
+    // alert("Next");
+    fetchAudioUrl(+chapter+1);
+    updateCheckedRadioBtn();
+});
+
+chapterConfirmBtn.addEventListener("click", () => {
+    let selectedValue = document.querySelector('input[name="current-chapter"]:checked').value;
+    fetchAudioUrl(selectedValue);
+    document.querySelector(".box--playbackpage").click();
+});
+
+/////////////////// Audio related handler
 
 PausePlayBtn.addEventListener("click", () => {
     // console.log('Button clicked');
@@ -55,18 +99,6 @@ PausePlayBtn.addEventListener("click", () => {
         //console.log('Pausing audio');
     }
     //console.log('Audio paused state:', audioPlayer.paused);
-});
-
-previousChapterBtn.addEventListener("click", () =>{
-    let chapter = document.getElementById('chapter').value;
-    // alert("Prev");
-    fetchAudioUrl(+chapter-1);
-});
-
-nextChapterBtn.addEventListener("click", () =>{
-    let chapter = document.getElementById('chapter').value;
-    // alert("Next");
-    fetchAudioUrl(+chapter+1);
 });
 
 audioPlayer.addEventListener("play", () => {
@@ -91,13 +123,27 @@ function countdownAudio(){
 }
 
 function setCountdownAudio(minutes){
-    const millis = minutes * 60 * 1000;
+    const millis = +minutes * 60 * 1000;
+    // audioTimeout = setTimeout(countdownAudio, 2000);
     audioTimeout = setTimeout(countdownAudio, millis);
 }
 
 function removeCountdownAudio(){
     if (audioTimeout) clearTimeout(audioTimeout);
 }
+
+timeoutConfirmBtn.addEventListener("click", () => {
+    let selectedValue = document.querySelector('input[name="timeout"]:checked').value;
+    if (selectedValue == 0){
+        console.log("timeout removed");
+        removeCountdownAudio();
+    } else {
+        console.log("timeout selected " + selectedValue);
+
+        setCountdownAudio(selectedValue);
+    }
+    document.querySelector(".box--playbackpage").click();
+});
 
 slider.addEventListener('input', () => {
     currentTimeContainer.textContent = calculateTime(slider.value);
