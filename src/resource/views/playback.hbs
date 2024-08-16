@@ -5,7 +5,6 @@
 
 {{#content "js" mode="append"}}
   <script src="/js/playback.js"></script>
-  <script src="/js/playbackMenu.js"></script>
 {{/content}}
 
 <div class="stop-scrolling">
@@ -83,7 +82,7 @@
             </div>
         </div>
         <div class="btn btn--Speed">
-            <div class="icon speed-amount">1.0x</div>
+            <div class="icon speed-amount" id="speed-btn" style="font-size: 18px;">x1.0</div>
             <div class="btn--content">
                 Tốc độ
             </div>
@@ -106,62 +105,62 @@
             <div class="row_list">
                 <p> Không hẹn giờ </p>
                 <label>
-                   <input class="radio-design" type="radio" />
+                   <input class="radio-design" type="radio" value="0"  name="timer" checked/>
                 </label> 
              </div>
             <div class="row_list">
                <p> 5 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="5"  name="timer"/>
                </label> 
             </div>
             <div class="row_list">
                <p> 10 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="10" name="timer" />
                </label> 
             </div>
             <div class="row_list">
                <p> 15 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="15" name="timer"  />
                </label> 
             </div>
             <div class="row_list">
                <p> 20 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="20" name="timer" />
                </label> 
             </div>
             <div class="row_list">
                <p> 30 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="30" name="timer" />
                </label> 
             </div>
             <div class="row_list">
                <p> 40 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="40" name="timer" />
                </label> 
             </div>
 
             <div class="row_list">
                <p> 50 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="50" name="timer" />
                </label> 
             </div>
 
             <div class="row_list">
                <p> 60 phút </p>
                <label>
-                  <input class="radio-design" type="radio" />
+                  <input class="radio-design" type="radio" value="60" name="timer" />
                </label> 
             </div>
         </div>
         <div class="user-confirm">
-            <button class="confirm-button">Xác nhận</button>
+            <button class="confirm-button" id="timer-btn">Xác nhận</button>
         </div>
     </div>
 
@@ -183,60 +182,6 @@
                 </label> 
              </div>
              {{/each}}
-            {{!-- <div class="row_list">
-                <div class="col_chap">
-                    <p> Chương 1 </p>
-                    <p class = "chapter-time" > 60 phút</p>
-                </div>
-                <label>
-                   <input class="radio-design" type="radio" />
-                </label> 
-             </div>
-            <div class="row_list">
-                <div class="col_chap">
-                    <p> Chương 2 </p>
-                    <p class = "chapter-time" > 60 phút</p>
-                </div>
-               <label>
-                  <input class="radio-design" type="radio" />
-               </label> 
-            </div>
-            <div class="row_list">
-                <div class="col_chap">
-                    <p> Chương 3 </p>
-                    <p class = "chapter-time" > 60 phút</p>
-                </div>
-               <label>
-                  <input class="radio-design" type="radio" />
-               </label> 
-            </div>
-            <div class="row_list">
-                <div class="col_chap">
-                    <p> Chương 4 </p>
-                    <p class = "chapter-time" > 60 phút</p>
-                </div>
-               <label>
-                  <input class="radio-design" type="radio" />
-               </label> 
-            </div>
-            <div class="row_list">
-                <div class="col_chap">
-                    <p> Chương 5 </p>
-                    <p class = "chapter-time" > 60 phút</p>
-                </div>
-               <label>
-                  <input class="radio-design" type="radio" />
-               </label> 
-            </div>
-            <div class="row_list">
-                <div class="col_chap">
-                    <p> Chương 6 </p>
-                    <p class = "chapter-time" > 60 phút</p>
-                </div>
-               <label>
-                  <input class="radio-design" type="radio" />
-               </label> 
-            </div> --}}
         </div>
         <div class="user-confirm">
             <button class="confirm-button">Xác nhận</button>
@@ -249,10 +194,13 @@
         <div class="container-list-speed">
             <div class="interact-bar-speed interact-bar"></div>
             <h3 style="font-size: 20px;">Tốc độ phát</h3>
-            <div class="speed-bar">
+            {{!-- <div class="speed-bar">
                 <div class="current-speed"></div>
                 <div class="speed-bar-handle"></div>
-            </div>
+            </div> --}}
+            <input id="speed-slider" class="speed-bar" type="range" min="0.25" max="2" step="0.25">
+            {{!-- Label ở dưới để test lấy speed --}}
+            <label id="speed-value"></label>
             <div class="speed-column">
                 <div class="speedindex-bar">
                     <div class="speed-index">0.25</div>
@@ -307,6 +255,26 @@
             $('.box--speed').toggleClass('open-speed');
         });
     });
+
+
+    const sliderSpeed = document.getElementById('speed-slider');
+    const sliderValueDisplay = document.getElementById('speed-value');
+    const speedBtn = document.getElementById('speed-btn');
+    sliderSpeed.value = 1;
+    sliderValueDisplay.innerHTML = 1;
+    speedBtn.innerHTML = "x1.0";
+
+    function setSlider() {
+        sliderValueDisplay.innerHTML = sliderSpeed.value;
+        speedBtn.innerHTML = `x${sliderSpeed.value}`;
+    }
+
+    sliderSpeed.addEventListener('input', setSlider);
+
+    document.getElementById('timer-btn').addEventListener('click', () => {
+        const timerValue = document.querySelector("input[type='radio'][name=timer]:checked").value;
+        console.log(timerValue);
+    })
 </script>
 
 {{!-- <script>
