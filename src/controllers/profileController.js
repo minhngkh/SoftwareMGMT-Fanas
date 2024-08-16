@@ -22,7 +22,7 @@ class profileController {
         res.status(401).send("Error fetching, user is not authenticated");
         return;
         }
-        const uid = cookieHeader.split("=")[1];
+        const uid = res.locals.userUid;
     
         let userData = await User.getUser(uid);
         if (!userData) {
@@ -31,41 +31,41 @@ class profileController {
         }
     
         try {
-        let userData = await User.getUser(uid);
-    
-        if (!userData.favoriteList || userData.favoriteList.length === 0) {
+            let userData = await User.getUser(uid);
+        
+            if (!userData.favoriteList || userData.favoriteList.length === 0) {
+                res.render("profile-list", {
+                layout: "base-with-nav",
+                title: "Reading history",
+                currentNav: "profile",
+                listName: "Yêu thích",
+                user: {
+                    email: userData.email,
+                    avatarPath: userData.avatarPath,
+                    favoriteList: [],
+                },
+                });
+                return;
+            }
+        
+            let favoriteBooks = await Promise.all(
+                userData.favoriteList.map((bookId) => Book.getBookById(bookId))
+            );
+        
             res.render("profile-list", {
-            layout: "base-with-nav",
-            title: "Reading history",
-            currentNav: "profile",
-            listName: "Yêu thích",
-            user: {
-                fullName: userData.fullName,
-                avatarPath: userData.avatarPath,
-                favoriteList: [],
-            },
+                layout: "base-with-nav",
+                title: "Reading history",
+                currentNav: "profile",
+                listName: "Yêu thích",
+                user: {
+                    email: userData.email,
+                    avatarPath: userData.avatarPath,
+                    favoriteList: favoriteBooks,
+                },
             });
-            return;
-        }
-    
-        let favoriteBooks = await Promise.all(
-            userData.favoriteList.map((bookId) => Book.getBookById(bookId))
-        );
-    
-        res.render("profile-list", {
-            layout: "base-with-nav",
-            title: "Reading history",
-            currentNav: "profile",
-            listName: "Yêu thích",
-            user: {
-            fullName: userData.fullName,
-            avatarPath: userData.avatarPath,
-            favoriteList: favoriteBooks,
-            },
-        });
         } catch (error) {
-        console.error("Error fetching favorite books: ", error);
-        res.status(500).send("Error fetching favorite books");
+            console.error("Error fetching favorite books: ", error);
+            res.status(500).send("Error fetching favorite books");
         }
     }
 }

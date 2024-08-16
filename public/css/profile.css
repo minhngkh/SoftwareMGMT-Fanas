@@ -19,7 +19,7 @@
 
 .avatar-name {
   margin-top: 20px;
-  font-size: 35px;
+  font-size: 25px;
   font-weight: bold;
   color: white;
 }
@@ -86,7 +86,7 @@
   gap: 35px;
 }
 
-.book-button-list > li {
+.book-button-list>li {
   width: 100%;
 }
 
@@ -126,7 +126,7 @@
 
 .book-title {
   max-width: 100%;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   text-align: left;
   overflow: hidden;

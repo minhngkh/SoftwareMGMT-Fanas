@@ -1,10 +1,10 @@
 {{#content "css" mode="prepend"}}
-  <link rel="stylesheet" href="/css/profile.css" />
+<link rel="stylesheet" href="/css/profile.css" />
 {{/content}}
 
 <div class="avatar-group">
-  <img class="avatar-img" src="{{ avatarUrl }}" />
-  <div class="avatar-name">{{ fullName }}</div>
+  <img class="avatar-img" src="{{ user.avatarPath }}" />
+  <p class="avatar-name">{{ user.email }}</p>
 </div>
 
 <main class="content">
