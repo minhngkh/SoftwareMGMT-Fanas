@@ -52,7 +52,9 @@ function updateSearchResults(data) {
     data.forEach(book => {
         const bookItem = `
             <li class="item_book">
-                <img src="${book.coverPath}" alt="" width="84" height="95">
+                <a href="/detail?id=${book.id}">
+                    <img src="${book.coverPath}" alt="" width="84" height="95">
+                </a>
                 <div class="info">
                     <h4 class="name">${book.bookName}</h4>
                     <span class="author">${book.authorName}</span>
