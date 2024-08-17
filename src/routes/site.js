@@ -4,7 +4,7 @@ const router = express.Router();
 // const firebaseAuthController = require("../controllers/firebaseAuthController");
 const siteController = require("../controllers/siteController");
 const authenticated = require("../middleware/authenticated");
-const { setCurrentNav } = require("../middleware/setNavProps");
+const { setCurrentNav } = require("../middleware/navProps");
 
 // router.get('/register', siteController.register);
 

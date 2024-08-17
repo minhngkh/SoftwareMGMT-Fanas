@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Book = require("../models/bookModel");
 const User = require("../models/userModel");
-const Author = require("../models/authorModel.js");
-const Review = require("../models/reviewModel.js");
-const firebaseAuthController = require("../controllers/firebaseAuthController");
-const authenticateUser = require("../middleware/authenticateUser");
 const profileController = require("../controllers/profileController");
 
 router.get("/", async (req, res, _) => {

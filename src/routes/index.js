@@ -4,7 +4,7 @@ const apiRouter = require("./api.js");
 const createError = require("http-errors");
 const authenticated = require("../middleware/authenticated");
 const { getAuthAdmin } = require("../config/firebase");
-const { setCurrentNav } = require("../middleware/setNavProps.js");
+const { setCurrentNav } = require("../middleware/navProps.js");
 
 const authAdmin = getAuthAdmin();
 
