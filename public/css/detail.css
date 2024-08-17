@@ -423,7 +423,8 @@ html {
 
 .box-com {
   width: 373px;
-  height: 685px;
+  max-height: 685px;
+  min-height: 250px;
   border-radius: 30px;
   background-color: #FFFFFF;
   padding: 24px 19px;

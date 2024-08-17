@@ -178,7 +178,15 @@ document.addEventListener('DOMContentLoaded', async function() {
             </li>
         `
     })
-    reviewsList.innerHTML = allReviewsHTML.join('');
+    if(allReviews.length === 0) {
+        reviewsList.innerHTML = `
+            <div style="display: flex; justify-content: center; margin-top: 20px">
+                <span style="color: #00000099; margin-bottom: 5px; font-size: 20px; font-weight: 600;">Không có bình luận</span>
+            </div>
+        `
+    }else {
+        reviewsList.innerHTML = allReviewsHTML.join('');
+    }
 });
 
 // document.addEventListener('DOMContentLoaded', function () {
