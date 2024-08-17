@@ -9,17 +9,17 @@ const {
   getDownloadURL,
   dbFirestore,
 } = require("../config/firebase.js");
-const { firebaseAuthController } = require("./firebaseAuthController.js");
+// const { firebaseAuthController } = require("./firebaseAuthController.js");
 
 class siteController {
   //[GET] /
-  index(req, res) {
+  index(_, res) {
     res.redirect("/homepage");
     // res.render("index", { layout: "main" });
   }
 
   //[GET] /homepage
-  async homepage(req, res) {
+  async homepage(_, res) {
     const sliders = await Book.getAllBooks();
     // console.log(sliders);
 
@@ -83,7 +83,7 @@ class siteController {
   }
 
   //[GET] /signup
-  signup(req, res) {
+  signup(_, res) {
     res.render("signup", { layout: "base-with-nav" });
   }
 
@@ -101,8 +101,7 @@ class siteController {
     if (userCredential) {
       const userInfo = {
         userID: userCredential.user?.uid,
-        avatarPath:
-          "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg",
+        avatarPath: null,
         email: req.body.email,
         role: "customer",
         favoriteGenres: req.body?.favoriteGenres ? req.body.favoriteGenres : [],
@@ -113,7 +112,7 @@ class siteController {
   }
 
   //[GET] /search
-  search(req, res) {
+  search(_, res) {
     res.render("search", { layout: "base-with-nav" });
   }
 
@@ -121,22 +120,30 @@ class siteController {
   //For example /search-books?phrase=hoa
   async searchBooks(req, res) {
     const phrase = req.query.phrase;
-    let foundBooks = [];
+    const foundBooks = [];
 
     await dbFirestore
       .collection("Books")
       .get()
       .then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          let book = doc.data();
-          if (
-            book.bookName &&
-            book.bookName.toLowerCase().includes(phrase.toLowerCase())
-          ) {
+        for (const doc of snapshot.docs) {
+          const book = doc.data();
+          if (book.bookName?.toLowerCase().includes(phrase.toLowerCase())) {
             book.id = doc.id;
             foundBooks.push(book);
           }
-        });
+        }
+
+        // snapshot.docs.forEach((doc) => {
+        //   let book = doc.data();
+        //   if (
+        //     book.bookName &&
+        //     book.bookName.toLowerCase().includes(phrase.toLowerCase())
+        //   ) {
+        //     book.id = doc.id;
+        //     foundBooks.push(book);
+        //   }
+        // });
       });
 
     res.json(foundBooks);
@@ -145,10 +152,9 @@ class siteController {
   //[GET] /detail
   async detail(req, res) {
     console.log(req.query);
-    let bookId = req.query.id;
-    var detail;
+    const bookId = req.query.id;
 
-    let bookData = await Book.getBookById(bookId);
+    const bookData = await Book.getBookById(bookId);
     // await dbFirestore
     //   .collection("Books")
     //   .get()
@@ -158,7 +164,7 @@ class siteController {
     //     // console.log(detail);
     //   });
 
-    let authorData = await Author.getAuthorById(bookData.author);
+    const authorData = await Author.getAuthorById(bookData.author);
     // console.log(authorData);
 
     res.render("detail", {
@@ -169,12 +175,12 @@ class siteController {
   }
 
   //[GET] /favorite
-  favorite(req, res) {
+  favorite(_, res) {
     res.render("favorite", { layout: "base-with-nav" });
   }
 
   //[GET] /example
-  example(req, res) {
+  example(_, res) {
     const exampleText = "muahahahaha";
     res.render("example", { layout: "example", exampleText });
   }
@@ -182,15 +188,14 @@ class siteController {
   //[GET] /get-audio-url
   async getAudio(req, res) {
     console.log(req.query);
-    let bookId = req.query.id;
-    let chapter = req.query.chapter;
+    const bookId = req.query.id;
+    const chapter = req.query.chapter;
 
     try {
-      const filename = bookId + "|" + chapter + ".mp3";
+      const filename = `${bookId}|${chapter}.mp3`;
       console.log(filename);
-      const fileRef = storage.bucket().file("Audio/" + filename);
-      fileRef.exists()
-      .then(async(exists) => {
+      const fileRef = storage.bucket().file(`Audio/${filename}`);
+      fileRef.exists().then(async (exists) => {
         if (exists[0]) {
           // console.log("File exists");
           const url = await getDownloadURL(fileRef);
@@ -199,7 +204,7 @@ class siteController {
           console.log("File does not exist");
           res.status(404).send("File does not exist");
         }
-      })
+      });
     } catch (error) {
       console.error("Error fetching the download URL: ", error);
       res.status(500).send("Error fetching the download URL");
@@ -229,13 +234,17 @@ class siteController {
     res.render("forgot-password", { layout: "base-with-nav" });
   }
 
-  async playback(req, res, next) {
+  async playback(req, res, _) {
     // console.log(req.query);
-    let bookId = req.query.id;
-    let bookData = await Book.getBookById(bookId);
-    let chapter = bookData.chapterList[0];
+    const bookId = req.query.id;
+    const bookData = await Book.getBookById(bookId);
+    const chapter = bookData.chapterList[0];
     console.log(chapter);
-    res.render("playback", { layout: "base-with-nav", book: bookData, chapter });
+    res.render("playback", {
+      layout: "base-with-nav",
+      book: bookData,
+      chapter,
+    });
   }
 }
 

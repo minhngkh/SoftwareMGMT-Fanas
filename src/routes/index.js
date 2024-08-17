@@ -2,14 +2,20 @@ const siteRouter = require("./site");
 const profileRouter = require("./profile");
 const apiRouter = require("./api.js");
 const createError = require("http-errors");
+const authenticated = require("../middleware/authenticated");
 const { getAuthAdmin } = require("../config/firebase");
+const { setCurrentNav } = require("../middleware/setNavProps.js");
 
 const authAdmin = getAuthAdmin();
 
 function route(app) {
   // Add authentication status into req.locals
   app.use((req, res, next) => {
-    const session = req.cookies.session || "";
+    const session = req.cookies.session;
+    if (!session) {
+      res.locals.isAuthenticated = false;
+      return next();
+    }
 
     authAdmin
       .verifySessionCookie(session, true)
@@ -25,10 +31,15 @@ function route(app) {
   });
 
   app.use("/", siteRouter);
-  app.use("/profile", profileRouter);
+  app.use(
+    "/profile",
+    authenticated.require,
+    setCurrentNav("profile"),
+    profileRouter,
+  );
   app.use("/api/v1", apiRouter);
 
-  app.use((req, res, next) => {
+  app.use((_, __, next) => {
     next(createError(404));
   });
 
