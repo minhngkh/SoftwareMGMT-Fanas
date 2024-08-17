@@ -27,28 +27,32 @@
                 {{!-- <span class="actor">Nguyễn Nhật Ánh</span> --}}
                 <span class="actor">{{author.name}}</span>
             </div>
-            <div class="header_like">
-                <i class="fa-regular fa-heart non-heart"></i>
-                <i class="fa-solid fa-heart heart"></i>
-                <span>Nghe chương đầu miễn phí</span>
-            </div>
-            <div class="header_cost">
-                <div class="header_cost-info">
-                    <span>Giá bán lẻ</span>
-                    <span>
-                        99,999đ
-                        {{!-- {{price}} --}}
-                        <label class="custom-checkbox">
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </span>
+            <a href="/playback?id={{detail.id}}">
+                <div class="header_like">
+                    <i class="fa-regular fa-heart non-heart"></i>
+                    <i class="fa-solid fa-heart heart"></i>
+                    <span>Nghe chương đầu miễn phí</span>
                 </div>
-                <div class="header_cost-box">
-                    <span>Mua với giá bán lẻ-99,999đ</span>
-                    {{!-- <span>Mua với giá bán lẻ-{{price}}</span> --}}
+            </a>
+            <a href="/playback?id={{detail.id}}">
+                <div class="header_cost">
+                    <div class="header_cost-info">
+                        <span>Giá bán lẻ</span>
+                        <span>
+                            99,999đ
+                            {{!-- {{price}} --}}
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </span>
+                    </div>
+                    <div class="header_cost-box">
+                        <span>Mua với giá bán lẻ-99,999đ</span>
+                        {{!-- <span>Mua với giá bán lẻ-{{price}}</span> --}}
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="footer-info" id="footer-info">
             <h3>Giới thiệu nội dung</h3>
@@ -122,7 +126,7 @@
                         <i class="fa-regular fa-star" data-value="4"></i>
                         <i class="fa-regular fa-star" data-value="5"></i>
                     </p> --}}
-                    <input type="text" placeholder="Nhập nhận xét của bạn...">
+                    <input type="text" id="review-input" placeholder="Nhập nhận xét của bạn...">
                     <div class="box-temp2__footer">
                         <span id="add-review-btn" style="color: #2BA40080; margin-right: 17px;">Lưu</span>
                         <span id="remove-review-btn" style="color: #F9000080;">Bỏ</span>

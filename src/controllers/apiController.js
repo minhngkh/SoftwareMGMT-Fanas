@@ -288,7 +288,7 @@ class ApiController {
   //[POST] /api/v1/review
   async createReview(req, res) {
     const { bookID, reviewContent } = req.body;
-    const uid = req.cookies.uid;
+    const uid = res.locals.userUid;
 
     if (!bookID || !reviewContent) {
       return res

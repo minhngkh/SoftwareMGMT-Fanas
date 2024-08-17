@@ -69,8 +69,39 @@ async function fetchReviews(bookId) {
         const response = await fetch('/api/v1/reviews/' + bookId, {
             method: 'GET'
         });
+        console.log(response.status);
         const data = await response.json();
-        console.log(data);
+
+        if (response.status == 401){
+            window.location.href = "/signin";
+        }
+
+        if (response.status == 200){
+            // alert('Book removed from favorite!');
+            return data;
+        }
+
+        return [];
+    } catch (error) {
+        console.error('Error fetching favorite:', error);
+        return [];
+    }
+}
+
+async function fetchAddReviews(bookId, reviewContent) {
+    try {
+        const response = await fetch('/api/v1/review/', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                bookID: bookId, 
+                reviewContent
+            }),
+            headers: { 
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+        console.log(response.status);
+        const data = await response.json();
 
         if (response.status == 401){
             window.location.href = "/signin";
@@ -108,6 +139,32 @@ heart.addEventListener('click', async () => {
         heart.classList.toggle('active');
     }
 });
+
+async function refreshReviews() {
+    const allReviews = await fetchReviews(bookId);
+    const reviewsList = document.getElementById('reviews-list');
+
+    const allReviewsHTML = allReviews.map((review) => {
+        return `
+            <li class="item-eval box-cmt f-cmt">
+                <span style="color: #00000099; margin-bottom: 5px; font-size: 20px; font-weight: 600;">${review.userEmail}</span>
+                <p style="color: #00000099; margin-bottom: 5px; font-size: 14px;">${review.createdAt}</p>
+                <p style="font-weight: 700; margin-top: 15px;">
+                    ${review.reviewContent}
+                </p>
+            </li>
+        `
+    })
+    if(allReviews.length === 0) {
+        reviewsList.innerHTML = `
+            <div style="display: flex; justify-content: center; margin-top: 20px">
+                <span style="color: #00000099; margin-bottom: 5px; font-size: 20px; font-weight: 600;">Không có bình luận</span>
+            </div>
+        `
+    }else {
+        reviewsList.innerHTML = allReviewsHTML.join('');
+    }
+}
 
         
 document.addEventListener('DOMContentLoaded', async function() {
@@ -164,29 +221,22 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
     
-    const allReviews = await fetchReviews(bookId);
-    const reviewsList = document.getElementById('reviews-list');
+    await refreshReviews();
+    
+    const reviewInput = document.getElementById('review-input');
+    const addReviewBtn = document.getElementById('add-review-btn');
+    const removeReviewBtn = document.getElementById('remove-review-btn');
 
-    const allReviewsHTML = allReviews.map((review) => {
-        return `
-            <li class="item-eval box-cmt f-cmt">
-                <span style="color: #00000099; margin-bottom: 5px; font-size: 20px; font-weight: 600;">${review.userEmail}</span>
-                <p style="color: #00000099; margin-bottom: 5px; font-size: 14px;">${review.createdAt}</p>
-                <p style="font-weight: 700; margin-top: 15px;">
-                    ${review.reviewContent}
-                </p>
-            </li>
-        `
+    removeReviewBtn.addEventListener('click', () => reviewInput.value = '');
+    addReviewBtn.addEventListener('click', async () => {
+        if(reviewInput.value !== '') {
+            const reviewContent = reviewInput.value;
+            const addReviewResult = await fetchAddReviews(bookId, reviewContent);
+            await refreshReviews();
+
+            reviewInput.value = '';
+        }
     })
-    if(allReviews.length === 0) {
-        reviewsList.innerHTML = `
-            <div style="display: flex; justify-content: center; margin-top: 20px">
-                <span style="color: #00000099; margin-bottom: 5px; font-size: 20px; font-weight: 600;">Không có bình luận</span>
-            </div>
-        `
-    }else {
-        reviewsList.innerHTML = allReviewsHTML.join('');
-    }
 });
 
 // document.addEventListener('DOMContentLoaded', function () {
