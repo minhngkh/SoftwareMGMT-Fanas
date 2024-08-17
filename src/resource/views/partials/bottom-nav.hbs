@@ -37,25 +37,25 @@
     </li>
 
     <li>
-      {{#if (eq currentNav "profile")}}
-      <a class="nav-button active" aria-current="page" href="/profile">
-        <img class="nav-button-icon" src="{{ user.avatarPath }}" />
-        <div class="nav-button-text">Tài khoản</div>
-      </a>
-      {{else}}
       {{#if isAuthenticated}}
-      <a class="nav-button" href="/profile">
-        <img class="nav-button-icon" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" />
+      <a class="nav-button {{#if (eq currentNav 'profile')}}active{{/if}}" href="/profile">
+        {{#if user.avatarPath}}
+        <img class="nav-button-icon" src="{{user.avatarPath}}" />
+        {{else}}
+        <div class="nav-button-icon">
+          <i class="fa fa-user"></i>
+        </div>
+        {{/if}}
+
         <div class="nav-button-text">Tài khoản</div>
       </a>
       {{else}}
-      <a class="nav-button" href="/signin">
+      <a class="nav-button {{#if (eq currentNav 'profile')}}active{{/if}}" href="/signin">
         <div class="nav-button-icon">
           <i class="fa fa-user"></i>
         </div>
         <div class="nav-button-text">Đăng nhập</div>
       </a>
-      {{/if}}
       {{/if}}
     </li>
   </ul>
