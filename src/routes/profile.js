@@ -3,8 +3,8 @@ const router = express.Router();
 
 const Book = require("../models/bookModel");
 const User = require("../models/userModel");
-const Author=require("../models/authorModel.js");
-const Review=require("../models/reviewModel.js")
+const Author = require("../models/authorModel.js");
+const Review = require("../models/reviewModel.js");
 const firebaseAuthController = require("../controllers/firebaseAuthController");
 const authenticateUser = require("../middleware/authenticateUser");
 const profileController = require("../controllers/profileController");
@@ -18,15 +18,12 @@ router.get("/", async (req, res, _) => {
       layout: "base-with-nav",
       title: "Profile",
       currentNav: "profile",
-      user:{
+      user: {
         avatarPath: userData.avatarPath,
-        email: userData.email
+        email: userData.email,
       },
     });
-  }
-  catch(error) {
-    
-  }
+  } catch (error) {}
 });
 
 router.get("/history", (req, res, _) => {
