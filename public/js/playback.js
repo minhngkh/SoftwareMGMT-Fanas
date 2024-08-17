@@ -3,6 +3,7 @@ const previousChapterBtn = document.getElementById('prev-btn');
 const nextChapterBtn = document.getElementById('next-btn');
 const chapterConfirmBtn = document.getElementById('chapter-confirm-btn');
 const timeoutConfirmBtn = document.getElementById('timeout-confirm-btn');
+const playbackRateConfirmBtn = document.getElementById('playback-rate-confirm-btn');
 
 // code mới được chuyển từ hbs qua
 const audioPlayer = document.getElementById('audioPlayer');
@@ -16,10 +17,11 @@ let rAF = null;
 let audioTimeout = null;
 const bookId = urlParams.get('id');
 
-document.addEventListener("DOMContentLoaded", () => {
+function setup() {
     let chapter = document.getElementById('chapter').getAttribute("value");
     fetchAudioUrl(chapter);
-});
+}
+setup();
 
 /////////////////// Chapter related handler
 
@@ -44,7 +46,7 @@ async function fetchAudioUrl(fetchChapter) {
         //                document.getElementById("chapters").value);
 
         // reset audioPlayer settings
-        adjustPlaybackRate(1);
+        setPlaybackRate(1);
         audioPlayer.pause();
         removeCountdownAudio();
 
@@ -114,10 +116,6 @@ audioPlayer.addEventListener("pause", () => {
     //console.log('Audio paused');
 });
 
-function adjustPlaybackRate(rate){
-    audioPlayer.playbackRate = rate;
-}
-
 function countdownAudio(){
     audioPlayer.pause();
 }
@@ -142,6 +140,21 @@ timeoutConfirmBtn.addEventListener("click", () => {
 
         setCountdownAudio(selectedValue);
     }
+    document.querySelector(".box--playbackpage").click();
+});
+
+function setPlaybackRate(rate){
+    audioPlayer.playbackRate = rate;
+    document.getElementById("speed-slider").value = rate;
+    document.getElementById("speed-value").innerHTML = rate;
+    document.getElementById('speed-btn').innerHTML = "x"+ rate;
+}
+
+playbackRateConfirmBtn.addEventListener("click", () => {
+    let selectedValue = document.getElementById("speed-slider").value;
+    // console.log(selectedValue);
+    setPlaybackRate(selectedValue);
+
     document.querySelector(".box--playbackpage").click();
 });
 

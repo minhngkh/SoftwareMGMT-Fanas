@@ -233,7 +233,7 @@
             </div>
         </div>
         <div class="user-confirm">
-            <button class="confirm-button">Xác nhận</button>
+            <button class="confirm-button" id="playback-rate-confirm-btn">Xác nhận</button>
         </div>
     </div>
 </div>
@@ -266,7 +266,7 @@
     const speedBtn = document.getElementById('speed-btn');
     sliderSpeed.value = 1;
     sliderValueDisplay.innerHTML = 1;
-    speedBtn.innerHTML = "x1.0";
+    speedBtn.innerHTML = "x1";
 
     function setSlider() {
         sliderValueDisplay.innerHTML = sliderSpeed.value;
