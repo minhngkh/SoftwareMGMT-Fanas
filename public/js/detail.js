@@ -64,32 +64,57 @@ async function fetchRemoveFavorite(bookId) {
     }
 }
 
+async function fetchReviews(bookId) {
+    try {
+        const response = await fetch('/api/v1/reviews/' + bookId, {
+            method: 'GET'
+        });
+        const data = await response.json();
+        console.log(data);
+
+        if (response.status == 401){
+            window.location.href = "/signin";
+        }
+
+        if (response.status == 200){
+            // alert('Book removed from favorite!');
+            return data;
+        }
+
+        return [];
+    } catch (error) {
+        console.error('Error fetching favorite:', error);
+        return [];
+    }
+}
+
 const nonHeart = document.querySelector('.non-heart');
-        const heart = document.querySelector('.heart');
-        const urlParams = new URLSearchParams(window.location.search);
-        const bookId = urlParams.get('id');
+const heart = document.querySelector('.heart');
+const urlParams = new URLSearchParams(window.location.search);
+const bookId = urlParams.get('id');
 
-        nonHeart.addEventListener('click', async() => {
-            let result = await fetchAddFavorite(bookId);
-            if (result){
-                nonHeart.classList.toggle('active');
-                heart.classList.toggle('active');
-            }
-        });
+nonHeart.addEventListener('click', async() => {
+    let result = await fetchAddFavorite(bookId);
+    if (result){
+        nonHeart.classList.toggle('active');
+        heart.classList.toggle('active');
+    }
+});
 
-        heart.addEventListener('click', async () => {
-            let result = await fetchRemoveFavorite(bookId);
-            if (result){
-                nonHeart.classList.toggle('active');
-                heart.classList.toggle('active');
-            }
-        });
+heart.addEventListener('click', async () => {
+    let result = await fetchRemoveFavorite(bookId);
+    if (result){
+        nonHeart.classList.toggle('active');
+        heart.classList.toggle('active');
+    }
+});
 
         
 document.addEventListener('DOMContentLoaded', async function() {
     const bookId = urlParams.get('id');
     let result = await fetchGetFavorite(bookId);
     console.log(result);
+
     if (result) {
         nonHeart.classList.toggle('active');
         heart.classList.toggle('active');
@@ -138,6 +163,22 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
         }
     });
+    
+    const allReviews = await fetchReviews(bookId);
+    const reviewsList = document.getElementById('reviews-list');
+
+    const allReviewsHTML = allReviews.map((review) => {
+        return `
+            <li class="item-eval box-cmt f-cmt">
+                <span style="color: #00000099; margin-bottom: 5px; font-size: 20px; font-weight: 600;">${review.userEmail}</span>
+                <p style="color: #00000099; margin-bottom: 5px; font-size: 14px;">${review.createdAt}</p>
+                <p style="font-weight: 700; margin-top: 15px;">
+                    ${review.reviewContent}
+                </p>
+            </li>
+        `
+    })
+    reviewsList.innerHTML = allReviewsHTML.join('');
 });
 
 // document.addEventListener('DOMContentLoaded', function () {

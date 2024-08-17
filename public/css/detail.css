@@ -11,7 +11,8 @@ html {
   font-family: Inter;
   line-height: 16px;
 }
-.app_body{
+
+.app_body {
   max-width: 430px;
   width: 100%;
   height: 932px;
@@ -19,13 +20,16 @@ html {
   font-size: 1.7rem;
   position: relative;
 }
-.detail_body{
+
+.detail_body {
   overflow: auto;
   height: 100%;
 }
+
 .box-temp3 {
   padding: 17px;
 }
+
 .detail_header {
   position: absolute;
   top: 0;
@@ -36,22 +40,26 @@ html {
 .header_info {
   width: 100%;
 }
+
 .header_info .icon {
-  width: 100%;    
+  width: 100%;
   display: flex;
   font-size: 3.7rem;
   justify-content: space-between;
   cursor: pointer;
 }
+
 .header_info .icon span {
   display: block;
 }
+
 .info_book img {
   width: 184px;
   height: 313px;
   border-radius: 14px;
   object-fit: cover;
 }
+
 .info_book {
   text-align: center;
 }
@@ -60,6 +68,7 @@ html {
   display: block;
   margin-bottom: 1.7rem;
 }
+
 .info_book h4 {
   font-size: 2.4rem;
   font-weight: 700;
@@ -67,19 +76,23 @@ html {
   text-align: center;
   padding: 17px 0;
 }
+
 .info_book .actor {
   font-weight: 700;
 }
+
 /* COLOR STAR */
 .info_book span .fa-star,
 .info_book span .fa-star-half-stroke,
 .info_book span .fa-star {
-  color: #949191; /* Thay đổi màu của các ngôi sao */
+  color: #949191;
+  /* Thay đổi màu của các ngôi sao */
 
 }
 
 .info_book span .fa-regular.fa-star {
-  color: #949191; /* Thay đổi màu của các ngôi sao rỗng */
+  color: #949191;
+  /* Thay đổi màu của các ngôi sao rỗng */
 }
 
 .header_like {
@@ -88,18 +101,22 @@ html {
   cursor: pointer;
   margin-bottom: 15px;
 }
+
 .header_like .non-heart {
   font-size: 30px;
 }
+
 .header_like .heart {
   font-size: 30px;
 }
+
 .header_like i:hover {
   color: rgba(255, 0, 0, 0.677);
 }
+
 .heart {
   display: none;
-  color:rgba(255, 0, 0, 0.677);
+  color: rgba(255, 0, 0, 0.677);
 }
 
 .header_like span {
@@ -113,18 +130,21 @@ html {
   line-height: 18.15px;
   margin-left: 20px;
 }
+
 .header_like span:hover {
   background-color: #d9d9d964;
 }
+
 .header_cost {
   width: 100%;
   background-color: #fff;
   border-radius: 48px;
   padding: 10px;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .header_cost-info {
   display: flex;
   justify-content: space-between;
@@ -136,14 +156,18 @@ html {
   line-height: 18.15px;
   align-items: center;
 }
+
 .header_cost-info input {
   width: 30px;
 }
+
 .custom-checkbox {
   display: inline-block;
   position: relative;
-  width: 25px; /* Kích thước của checkbox */
-  height: 25px; /* Kích thước của checkbox */
+  width: 25px;
+  /* Kích thước của checkbox */
+  height: 25px;
+  /* Kích thước của checkbox */
 }
 
 .custom-checkbox input {
@@ -159,10 +183,11 @@ html {
   height: 100%;
   width: 100%;
   background-color: #ccc;
-  border-radius: 4px; /* Bo góc cho checkbox */
+  border-radius: 4px;
+  /* Bo góc cho checkbox */
 }
 
-.custom-checkbox input:checked ~ .checkmark {
+.custom-checkbox input:checked~.checkmark {
   background-color: #2196F3;
 }
 
@@ -172,7 +197,7 @@ html {
   display: none;
 }
 
-.custom-checkbox input:checked ~ .checkmark::after {
+.custom-checkbox input:checked~.checkmark::after {
   display: block;
 }
 
@@ -185,6 +210,7 @@ html {
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
+
 .header_cost-box {
   width: 350px;
   height: 44px;
@@ -199,9 +225,11 @@ html {
   font-size: 15px;
   font-weight: 800;
 }
+
 .header_cost-box:hover {
   background: linear-gradient(90deg, #fd877fcc 0%, #de9848d0 100%);
 }
+
 .detail_footer {
   flex-grow: 1;
   display: flex;
@@ -210,6 +238,7 @@ html {
   z-index: 1;
   position: relative;
 }
+
 .footer-info {
   width: 430px;
   padding: 10px;
@@ -217,8 +246,9 @@ html {
   border-radius: 30px 30px 0 0;
   bottom: 0;
   margin-top: 20px;
- 
+
 }
+
 .footer-info p {
   font-size: 17px;
   font-weight: 400;
@@ -228,6 +258,7 @@ html {
   margin: 11px 0;
 
 }
+
 .footer-info h3 {
   font-size: 24px;
   font-weight: 700;
@@ -235,9 +266,11 @@ html {
   text-align: left;
   margin-bottom: 5px;
 }
+
 .footer-info.open {
   animation: slide-up 1s forwards;
 }
+
 .footer-info h4 {
   margin: 11px 0;
   font-size: 20px;
@@ -246,14 +279,17 @@ html {
   text-align: left;
 
 }
+
 .box-info {
   display: flex;
   margin-bottom: 11px;
 }
+
 .box-info img {
   margin-right: 19px;
 }
-.name-au h5{
+
+.name-au h5 {
   font-size: 17px;
   font-weight: 700;
   line-height: 20.57px;
@@ -261,6 +297,7 @@ html {
   margin-bottom: 2px;
   color: #000;
 }
+
 .name-au span {
   font-family: Inter;
   font-size: 17px;
@@ -270,9 +307,11 @@ html {
   color: #596266;
 
 }
+
 .box-temp1 {
   display: flex;
 }
+
 .box-temp1 .ctg {
   border-radius: 8px;
   background: #F8FFCD;
@@ -284,20 +323,24 @@ html {
   text-align: center;
   margin-right: 24px;
 }
+
 .box-temp1 .ctg:hover {
   cursor: pointer;
   text-decoration: underline;
 }
+
 .underline {
   display: block;
   border: 1px solid #00000080;
   margin: 9px 0 19px 0;
 }
+
 .box-temp2 {
   display: flex;
   margin-bottom: 19px;
 
 }
+
 .box-info1 {
   width: 258px;
   height: 176px;
@@ -310,17 +353,20 @@ html {
   padding: 30px 33px;
 
 }
+
 .eval {
   font-size: 22px;
   font-weight: 700;
   line-height: 31.47px;
-  text-align: left; 
+  text-align: left;
   margin-bottom: 27px;
 }
+
 .eval i {
-  font-size: 22px ;
+  font-size: 22px;
   color: #FF6B00;
 }
+
 .box-info1 p {
   font-size: 17px;
   font-weight: 400;
@@ -330,12 +376,14 @@ html {
   display: flex;
   justify-content: space-between;
 }
+
 .box-cmt {
   width: 372px;
   height: auto;
   border-radius: 30px;
   padding: 19px 25px;
 }
+
 .box-cmt p {
   display: flex;
   font-size: 17px;
@@ -348,6 +396,7 @@ html {
   display: block;
   width: 110px;
 }
+
 .box-cmt h4 {
   font-family: Inter;
   font-size: 20px;
@@ -357,17 +406,21 @@ html {
   margin-top: 0;
 
 }
+
 .box-cmt p i {
   color: #FF6B00;
 }
+
 .y-cmt {
   background: #FFFFFF;
   margin-bottom: 19px;
 }
+
 .f-cmt {
   background-color: #E2E2E2;
   margin-bottom: 21px;
 }
+
 .box-com {
   width: 373px;
   height: 685px;
@@ -386,24 +439,29 @@ html {
   text-align: left;
 
 }
+
 .list-eval {
   list-style: none;
   margin-left: 0;
 }
+
 .item-eval {
   width: 335px;
-  height: 184px;
+  height: auto;
   border-radius: 16px;
 }
+
 .box-cmt input {
   border: none;
   padding: 10px 0;
   width: 100%;
   outline: none;
 }
+
 .box-temp2__footer {
   text-align: right;
 }
+
 .box-temp2__footer span {
   font-size: 15px;
   font-weight: 700;
@@ -411,14 +469,18 @@ html {
   text-align: left;
   cursor: pointer;
 }
+
 @keyframes slide-up {
   from {
-      max-height: 0%;
+    max-height: 0%;
   }
+
   to {
-      max-height: 70%; /* Chiều cao khi mở rộng */
+    max-height: 70%;
+    /* Chiều cao khi mở rộng */
   }
 }
+
 .tool {
   position: absolute;
   bottom: 0;
@@ -445,12 +507,15 @@ html {
   margin-bottom: 5px;
   font-size: 20px;
 }
+
 .header_like .non-heart.active {
   display: none;
 }
-.header_like .non-heart.active + .heart {
+
+.header_like .non-heart.active+.heart {
   display: inline-block;
 }
+
 .bx {
   width: 55px;
   padding: 4px;
