@@ -1,13 +1,20 @@
+/**
+ * @import express
+ */
 const siteRouter = require("./site");
 const profileRouter = require("./profile");
 const apiRouter = require("./api.js");
 const createError = require("http-errors");
 const authenticated = require("../middleware/authenticated");
 const { getAuthAdmin } = require("../config/firebase");
-const { setCurrentNav } = require("../middleware/navProps.js");
+const { setCurrentNav } = require("../middleware/navProps");
 
 const authAdmin = getAuthAdmin();
 
+/**
+ *
+ * @param {Express} app
+ */
 function route(app) {
   // Add authentication status into req.locals
   app.use((req, res, next) => {

@@ -1,3 +1,7 @@
+.phone-wrapper {
+  padding-bottom: 0 !important;
+}
+
 .avatar-group {
   display: flex;
   flex-direction: column;
